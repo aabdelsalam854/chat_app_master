@@ -22,7 +22,7 @@ class _VideoViewState extends State<VideoView> {
   void initVideo() {
     videoPlayerController = widget.local!
         ? VideoPlayerController.file(widget.videoUrl)
-        : VideoPlayerController.network(widget.videoUrl);
+        : VideoPlayerController.networkUrl(widget.videoUrl);
 
     videoPlayerController.addListener(() {
       if (videoPlayerController.value.isInitialized) {

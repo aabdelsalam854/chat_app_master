@@ -180,11 +180,14 @@ class _CameraWidgetState extends State<CameraWidget> {
                         List<File> imageFile = mediaSelect
                             .map((media) => File(media.path!))
                             .toList();
-                        GoRouter.of(context).push(AppRouts.kMediaSelection,
+                            if(context.mounted){
+                                  GoRouter.of(context).push(AppRouts.kMediaSelection,
                             extra: ({
                               'imageFile': imageFile,
                               'email': "email"
                             }));
+                            }
+                    
                       }
                     });
                   },
@@ -200,8 +203,11 @@ class _CameraWidgetState extends State<CameraWidget> {
                   onPressed: () {
                     camController.takePicture().then((value) {
                       File file = File(value.path);
-                      GoRouter.of(context).push(AppRouts.kShowImageandSend,
+                      if (context.mounted){
+                           GoRouter.of(context).push(AppRouts.kShowImageandSend,
                           extra: ({'imageFile': file, 'email': widget.email}));
+                      }
+                   
                     });
                   },
                   backgroundColor: const Color.fromRGBO(225, 225, 225, .7),

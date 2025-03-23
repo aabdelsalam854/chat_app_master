@@ -36,13 +36,17 @@ class MediaSelection extends StatelessWidget {
               child: ListTile(
                 onTap: () async {
                   await availableCameras().then((value) {
-                    Navigator.push(
+
+                    if (context.mounted){
+                         Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => CameraWidget(
                             email: email,
                             cameras: value)),
                     );
+                    }
+                 
                   });
                 },
                 title: const Text('camera'),
@@ -57,8 +61,11 @@ class MediaSelection extends StatelessWidget {
                       List<File> imageFile = mediaSelect
                           .map((media) => File(media.path!))
                           .toList();
-                      GoRouter.of(context).push(AppRouts.kMediaSelection,
+                          if (context.mounted){
+                                   GoRouter.of(context).push(AppRouts.kMediaSelection,
                           extra: ({'imageFile': imageFile, 'email': email}));
+                          }
+               
                     }
                   });
                 },
