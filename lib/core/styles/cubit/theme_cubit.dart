@@ -1,3 +1,4 @@
+import 'package:chat_master/core/enums/theme.dart';
 import 'package:chat_master/core/utils/server_locator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

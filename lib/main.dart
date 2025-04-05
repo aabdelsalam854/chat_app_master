@@ -15,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
- await setUpServerLocator();
+  await setUpServerLocator();
 
   runApp(const ChatApp());
 }

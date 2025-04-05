@@ -1,3 +1,4 @@
+import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/is_file.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/is_image.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/is_record.dart';
@@ -5,7 +6,7 @@ import 'package:chat_master/features/chat/presentation/views/widget/is_video.dar
 
 import 'package:flutter/material.dart';
 
-import '../../../data/model/messages_model.dart';
+
 
 class BuildMessageTypeWidget extends StatelessWidget {
   const BuildMessageTypeWidget(

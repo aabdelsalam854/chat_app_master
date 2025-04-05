@@ -1,11 +1,12 @@
-import 'package:chat_master/core/error/fire_base_error.dart';
+
+import 'package:chat_master/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class LoginAndRegisterRepo {
-  Future<Either<Fuiler, UserCredential>> register(
+  Future<Either<Failure, UserCredential>> register(
       String emailAddress, final String password);
 
-  Future<Either<Fuiler, UserCredential>> login(
+  Future<Either<Failure, UserCredential>> login(
       String emailAddress, final String password);
 }

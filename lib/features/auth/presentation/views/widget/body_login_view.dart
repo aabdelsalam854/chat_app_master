@@ -3,9 +3,9 @@ import 'package:chat_master/core/routes/routes.dart';
 
 import 'package:chat_master/features/login/presentation/manger/cubit/login_and_register_cubit.dart';
 import 'package:chat_master/features/login/presentation/manger/cubit/login_and_register_state.dart';
-import 'package:chat_master/features/login/presentation/views/widget/custom_bottom.dart';
-import 'package:chat_master/features/login/presentation/views/widget/custom_text_form_field.dart';
-import 'package:chat_master/features/login/presentation/views/widget/custom_text_bottom.dart';
+import 'package:chat_master/features/auth/presentation/views/widget/custom_bottom.dart';
+import 'package:chat_master/features/auth/presentation/views/widget/custom_text_form_field.dart';
+import 'package:chat_master/features/auth/presentation/views/widget/custom_text_bottom.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
