@@ -20,6 +20,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     emailController.dispose();
@@ -32,50 +33,53 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            'assets/images/login.png',
-            height: 200,
-          ),
-          CustomTitleText(title: "Create your account"),
-          CustomTextFormField(
-            controller: emailController,
-            hintText: 'Email',
-            keyboardType: TextInputType.emailAddress,
-          ),
-          const SizedBox(height: 16),
-          PasswordField(
-              hintText: 'Password', passwordController: passwordController),
-          const SizedBox(height: 16),
-          PasswordField(
-              hintText: 'Confirm Password',
-              passwordController: confirmPasswordController),
-          const SizedBox(height: 30),
-          CustomButton(
+      child: Form(
+        key: formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(
+              'assets/images/login.png',
+              height: 200,
+            ),
+            CustomTitleText(title: "Create your account"),
+            CustomTextFormField(
+              controller: emailController,
+              hintText: 'Email',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: 16),
+            PasswordField(
+                hintText: 'Password', passwordController: passwordController),
+            const SizedBox(height: 16),
+            PasswordField(
+                hintText: 'Confirm Password',
+                passwordController: confirmPasswordController),
+            const SizedBox(height: 30),
+            CustomButton(
+                onPressed: () {
+                  context.read<AuthCubit>().register(
+                        emailController.text,
+                        passwordController.text,
+                        confirmPasswordController.text,
+                      );
+                },
+                text: "Sign Up"),
+            const SizedBox(height: 40),
+            DividerWithText(
+              text: " or sign up with",
+            ),
+            const SizedBox(height: 20),
+            AuthSocialIcons(),
+            DontHaveAnAccountSection(
+              title: "Already have an account ?",
+              buttonText: "Sign in",
               onPressed: () {
-                context.read<AuthCubit>().register(
-                      emailController.text,
-                      passwordController.text,
-                      confirmPasswordController.text,
-                    );
+                Navigator.pop(context);
               },
-              text: "Sign Up"),
-          const SizedBox(height: 40),
-          DividerWithText(
-            text: " or sign up with",
-          ),
-          const SizedBox(height: 20),
-          AuthSocialIcons(),
-          DontHaveAnAccountSection(
-            title: "Already have an account ?",
-            buttonText: "Sign in",
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
