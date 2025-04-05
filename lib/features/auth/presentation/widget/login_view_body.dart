@@ -1,4 +1,5 @@
 import 'package:chat_master/core/routes/routes.dart';
+import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/auth/presentation/widget/auth_social_icons.dart';
 import 'package:chat_master/features/auth/presentation/widget/custom_text_form_field.dart';
@@ -8,7 +9,7 @@ import 'package:chat_master/features/auth/presentation/widget/password.dart';
 import 'package:chat_master/features/auth/presentation/widget/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:go_router/go_router.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -50,15 +51,16 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               height: 200,
             ),
             CustomTitleText(title: "Sign in to your account"),
+            const SizedBox(height: 30),
             CustomTextFormField(
-              // validator: (value) {
-              //   if (value == null || value.isEmpty) {
-              //     return 'Please enter your email';
-              //   } else if (!validateEmail(value)) {
-              //     return "Email must be in the correct form";
-              //   }
-              //   return null;
-              // },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                } else if (!validateEmail(value)) {
+                  return "Email must be in the correct form";
+                }
+                return null;
+              },
               controller: emailController,
               hintText: 'Email',
               keyboardType: TextInputType.emailAddress,
@@ -67,11 +69,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             PasswordField(
                 hintText: 'Password', passwordController: passwordController),
             const SizedBox(height: 30),
-            // CustomButton(
-            //     onPressed: () {
-            //       login(context);
-            //     },
-            //     text: "Sign in"),
+            CustomButton(
+                onPressed: () {
+                  login(context);
+                },
+                text: "Sign in"),
             const SizedBox(height: 40),
             DividerWithText(
               text: "Or Sign in with",
@@ -83,7 +85,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               title: "Don't have an account ?",
               buttonText: "Sign up",
               onPressed: () {
-                Navigator.pushNamed(context, Routes.kRegisterView);
+                GoRouter.of(context).push(Routes.kRegisterView);
+            
               },
             )
           ],
