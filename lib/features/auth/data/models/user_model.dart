@@ -16,6 +16,7 @@ class UserModel extends UserEntity {
       uid: json['uid'],
     );
   }
+
   @override
   List<Object?> get props => [email, name, uid];
 }

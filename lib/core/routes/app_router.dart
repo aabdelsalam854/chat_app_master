@@ -26,16 +26,15 @@ abstract class AppRouts {
       path: Routes.kLogin,
       builder: (context, state) {
         return BlocProvider.value(
-
-          value:sl<AuthCubit>() ,
+          value: sl<AuthCubit>(),
           child: const LoginViews(),
         );
       },
     ),
     GoRoute(
-      path: Routes.kRegisterView,
-      builder: (context, state) => const RegisterViews(),
-    ),
+        path: Routes.kRegisterView,
+        builder: (context, state) => BlocProvider.value(
+            value: sl<AuthCubit>(), child: const RegisterViews())),
     GoRoute(
       path: Routes.kChatView,
       builder: (context, state) {

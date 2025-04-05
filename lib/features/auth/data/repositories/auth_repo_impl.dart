@@ -1,20 +1,21 @@
 import 'package:chat_master/core/error/failure.dart';
 import 'package:chat_master/features/auth/data/datasources/auth_remote.dart';
+import 'package:chat_master/features/auth/data/models/register_model.dart';
 import 'package:chat_master/features/auth/domain/entities/user_entity.dart';
 import 'package:chat_master/features/auth/domain/repositories/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
-
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource dataSource;
 
-
-  AuthRepositoryImpl(this.dataSource, );
+  AuthRepositoryImpl(
+    this.dataSource,
+  );
 
   @override
-  Future<Either<Failure, UserEntity>> login(String email, String password) async{
+  Future<Either<Failure, UserEntity>> login(
+      String email, String password) async {
     try {
       final res = await dataSource.login(email, password);
       return Right(res);
@@ -23,8 +24,21 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
-
   }
 
-
+  @override
+  Future<Either<Failure, UserEntity>> register(
+      String email, String password, String covariantPassword) async {
+    try {
+      final res = await dataSource.register(RegisterModel(
+          email: email,
+          password: password,
+          covariantPassword: covariantPassword));
+      return Right(res);
+    } on FirebaseAuthException catch (e) {
+      return Left(ServerFailure(e.message ?? ''));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

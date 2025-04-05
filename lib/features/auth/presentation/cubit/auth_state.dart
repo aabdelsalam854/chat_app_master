@@ -8,7 +8,9 @@ abstract class AuthState extends Equatable {
 }
 
 class AuthInitial extends AuthState {}
+
 class AuthLoginLoadingState extends AuthState {}
+
 class AuthLoginSuccessState extends AuthState {
   final UserEntity user;
 
@@ -17,6 +19,7 @@ class AuthLoginSuccessState extends AuthState {
   @override
   List<Object> get props => [user];
 }
+
 class AuthLoginFailureState extends AuthState {
   final String error;
 
@@ -26,3 +29,22 @@ class AuthLoginFailureState extends AuthState {
   List<Object> get props => [error];
 }
 
+final class AuthRegisterLoadingState extends AuthState {}
+
+final class AuthRegisterSuccessState extends AuthState {
+  final UserEntity user;
+
+  const AuthRegisterSuccessState(this.user);
+
+  @override
+  List<Object> get props => [user];
+}
+
+final class AuthRegisterFailureState extends AuthState {
+  final String error;
+
+  const AuthRegisterFailureState(this.error);
+
+  @override
+  List<Object> get props => [error];
+}

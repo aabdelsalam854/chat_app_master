@@ -1,8 +1,8 @@
 import 'package:chat_master/core/error/failure.dart';
+import 'package:chat_master/features/auth/data/models/register_model.dart';
 import 'package:chat_master/features/auth/domain/entities/user_entity.dart';
 import 'package:chat_master/features/auth/domain/repositories/auth_repo.dart';
 import 'package:dartz/dartz.dart';
-
 
 class AuthUseCases {
   final AuthRepository authRepository;
@@ -13,9 +13,10 @@ class AuthUseCases {
           String email, String password) async =>
       await authRepository.login(email, password);
 //   //*-----------------register------------------*//
-//   Future<Either<Failure, dynamic>> register(
-//           RegisterModel registerModel) async =>
-//       await authRepository.register(registerModel);
+  Future<Either<Failure, dynamic>> register(
+          RegisterModel registerModel) async =>
+      await authRepository.register(registerModel.email, registerModel.password,
+          registerModel.covariantPassword);
 
 //   Future<Either<Failure, dynamic>> signout() async =>
 //       await authRepository.signout();
