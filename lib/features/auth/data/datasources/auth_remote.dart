@@ -1,11 +1,13 @@
-import 'package:chat_master/features/auth/data/models/login_response.dart';
+import 'package:chat_master/core/services/firebase_auth_services.dart';
 import 'package:chat_master/features/auth/data/models/register_model.dart';
-import 'package:chat_master/features/auth/data/models/register_with_fire_base.dart';
+import 'package:chat_master/features/auth/data/models/user_model.dart';
+
+
 
 
 abstract class AuthRemoteDataSource {
   //*-----------------login------------------*//
-  Future<dynamic> login(String email, String password);
+  Future<UserModel> login(String email, String password);
   //*-----------------register------------------*//
   Future<dynamic> register(RegisterModel userRequest);
   // Future<dynamic> logout();
@@ -20,15 +22,21 @@ abstract class AuthRemoteDataSource {
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  
+   final FirebaseAuthServices firebaseAuthServices;
+
+  AuthRemoteDataSourceImpl(this.firebaseAuthServices);
   @override
-  Future<LoginResponse> login(String email, String password) {
-    // TODO: implement login
-    throw UnimplementedError();
+
+  Future<UserModel> login(String email, String password) async {
+    final user = await firebaseAuthServices.loginWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return UserModel.fromFirebase(user);
   }
 
   @override
-  Future<LoginResponse> loginWithFirebase(String firebaseToken) {
+  Future<UserModel> loginWithFirebase(String firebaseToken) {
     // TODO: implement loginWithFirebase
     throw UnimplementedError();
   }

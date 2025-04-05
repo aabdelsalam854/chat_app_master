@@ -39,66 +39,74 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.asset(
-              'assets/images/login.png',
-              height: 200,
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+
+      },
+      builder: (context, state) {
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(
+                  'assets/images/login.png',
+                  height: 200,
+                ),
+                CustomTitleText(title: "Sign in to your account"),
+                const SizedBox(height: 30),
+                CustomTextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email';
+                    } else if (!validateEmail(value)) {
+                      return "Email must be in the correct form";
+                    }
+                    return null;
+                  },
+                  controller: emailController,
+                  hintText: 'Email',
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 16),
+                PasswordField(
+                    hintText: 'Password',
+                    passwordController: passwordController),
+                const SizedBox(height: 30),
+                CustomButton(
+                    onPressed: () {
+                      login(context);
+                    },
+                    text: "Sign in"),
+                const SizedBox(height: 40),
+                DividerWithText(
+                  text: "Or Sign in with",
+                ),
+                const SizedBox(height: 20),
+                AuthSocialIcons(),
+                const SizedBox(height: 30),
+                DontHaveAnAccountSection(
+                  title: "Don't have an account ?",
+                  buttonText: "Sign up",
+                  onPressed: () {
+                    GoRouter.of(context).push(Routes.kRegisterView);
+                  },
+                )
+              ],
             ),
-            CustomTitleText(title: "Sign in to your account"),
-            const SizedBox(height: 30),
-            CustomTextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter your email';
-                } else if (!validateEmail(value)) {
-                  return "Email must be in the correct form";
-                }
-                return null;
-              },
-              controller: emailController,
-              hintText: 'Email',
-              keyboardType: TextInputType.emailAddress,
-            ),
-            const SizedBox(height: 16),
-            PasswordField(
-                hintText: 'Password', passwordController: passwordController),
-            const SizedBox(height: 30),
-            CustomButton(
-                onPressed: () {
-                  login(context);
-                },
-                text: "Sign in"),
-            const SizedBox(height: 40),
-            DividerWithText(
-              text: "Or Sign in with",
-            ),
-            const SizedBox(height: 20),
-            AuthSocialIcons(),
-            const SizedBox(height: 30),
-            DontHaveAnAccountSection(
-              title: "Don't have an account ?",
-              buttonText: "Sign up",
-              onPressed: () {
-                GoRouter.of(context).push(Routes.kRegisterView);
-              },
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
   void login(BuildContext context) {
     if (formKey.currentState!.validate()) {
-      // context
-      //     .read<AuthCubit>()
-      //     .(emailController.text, passwordController.text);
+      context
+          .read<AuthCubit>().login(emailController.text, passwordController.text);
+          
     }
   }
 }

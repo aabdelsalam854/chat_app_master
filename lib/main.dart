@@ -2,13 +2,12 @@ import 'package:chat_master/core/constant/bloc_observer.dart';
 import 'package:chat_master/core/styles/app_theme.dart';
 import 'package:chat_master/core/styles/cubit/theme_cubit.dart';
 import 'package:chat_master/core/routes/app_router.dart';
-import 'package:chat_master/core/utils/server_locator.dart';
+import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'features/login/data/repo/login_and_register_repo_impl.dart';
-import 'features/login/presentation/manger/cubit/login_and_register_cubit.dart';
+
 
 void main() async {
   Bloc.observer = const MyBlocObserver();
@@ -30,9 +29,9 @@ class ChatApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ThemeCubit(),
         ),
-        BlocProvider(
-            create: (context) =>
-                LoginAndRegisterCubit(sl.get<LoginAndRegisterRepoImpl>())),
+        // BlocProvider(
+        //     create: (context) =>
+        //         LoginAndRegisterCubit(sl.get<LoginAndRegisterRepoImpl>())),
       ],
       child: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, themeState) {
