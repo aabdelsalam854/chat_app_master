@@ -1,7 +1,7 @@
 import 'package:chat_master/core/constant/bloc_observer.dart';
 import 'package:chat_master/core/styles/app_theme.dart';
 import 'package:chat_master/core/styles/cubit/theme_cubit.dart';
-import 'package:chat_master/core/utils/app_router.dart';
+import 'package:chat_master/core/routes/app_router.dart';
 import 'package:chat_master/core/utils/server_locator.dart';
 import 'package:chat_master/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';

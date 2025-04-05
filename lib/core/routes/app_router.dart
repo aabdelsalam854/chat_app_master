@@ -4,7 +4,7 @@ import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/chat/presentation/views/chat_views.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/show_file_and_send.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/show_multi_image.dart';
-import 'package:chat_master/features/home/presentation/pages/home_page.dart';
+
 import 'package:chat_master/features/auth/presentation/views/login_view.dart';
 
 import 'package:chat_master/features/auth/presentation/views/register.dart';

@@ -86,7 +86,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               buttonText: "Sign up",
               onPressed: () {
                 GoRouter.of(context).push(Routes.kRegisterView);
-            
               },
             )
           ],
