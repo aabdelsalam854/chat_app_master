@@ -1,4 +1,6 @@
 import 'package:chat_master/core/constant/bloc_observer.dart';
+import 'package:chat_master/core/styles/app_theme.dart';
+import 'package:chat_master/core/styles/cubit/theme_cubit.dart';
 import 'package:chat_master/core/utils/app_router.dart';
 import 'package:chat_master/core/utils/server_locator.dart';
 import 'package:chat_master/firebase_options.dart';
@@ -11,11 +13,9 @@ import 'features/login/presentation/manger/cubit/login_and_register_cubit.dart';
 void main() async {
   Bloc.observer = const MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  // await CacheData.cacheInitialization();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  setUpServerLocator();
-  // kToken = CacheData.getData(key: 'token');
+ await setUpServerLocator();
 
   runApp(const ChatApp());
 }
@@ -28,18 +28,24 @@ class ChatApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider(
             create: (context) =>
-                LoginAndRegisterCubit(getit.get<LoginAndRegisterRepoImpl>())),
+                LoginAndRegisterCubit(sl.get<LoginAndRegisterRepoImpl>())),
       ],
-      child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          darkTheme: ThemeData.dark(
-            useMaterial3: true,
-          ).copyWith(
-            scaffoldBackgroundColor: Color(0xFF222530),
-          ),
-            
-          routerConfig: AppRouts.router),
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        builder: (context, themeState) {
+          if (themeState is ThemeChanged) {
+            return MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                theme: appThemeData[themeState.appTheme]!,
+                routerConfig: AppRouts.router);
+          } else {
+            return const SizedBox();
+          }
+        },
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
+import 'package:chat_master/core/styles/app_color.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/constant/constant.dart';
+
 
 class FileChatBubble extends StatelessWidget {
    const FileChatBubble({
@@ -24,7 +25,7 @@ final String url;
               bottomRight: Radius.circular(32),
               bottomLeft: Radius.circular(0),
             ),
-            color: kCustomBottomColors),
+       color: AppColors.kCustomBottomColors,),
         child:  Text(
          url.toString(),
           style: const TextStyle(

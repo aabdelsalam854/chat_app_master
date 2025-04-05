@@ -1,6 +1,7 @@
+import 'package:chat_master/core/styles/app_color.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/build_message_type_widget.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/constant/constant.dart';
+
 import '../../../data/model/messages_model.dart';
 
 
@@ -30,7 +31,7 @@ class ChatBubble extends StatelessWidget {
             bottomRight: Radius.circular(32),
             bottomLeft: Radius.circular(0),
           ),
-          color: kCustomBottomColors,
+          color: AppColors.kCustomBottomColors,
         ),
         child: SizedBox(
           child:  BuildMessageTypeWidget(messageModel: messageModel, message: message),

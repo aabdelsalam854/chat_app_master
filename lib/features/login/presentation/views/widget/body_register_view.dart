@@ -5,7 +5,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 import 'custom_bottom.dart';
 import 'custom_text_bottom.dart';
 import 'custom_text_form_field.dart';
@@ -17,8 +16,8 @@ class BodyRegisterView extends StatefulWidget {
 }
 
 class _BodyRegisterViewState extends State<BodyRegisterView> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
   @override
   void dispose() {

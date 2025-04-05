@@ -1,4 +1,5 @@
-import 'package:chat_master/core/constant/constant.dart';
+
+import 'package:chat_master/core/styles/app_color.dart';
 import 'package:flutter/material.dart';
 
 
@@ -18,7 +19,7 @@ class CustomBottom extends StatelessWidget {
         textColor: const Color(0xFF7C7D7D),
         elevation: 10,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        color: kCustomBottomColors,
+        color: AppColors.kCustomBottomColors,
         child: Text(
           text,
           style: const TextStyle(fontWeight: FontWeight.bold),

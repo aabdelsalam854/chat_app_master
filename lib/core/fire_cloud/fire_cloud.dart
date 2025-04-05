@@ -14,7 +14,7 @@ class FireCloud {
   static Stream<QuerySnapshot<Object?>> getMessages() {
     CollectionReference messages =
         FirebaseFirestore.instance.collection(kMessageCollection);
-    return messages.orderBy('time', descending: true).snapshots();
+    return messages.orderBy('time', descending: true ).limit(20).snapshots();
   }
 }
 // message.orderBy('time', descending: true).snapshots(),

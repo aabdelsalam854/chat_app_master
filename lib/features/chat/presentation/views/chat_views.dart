@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:camera/camera.dart';
+
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/chat_bubble_friend.dart';
@@ -18,9 +18,9 @@ import 'package:uuid/uuid.dart';
 import '../../../login/presentation/views/widget/custom_text_form_field.dart';
 
 class ChatView extends StatefulWidget {
-  const ChatView(this.email, {super.key, this.cameras});
+  const ChatView(this.email, {super.key, });
   final String email;
-  final List<CameraDescription>? cameras;
+ 
   @override
   State<ChatView> createState() => _ChatViewState();
 }
