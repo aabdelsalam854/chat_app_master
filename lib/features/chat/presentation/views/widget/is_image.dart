@@ -1,4 +1,5 @@
-import 'package:chat_master/core/utils/app_router.dart';
+import 'package:chat_master/core/routes/routes.dart';
+
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +21,7 @@ class IsImage extends StatelessWidget {
       children: [
         GestureDetector(
             onTap: () {
-              GoRouter.of(context).push(AppRouts.kShowImage, extra: message);
+              GoRouter.of(context).push(Routes.kShowImage, extra: message);
             },
             child: Image.network(message)),
         const SizedBox(

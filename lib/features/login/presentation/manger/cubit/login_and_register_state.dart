@@ -6,10 +6,10 @@ final class LoginInitialState extends LoginAndRegisterState {}
 
 final class LoginLoadingState extends LoginAndRegisterState {}
 
-final class LoginFailurelState extends LoginAndRegisterState {
+final class LoginFailureState extends LoginAndRegisterState {
   final String errMessage;
 
-  LoginFailurelState(this.errMessage);
+  LoginFailureState(this.errMessage);
 }
 
 final class LoginSuccessState extends LoginAndRegisterState {
@@ -20,10 +20,10 @@ final class LoginSuccessState extends LoginAndRegisterState {
 
 final class RegisterLoadingState extends LoginAndRegisterState {}
 
-final class RegisterFailurelState extends LoginAndRegisterState {
+final class RegisterFailureState extends LoginAndRegisterState {
   final String errMessage;
 
-  RegisterFailurelState(this.errMessage);
+  RegisterFailureState(this.errMessage);
 }
 
 final class RegisterSuccessState extends LoginAndRegisterState {

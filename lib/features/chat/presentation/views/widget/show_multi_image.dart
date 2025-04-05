@@ -1,20 +1,17 @@
-
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
+import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
+import 'package:chat_master/features/chat/data/model/messages_model.dart';
+import 'package:chat_master/features/chat/data/model/metadata_model.dart';
+import 'package:chat_master/features/login/presentation/views/widget/custom_text_form_field.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/app_router.dart';
-import '../../../../../core/utils/upload_file_in_firebase.dart';
-import '../../../../login/presentation/views/widget/custom_text_form_field.dart';
-import '../../../data/model/messages_model.dart';
-import '../../../data/model/metadata_model.dart';
-
-class ShowMultyImage extends StatefulWidget {
-  const ShowMultyImage({
+class ShowMultiImage extends StatefulWidget {
+  const ShowMultiImage({
     super.key,
     required this.file,
     required this.email,
@@ -24,10 +21,10 @@ class ShowMultyImage extends StatefulWidget {
   final String email;
 
   @override
-  State<ShowMultyImage> createState() => _ShowMultyImageState();
+  State<ShowMultiImage> createState() => _ShowMultiImageState();
 }
 
-class _ShowMultyImageState extends State<ShowMultyImage> {
+class _ShowMultiImageState extends State<ShowMultiImage> {
   final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -55,7 +52,7 @@ class _ShowMultyImageState extends State<ShowMultyImage> {
                           return Image.file(files);
 
                         default:
-                       return  Image.file(files);
+                          return Image.file(files);
                       }
                     }).toList(),
                   ),
@@ -127,7 +124,7 @@ class _ShowMultyImageState extends State<ShowMultyImage> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    GoRouter.of(context).pop(AppRouts.kChatView);
+                    GoRouter.of(context).pop();
                     for (var index = 0; index < widget.file.length; index++) {
                       final imageUrl = await UploadFileInFirebase.uploadFile(
                           widget.file[index]);

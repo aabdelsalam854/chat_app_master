@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:chat_master/core/utils/app_router.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/show_send.dart';
+import 'package:chat_master/core/routes/routes.dart';
 
+import 'package:chat_master/core/utils/cam.dart';
+import 'package:chat_master/features/chat/presentation/views/widget/show_send.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/cam.dart';
 
 
 class CameraWidget extends StatefulWidget {
@@ -60,8 +60,7 @@ class _CameraWidgetState extends State<CameraWidget> {
 
       final route = MaterialPageRoute(
         fullscreenDialog: true,
-        builder: (_) => ShowSend(videoUrl: files,
-            email: widget.email),
+        builder: (_) => ShowSend(videoUrl: files, email: widget.email),
       );
       if (mounted) {
         Navigator.push(context, route);
@@ -173,21 +172,20 @@ class _CameraWidgetState extends State<CameraWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
-                 heroTag: 'btn1',
+                  heroTag: 'btn1',
                   onPressed: () {
                     SelectMediaFromStorage.selectMedia().then((mediaSelect) {
                       if (mediaSelect != null) {
                         List<File> imageFile = mediaSelect
                             .map((media) => File(media.path!))
                             .toList();
-                            if(context.mounted){
-                                  GoRouter.of(context).push(AppRouts.kMediaSelection,
-                            extra: ({
-                              'imageFile': imageFile,
-                              'email': "email"
-                            }));
-                            }
-                    
+                        if (context.mounted) {
+                          GoRouter.of(context).push(Routes.kMediaSelection,
+                              extra: ({
+                                'imageFile': imageFile,
+                                'email': "email"
+                              }));
+                        }
                       }
                     });
                   },
@@ -203,11 +201,13 @@ class _CameraWidgetState extends State<CameraWidget> {
                   onPressed: () {
                     camController.takePicture().then((value) {
                       File file = File(value.path);
-                      if (context.mounted){
-                           GoRouter.of(context).push(AppRouts.kShowImageandSend,
-                          extra: ({'imageFile': file, 'email': widget.email}));
+                      if (context.mounted) {
+                        GoRouter.of(context).push(Routes.kShowImageAndSend,
+                            extra: ({
+                              'imageFile': file,
+                              'email': widget.email
+                            }));
                       }
-                   
                     });
                   },
                   backgroundColor: const Color.fromRGBO(225, 225, 225, .7),
@@ -218,7 +218,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                   ),
                 ),
                 FloatingActionButton(
-                  heroTag:'btn3' ,
+                  heroTag: 'btn3',
                   backgroundColor: Colors.red,
                   child: Icon(_isRecording ? Icons.stop : Icons.circle),
                   onPressed: () => _recordVideo(),

@@ -1,6 +1,7 @@
+import 'package:chat_master/core/constant/constant.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constant/constant.dart';
+
 
 class CustomBottom extends StatelessWidget {
   const CustomBottom({super.key, required this.text, required this.onPressed});

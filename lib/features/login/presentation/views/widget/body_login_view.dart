@@ -1,5 +1,6 @@
 import 'dart:developer';
-import 'package:chat_master/core/utils/app_router.dart';
+import 'package:chat_master/core/routes/routes.dart';
+
 import 'package:chat_master/features/login/presentation/manger/cubit/login_and_register_cubit.dart';
 import 'package:chat_master/features/login/presentation/manger/cubit/login_and_register_state.dart';
 import 'package:chat_master/features/login/presentation/views/widget/custom_bottom.dart';
@@ -17,13 +18,13 @@ class BodyLoginView extends StatefulWidget {
 }
 
 class _BodyLoginViewState extends State<BodyLoginView> {
-  var emailControler = TextEditingController();
-  var passwordControler = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
   @override
   void dispose() {
-    emailControler.dispose();
-    passwordControler.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -33,14 +34,14 @@ class _BodyLoginViewState extends State<BodyLoginView> {
       listener: (context, state) {
         if (state is LoginSuccessState) {
           // CacheData.setData(key: 'token', value: state.credential.user!.email);
-          GoRouter.of(context).pushReplacement(AppRouts.kChatView,
-              extra:state.credential.user!.email);
-              log(state.credential.user!.uid.toString());
+          GoRouter.of(context).pushReplacement(Routes.kChatView,
+              extra: state.credential.user!.email);
+          log(state.credential.user!.uid.toString());
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.green,
             content: Center(child: Text('Login Successfully 💚')),
           ));
-        } else if (state is LoginFailurelState) {
+        } else if (state is LoginFailureState) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.red,
             content: Center(child: Text(state.errMessage)),
@@ -66,13 +67,13 @@ class _BodyLoginViewState extends State<BodyLoginView> {
                       )),
                       const SizedBox(height: 10),
                       CustomTextFormField(
-                        controller: emailControler,
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         hintText: 'email',
                       ),
                       const SizedBox(height: 10),
                       CustomTextFormField(
-                          controller: passwordControler,
+                          controller: passwordController,
                           keyboardType: TextInputType.emailAddress,
                           hintText: 'password',
                           obscureText: cubit.showPassword,
@@ -85,7 +86,7 @@ class _BodyLoginViewState extends State<BodyLoginView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          CusttomTextBottom(
+                          CustomTextBottom(
                               onPressed: () {}, text: 'Forget Password?')
                         ],
                       ),
@@ -101,8 +102,9 @@ class _BodyLoginViewState extends State<BodyLoginView> {
                             text: 'Login',
                             onPressed: () async {
                               if (formKey.currentState!.validate()) {
-                                await cubit.logininFireBase(emailControler.text,
-                                    passwordControler.text);
+                                await cubit.loginInFireBase(
+                                    emailController.text,
+                                    passwordController.text);
                               }
                             }),
                       ),
@@ -111,10 +113,9 @@ class _BodyLoginViewState extends State<BodyLoginView> {
                         children: [
                           const Text('Not a membar?',
                               style: TextStyle(color: Color(0xFF424243))),
-                          CusttomTextBottom(
+                          CustomTextBottom(
                               onPressed: () {
-                                GoRouter.of(context)
-                                    .push(AppRouts.kRegisterView);
+                                GoRouter.of(context).push(Routes.kRegisterView);
                               },
                               text: 'Register Now')
                         ],

@@ -1,7 +1,8 @@
+import 'package:chat_master/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/app_router.dart';
+
 
 class IsVideo extends StatelessWidget {
   const IsVideo({super.key, required this.message});
@@ -11,7 +12,7 @@ class IsVideo extends StatelessWidget {
     return IconButton(
       icon: const Icon(Icons.video_camera_front),
       onPressed: () {
-        GoRouter.of(context).push(AppRouts.kVideoPlayer,
+        GoRouter.of(context).push(Routes.kVideoPlayer,
             extra: ({'message': message, 'isFile': false}));
       },
     );

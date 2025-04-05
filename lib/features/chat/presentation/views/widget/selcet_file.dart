@@ -1,8 +1,9 @@
+import 'package:chat_master/core/routes/routes.dart';
+import 'package:chat_master/core/utils/select_file_from_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/app_router.dart';
-import '../../../../../core/utils/select_file_from_storage.dart';
+
 
 class SelectFile extends StatelessWidget {
   const SelectFile({
@@ -19,8 +20,9 @@ class SelectFile extends StatelessWidget {
         onTap: () async {
           await SelectFileFromStorage.selectFiles().then((pickedFile) {
             if (pickedFile != null) {
+              
               GoRouter.of(context).push(
-                AppRouts.kShowFileBeforeSend,
+                Routes.kShowFileBeforeSend,
                 extra: ({'file': pickedFile, 'email': email}),
               );
             }

@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:chat_master/core/utils/app_router.dart';
+import 'package:chat_master/core/routes/routes.dart';
+
 import 'package:chat_master/core/utils/cam.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/cam.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/divider_widget.dart';
@@ -62,7 +63,7 @@ class MediaSelection extends StatelessWidget {
                           .map((media) => File(media.path!))
                           .toList();
                           if (context.mounted){
-                                   GoRouter.of(context).push(AppRouts.kMediaSelection,
+                                   GoRouter.of(context).push(Routes.kMediaSelection,
                           extra: ({'imageFile': imageFile, 'email': email}));
                           }
                

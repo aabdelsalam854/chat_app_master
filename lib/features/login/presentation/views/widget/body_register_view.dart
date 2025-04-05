@@ -1,3 +1,4 @@
+import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/login/presentation/manger/cubit/login_and_register_cubit.dart';
 import 'package:chat_master/features/login/presentation/manger/cubit/login_and_register_state.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/app_router.dart';
 import 'custom_bottom.dart';
 import 'custom_text_bottom.dart';
 import 'custom_text_form_field.dart';
@@ -13,17 +13,17 @@ import 'custom_text_form_field.dart';
 class BodyRegisterView extends StatefulWidget {
   const BodyRegisterView({super.key});
   @override
-  State<BodyRegisterView> createState() => _BodtRegisterViewState();
+  State<BodyRegisterView> createState() => _BodyRegisterViewState();
 }
 
-class _BodtRegisterViewState extends State<BodyRegisterView> {
-  var emailControler = TextEditingController();
-  var passwordControler = TextEditingController();
+class _BodyRegisterViewState extends State<BodyRegisterView> {
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
   @override
   void dispose() {
-    emailControler.dispose();
-    passwordControler.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -35,8 +35,8 @@ class _BodtRegisterViewState extends State<BodyRegisterView> {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               backgroundColor: Colors.green,
               content: Center(child: Text('Account successfully created'))));
-          GoRouter.of(context).pushReplacement(AppRouts.kLogin);
-        } else if (state is RegisterFailurelState) {
+          GoRouter.of(context).pushReplacement(Routes.kLogin);
+        } else if (state is RegisterFailureState) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Colors.red,
               content: Center(child: Text(state.errMessage))));
@@ -61,13 +61,13 @@ class _BodtRegisterViewState extends State<BodyRegisterView> {
                       )),
                       const SizedBox(height: 10),
                       CustomTextFormField(
-                        controller: emailControler,
+                        controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         hintText: 'email',
                       ),
                       const SizedBox(height: 10),
                       CustomTextFormField(
-                          controller: passwordControler,
+                          controller: passwordController,
                           keyboardType: TextInputType.emailAddress,
                           hintText: 'password',
                           obscureText: cubit.showPassword,
@@ -80,7 +80,7 @@ class _BodtRegisterViewState extends State<BodyRegisterView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          CusttomTextBottom(
+                          CustomTextBottom(
                               onPressed: () {}, text: 'Forget Password?')
                         ],
                       ),
@@ -97,8 +97,8 @@ class _BodtRegisterViewState extends State<BodyRegisterView> {
                               text: 'Sing Up',
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  cubit.registerinFireBase(emailControler.text,
-                                      passwordControler.text);
+                                  cubit.registerinFireBase(emailController.text,
+                                      passwordController.text);
                                 }
                               },
                             );
@@ -108,7 +108,7 @@ class _BodtRegisterViewState extends State<BodyRegisterView> {
                         children: [
                           const Text('Already a membar?',
                               style: TextStyle(color: Color(0xFF424243))),
-                          CusttomTextBottom(
+                          CustomTextBottom(
                               onPressed: () {
                                 GoRouter.of(context).push("/");
                               },

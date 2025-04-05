@@ -14,17 +14,17 @@ class LoginAndRegisterCubit extends Cubit<LoginAndRegisterState> {
   ) async {
     emit(RegisterLoadingState());
     var request = await loginAndRegisterRepo.register(emailAddress, password);
-    emit(request.fold((failure) => RegisterFailurelState(failure.message),
+    emit(request.fold((failure) => RegisterFailureState(failure.message),
         (register) => RegisterSuccessState(register)));
   }
 
-  Future<void> logininFireBase(
+  Future<void> loginInFireBase(
     String emailAddress,
     String password,
   ) async {
     emit(LoginLoadingState());
     var request = await loginAndRegisterRepo.login(emailAddress, password);
-    emit(request.fold((failure) => LoginFailurelState(failure.message),
+    emit(request.fold((failure) => LoginFailureState(failure.message),
         (login) => LoginSuccessState(login)));
   }
 
