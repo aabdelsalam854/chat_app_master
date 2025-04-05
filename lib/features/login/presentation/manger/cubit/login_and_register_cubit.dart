@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginAndRegisterCubit extends Cubit<LoginAndRegisterState> {
   LoginAndRegisterCubit(this.loginAndRegisterRepo) : super(LoginInitialState());
   final LoginAndRegisterRepo loginAndRegisterRepo;
-  Future<void> registerinFireBase(
+  Future<void> registerInFireBase(
     String emailAddress,
     String password,
   ) async {

@@ -97,7 +97,7 @@ class _BodyRegisterViewState extends State<BodyRegisterView> {
                               text: 'Sing Up',
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
-                                  cubit.registerinFireBase(emailController.text,
+                                  cubit.registerInFireBase(emailController.text,
                                       passwordController.text);
                                 }
                               },
@@ -106,7 +106,7 @@ class _BodyRegisterViewState extends State<BodyRegisterView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Already a membar?',
+                          const Text('Already a member?',
                               style: TextStyle(color: Color(0xFF424243))),
                           CustomTextBottom(
                               onPressed: () {

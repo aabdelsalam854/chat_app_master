@@ -111,7 +111,7 @@ class _BodyLoginViewState extends State<BodyLoginView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Not a membar?',
+                          const Text('Not a member?',
                               style: TextStyle(color: Color(0xFF424243))),
                           CustomTextBottom(
                               onPressed: () {
