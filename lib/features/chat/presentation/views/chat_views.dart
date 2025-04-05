@@ -15,7 +15,7 @@ import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
-import '../../../auth/presentation/views/widget/custom_text_form_field.dart';
+import '../../../auth/presentation/widget/custom_text_form_field.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView(this.email, {super.key, });

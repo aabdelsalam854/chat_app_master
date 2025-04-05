@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import '../../../../../core/fire_cloud/fire_cloud.dart';
 import '../../../../../core/utils/upload_file_in_firebase.dart';
-import '../../../../auth/presentation/views/widget/custom_bottom.dart';
+import '../../../../auth/presentation/widget/custom_bottom.dart';
 import '../../../data/model/messages_model.dart';
 import '../../../data/model/metadata_model.dart';
 

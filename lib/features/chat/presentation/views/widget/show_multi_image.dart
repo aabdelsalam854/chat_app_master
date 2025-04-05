@@ -4,9 +4,10 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
+import 'package:chat_master/features/auth/presentation/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/data/model/metadata_model.dart';
-import 'package:chat_master/features/auth/presentation/views/widget/custom_text_form_field.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
