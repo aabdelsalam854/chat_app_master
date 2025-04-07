@@ -1,3 +1,4 @@
+import 'package:chat_master/core/constant/validation.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/core/widget/snack_bar.dart';
@@ -53,7 +54,9 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             ),
             const SizedBox(height: 16),
             PasswordField(
-                hintText: 'Password', passwordController: passwordController),
+                hintText: 'Password',
+                passwordController: passwordController,
+                validator: Validation.passwordValidator),
             const SizedBox(height: 16),
             PasswordField(
                 hintText: 'Confirm Password',
@@ -70,17 +73,26 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                     ? const Center(child: CircularProgressIndicator())
                     : CustomButton(
                         onPressed: () {
-                           snackBar(context, "Register Success", Colors.green);
-                          // context.read<AuthCubit>().register(
-                          //       RegisterModel(
-                          //         email: emailController.text,
-                          //         password: passwordController.text,
-                          //         covariantPassword:
-                          //             confirmPasswordController.text,
-                          //         name: " nameController.text",
-                          //         phoneNumber: "phoneNumberController.text",
-                          //       ),
-                          //     );
+                          if (formKey.currentState!.validate()) {
+                            if (passwordController.text !=
+                                confirmPasswordController.text) {
+                              snackBar(context, "Passwords do not match",
+                                  Colors.red);
+                              return;
+                            }
+                               context.read<AuthCubit>().register(
+                                RegisterModel(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  covariantPassword:
+                                      confirmPasswordController.text,
+                                  name: " nameController.text",
+                                  phoneNumber: "phoneNumberController.text",
+                                ),
+                              );
+                          }
+
+                       
                         },
                         text: "Sign Up");
               },

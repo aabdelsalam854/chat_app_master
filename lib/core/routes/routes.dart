@@ -12,5 +12,7 @@ class Routes {
 
   static const kMediaSelection = '/MediaSelection';
   static const kShowImageAndSend = '/ShowImageAndSend';
-  static const kForgetPassword = '/ForgetPassword'; 
+  static const kForgetPassword = '/ForgetPassword';
+
+  static const kHome = "/Home"; 
 }

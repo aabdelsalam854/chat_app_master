@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -41,6 +42,9 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+          textInputAction:
+              TextInputAction.done, 
+
           onSaved: onSaved,
           validator: validator ??
               (data) {
@@ -65,7 +69,7 @@ class CustomTextFormField extends StatelessWidget {
           obscureText: obscureText,
           decoration: InputDecoration(
             suffixIcon: icon,
-            hintText: hintText,
+            labelText: hintText,
           )),
     );
   }

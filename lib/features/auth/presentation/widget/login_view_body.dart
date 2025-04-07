@@ -1,9 +1,10 @@
+import 'package:chat_master/core/constant/validation.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
+import 'package:chat_master/core/widget/snack_bar.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/auth/presentation/widget/auth_social_icons.dart';
-
 import 'package:chat_master/features/auth/presentation/widget/divider_with_text.dart';
 import 'package:chat_master/features/auth/presentation/widget/dont_have_an_account_section.dart';
 import 'package:chat_master/features/auth/presentation/widget/password.dart';
@@ -23,13 +24,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final String emailPattern =
-      r'^[a-zA-Z0-9]+([._%+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+$';
-
-  bool validateEmail(String email) {
-    RegExp regex = RegExp(emailPattern);
-    return regex.hasMatch(email);
-  }
 
   @override
   void dispose() {
@@ -57,14 +51,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 CustomTitleText(title: "Sign in to your account"),
                 const SizedBox(height: 30),
                 CustomTextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    } else if (!validateEmail(value)) {
-                      return "Email must be in the correct form";
-                    }
-                    return null;
-                  },
+                  validator: Validation.emailValidator,
                   controller: emailController,
                   hintText: 'Email',
                   keyboardType: TextInputType.emailAddress,
@@ -72,6 +59,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 const SizedBox(height: 16),
                 PasswordField(
                     hintText: 'Password',
+                    validator: Validation.passwordValidator,
                     passwordController: passwordController),
                 const SizedBox(height: 30),
                 Theme(
@@ -105,11 +93,23 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                CustomButton(
-                    onPressed: () {
-                      login(context);
-                    },
-                    text: "Sign in"),
+                BlocConsumer<AuthCubit, AuthState>(
+                  listener: (context, state) {
+                    if (state is AuthLoginSuccessState) {
+                      snackBar(context, "Login Success", Colors.green);
+                      GoRouter.of(context).go(Routes.kHome);
+                    } else if (state is AuthLoginFailureState) {
+                      snackBar(context, state.error, Colors.red);
+                    }
+                  },
+                  builder: (context, state) {
+                    return CustomButton(
+                        onPressed: () {
+                          login(context);
+                        },
+                        text: "Sign in");
+                  },
+                ),
                 const SizedBox(height: 40),
                 DividerWithText(
                   text: "Or Sign in with",

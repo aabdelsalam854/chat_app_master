@@ -17,14 +17,13 @@ class ForgetPasswordBody extends StatefulWidget {
   const ForgetPasswordBody({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ForgetPasswordBodyState createState() => _ForgetPasswordBodyState();
 }
 
 class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +49,9 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
               CustomButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                 
-                 context.read<AuthCubit>().forgetPassword(_emailController.text);
+                    context
+                        .read<AuthCubit>()
+                        .forgetPassword(_emailController.text);
                   }
                 },
                 text: 'إرسال رابط إعادة تعيين كلمة المرور',

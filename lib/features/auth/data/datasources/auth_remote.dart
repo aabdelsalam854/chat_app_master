@@ -16,6 +16,9 @@ abstract class AuthRemoteDataSource {
 
   //*------------- resetPassword------------------*//
   Future<dynamic> resetPassword(String email);
+//*-----------------deleteUser------------------*//
+  Future<dynamic> deleteUser();
+  //*-----------------signout------------------*//
 
   Future<dynamic> signout();
 }
@@ -34,10 +37,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<UserModel> loginWithFirebase(String firebaseToken) {
-    // TODO: implement loginWithFirebase
-    throw UnimplementedError();
-  }
+
 
   @override
   Future<UserModel> register(RegisterModel userRequest)  async{
@@ -49,9 +49,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future signout() {
-    // TODO: implement signout
-    throw UnimplementedError();
+  Future signout() async {
+    await firebaseAuthServices.logout();
+  
   }
 
   @override
@@ -70,5 +70,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future resetPassword(String email) async {
     await firebaseAuthServices.resetPassword(email);
  
+  }
+  
+  @override
+  Future deleteUser()  async {
+    await firebaseAuthServices.deleteUser();
+  
   }
 }

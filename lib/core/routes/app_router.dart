@@ -11,6 +11,7 @@ import 'package:chat_master/features/chat/presentation/views/widget/show_multi_i
 import 'package:chat_master/features/auth/presentation/views/login_view.dart';
 
 import 'package:chat_master/features/auth/presentation/views/register.dart';
+import 'package:chat_master/features/home/presentation/pages/home_page.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,18 +25,20 @@ import 'package:chat_master/features/chat/presentation/views/widget/video_player
 abstract class AppRouts {
   static final router = GoRouter(routes: [
     GoRoute(
-      path: Routes.kLogin,
-      builder: (context, state) {
-        return BlocProvider.value(
-          value: sl<AuthCubit>(),
-          child: const LoginViews(),
-        );
-      },
-    ),
+        path: Routes.kLogin,
+        builder: (context, state) => BlocProvider.value(
+              value: sl<AuthCubit>(),
+              child: const LoginViews(),
+            )),
     GoRoute(
         path: Routes.kRegisterView,
         builder: (context, state) => BlocProvider.value(
             value: sl<AuthCubit>(), child: const RegisterViews())),
+    GoRoute(
+        path: Routes.kHome,
+        builder: (context, state) {
+          return HomePage();
+        }),
     GoRoute(
       path: Routes.kChatView,
       builder: (context, state) {
