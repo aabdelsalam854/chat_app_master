@@ -1,7 +1,8 @@
 import 'package:chat_master/core/widget/custom_button.dart';
+import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/auth/presentation/widget/auth_social_icons.dart';
-import 'package:chat_master/features/auth/presentation/widget/custom_text_form_field.dart';
+
 import 'package:chat_master/features/auth/presentation/widget/divider_with_text.dart';
 import 'package:chat_master/features/auth/presentation/widget/dont_have_an_account_section.dart';
 import 'package:chat_master/features/auth/presentation/widget/password.dart';

@@ -1,11 +1,12 @@
 import 'dart:io';
+import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
+import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
+import 'package:chat_master/core/widget/custom_button.dart';
+import 'package:chat_master/features/chat/data/model/messages_model.dart';
+import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
-import '../../../../../core/fire_cloud/fire_cloud.dart';
-import '../../../../../core/utils/upload_file_in_firebase.dart';
-import '../../../../auth/presentation/widget/custom_bottom.dart';
-import '../../../data/model/messages_model.dart';
-import '../../../data/model/metadata_model.dart';
+
 
 class ShowImageAndSend extends StatelessWidget {
   const ShowImageAndSend({
@@ -32,7 +33,7 @@ class ShowImageAndSend extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(20),
-            child: CustomBottom(
+            child: CustomButton(
               text: 'Send',
               onPressed: () async {
                 Navigator.pop(context);

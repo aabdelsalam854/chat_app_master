@@ -34,7 +34,7 @@ dependencies:
   #fireBase
   firebase_auth: ^5.5.1 
   firebase_core: ^3.12.1
-  cloud_firestore: ^5.6.5
+  cloud_firestore: ^5.6.6
   firebase_storage: ^12.4.4
   #bloc
   flutter_bloc: ^9.1.0
@@ -42,7 +42,7 @@ dependencies:
  #data handle
   dartz: ^0.10.1
   get_it: ^8.0.3
-  conditional_builder_null_safety: ^0.0.6
+
 #send image-file-sound_record
   image_picker: ^1.0.7
   record: ^6.0.0
@@ -56,7 +56,7 @@ dependencies:
   video_player: ^2.8.6
   chewie: ^1.8.1
   camera: ^0.11.1
-  flutter_downloader: ^1.11.7
+
   permission_handler: ^11.3.1
   dio: ^5.4.3+1
   equatable: ^2.0.7

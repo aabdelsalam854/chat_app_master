@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
+import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/chat_bubble_friend.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/chat_puple.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/media_selection.dart';
@@ -15,7 +16,7 @@ import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
-import '../../../auth/presentation/widget/custom_text_form_field.dart';
+
 
 class ChatView extends StatefulWidget {
   const ChatView(this.email, {super.key, });
@@ -150,7 +151,7 @@ class _ChatViewState extends State<ChatView> {
                                 email: widget.email),
                         Expanded(
                           child: CustomTextFormField(
-                            prefixIcon: IconButton(
+                            icon: IconButton(
                               onPressed: () {
                                 showBottomSheet(
                                   context: context,

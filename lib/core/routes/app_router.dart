@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:chat_master/features/auth/presentation/views/forget_password.dart';
 import 'package:chat_master/features/chat/presentation/views/chat_views.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/show_file_and_send.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/show_multi_image.dart';
@@ -94,5 +95,13 @@ abstract class AppRouts {
         );
       },
     ),
+    GoRoute(
+        path: Routes.kForgetPassword,
+        builder: (context, state) {
+          return BlocProvider.value(
+            value: sl<AuthCubit>(),
+            child: const ForgetPassword(),
+          );
+        }),
   ]);
 }
