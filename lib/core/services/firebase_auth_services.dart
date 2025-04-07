@@ -4,7 +4,6 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthServices {
-  // FirebaseAuthServices._();
 
   String _mapFirebaseAuthExceptionToString(FirebaseAuthException e) {
     switch (e.code) {
@@ -53,15 +52,8 @@ class FirebaseAuthServices {
   Future<void> resetPassword(String email) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      // Success - الإيميل موجود وتم إرسال الرابط
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        // المستخدم غير موجود
-        throw CustomException(message: 'البريد الإلكتروني غير مسجل');
-      } else {
-        // خطأ آخر
-        throw CustomException(message: 'حدث خطأ: ${e.message}');
-      }
+      throw CustomException(message: _mapFirebaseAuthExceptionToString(e));
     }
   }
 

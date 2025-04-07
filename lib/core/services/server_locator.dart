@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final sl = GetIt.instance;
 Future<void> setUpServerLocator() async {
   sl.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
-  sl.registerSingleton<DatabaseServices>((FirestoreServices())); 
- 
+  sl.registerSingleton<DatabaseServices>((FirestoreServices()));
+
   autInjection(sl);
   sl.registerSingleton<SharedPreferences>(
       await SharedPreferences.getInstance());
