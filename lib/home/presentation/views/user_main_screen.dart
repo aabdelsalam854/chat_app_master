@@ -1,8 +1,6 @@
-
 import 'package:chat_master/features/home/presentation/pages/home_page.dart';
 import 'package:chat_master/home/presentation/views/widget/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -15,7 +13,7 @@ class MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   final List<Widget> _screens = [
     const HomePage(),
-   
+
     // Payment(),
   ];
 
@@ -40,28 +38,20 @@ class MainScreenState extends State<MainScreen> {
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.home_filled, size: 30),
-              label: "S.of(context).home",
+              label: "chats",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.abc, size: 30),
-              label:" S.of(context).myPlan",
+              icon: const Icon(Icons.flip_camera_android_outlined, size: 30),
+              label: "Stories",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.abc, size: 30),
-              label:"",
+              icon: const Icon(Icons.groups_2_outlined, size: 30),
+              label: "groups",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.abc, size: 30),
-              label: "S.of(context).askDr",
+              icon: const Icon(Icons.person, size: 30),
+              label: "profile",
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.abc, size: 30),
-              label:" S.of(context).profile",
-            ),
-            // BottomNavigationBarItem(
-            //   icon: const Icon(IconlyBold.profile, size: 30),
-            //   label: S.of(context).profile,
-            // ),
           ],
         ));
   }

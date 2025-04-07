@@ -1,5 +1,4 @@
 import 'package:chat_master/core/constant/endpoint.dart';
-import 'package:chat_master/core/error/failure.dart';
 import 'package:chat_master/core/error/failures.dart';
 import 'package:chat_master/core/services/database_services.dart';
 import 'package:chat_master/features/auth/data/datasources/auth_remote.dart';

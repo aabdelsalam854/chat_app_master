@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocProviders extends StatelessWidget {
   final Widget child;
-  const AppBlocProviders({Key? key, required this.child}) : super(key: key);
+  const AppBlocProviders({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

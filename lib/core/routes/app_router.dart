@@ -11,7 +11,7 @@ import 'package:chat_master/features/chat/presentation/views/widget/show_multi_i
 import 'package:chat_master/features/auth/presentation/views/login_view.dart';
 
 import 'package:chat_master/features/auth/presentation/views/register.dart';
-import 'package:chat_master/features/home/presentation/pages/home_page.dart';
+
 import 'package:chat_master/home/presentation/views/user_main_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

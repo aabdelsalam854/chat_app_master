@@ -1,3 +1,4 @@
+
 import 'package:chat_master/config/locale/app_localizations_setup.dart';
 import 'package:chat_master/core/constant/bloc_observer.dart';
 import 'package:chat_master/core/styles/app_theme.dart';
@@ -10,11 +11,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 void main() async {
   Bloc.observer = const MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
-
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setUpServerLocator();
@@ -41,9 +40,11 @@ class ChatApp extends StatelessWidget {
           if (themeState is ThemeChanged) {
             return Responsive(
               child: MaterialApp.router(
-              supportedLocales: AppLocalSetup.supportedLocales,
-              localizationsDelegates: AppLocalSetup.localizationsDelegates,
-             localeResolutionCallback: AppLocalSetup.localeResolutionCallback,
+                  locale: Locale("en"),
+                  supportedLocales: AppLocalSetup.supportedLocales,
+                  localizationsDelegates: AppLocalSetup.localizationsDelegates,
+                  localeResolutionCallback:
+                      AppLocalSetup.localeResolutionCallback,
                   debugShowCheckedModeBanner: false,
                   theme: appThemeData[themeState.appTheme]!,
                   routerConfig: AppRouts.router),
