@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'dart:math';
 
+import 'package:chat_master/core/constant/cached_key.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/services/server_locator.dart';
+import 'package:chat_master/core/utils/app_constants.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/auth/presentation/views/forget_password.dart';
 import 'package:chat_master/features/chat/presentation/views/chat_views.dart';
@@ -22,15 +25,26 @@ import 'package:chat_master/features/chat/presentation/views/widget/show_image.d
 import 'package:chat_master/features/chat/presentation/views/widget/show_image_and_send.dart';
 
 import 'package:chat_master/features/chat/presentation/views/widget/video_player.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AppRouts {
   static final router = GoRouter(routes: [
     GoRoute(
         path: Routes.kLogin,
-        builder: (context, state) => BlocProvider.value(
+        builder: (context, state) {
+          if (sl<SharedPreferences>().get(CachedKey.uid) != null) {
+            return BlocProvider.value(
+              value: sl<AuthCubit>(),
+              child: MainScreen(),
+            );
+          }   else {
+            return BlocProvider.value(
               value: sl<AuthCubit>(),
               child: const LoginViews(),
-            )),
+            );
+          }
+      
+        }),
     GoRoute(
         path: Routes.kRegisterView,
         builder: (context, state) => BlocProvider.value(

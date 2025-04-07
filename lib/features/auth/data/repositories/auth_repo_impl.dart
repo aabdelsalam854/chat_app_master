@@ -1,19 +1,24 @@
+import 'package:chat_master/core/constant/cached_key.dart';
 import 'package:chat_master/core/constant/endpoint.dart';
+import 'package:chat_master/core/encryption/encryption.dart';
 import 'package:chat_master/core/error/failures.dart';
 import 'package:chat_master/core/services/database_services.dart';
+import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/features/auth/data/datasources/auth_remote.dart';
 import 'package:chat_master/features/auth/data/models/register_model.dart';
 import 'package:chat_master/features/auth/domain/entities/user_entity.dart';
 import 'package:chat_master/features/auth/domain/repositories/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource dataSource;
-    final DatabaseServices databaseServices;
+  final DatabaseServices databaseServices;
 
   AuthRepositoryImpl(
-    this.dataSource, this.databaseServices,
+    this.dataSource,
+    this.databaseServices,
   );
 
   @override
@@ -21,6 +26,9 @@ class AuthRepositoryImpl implements AuthRepository {
       String email, String password) async {
     try {
       final res = await dataSource.login(email, password);
+
+      res.uid;
+      sl<SharedPreferences>().setString(CachedKey.uid, res.uid.encrypt());
       return Right(res);
     } on FirebaseAuthException catch (e) {
       return Left(ServerFailure(e.message ?? ''));
@@ -40,16 +48,15 @@ class AuthRepositoryImpl implements AuthRepository {
           password: registerModel.password,
           covariantPassword: registerModel.covariantPassword));
 
-databaseServices.addData(
-          docId: res.uid, path: EndPoint.userCollection,
-          data: {
-            'name': registerModel.name,
-            'phoneNumber': registerModel.phoneNumber,
-            'email': registerModel.email,
-            'password': registerModel.password,
-            'covariantPassword': registerModel.covariantPassword
-          });
-  
+      databaseServices
+          .addData(docId: res.uid, path: EndPoint.userCollection, data: {
+        'name': registerModel.name,
+        'phoneNumber': registerModel.phoneNumber,
+        'email': registerModel.email,
+        'password': registerModel.password,
+        'covariantPassword': registerModel.covariantPassword
+      });
+
       return Right(res);
     } on FirebaseAuthException catch (e) {
       return Left(ServerFailure(e.message ?? ''));

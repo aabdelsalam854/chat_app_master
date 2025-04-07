@@ -13,7 +13,9 @@ class MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   final List<Widget> _screens = [
     const HomePage(),
-
+    const HomePage(),
+     const HomePage(),
+      const HomePage(),
     // Payment(),
   ];
 
@@ -42,7 +44,7 @@ class MainScreenState extends State<MainScreen> {
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.flip_camera_android_outlined, size: 30),
-              label: "Stories",
+              label: "stories",
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.groups_2_outlined, size: 30),

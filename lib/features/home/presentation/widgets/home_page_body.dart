@@ -21,8 +21,6 @@ class HomePageBody extends StatelessWidget {
           title: Text('chat master'),
         ),
         body: ListView.builder(
-       
-         
           itemCount: 10,
           itemBuilder: (context, index) {
             return ChatTile(
@@ -35,9 +33,6 @@ class HomePageBody extends StatelessWidget {
               },
             );
           },
-          
-        )
-        
-        );
+        ));
   }
 }
