@@ -1,5 +1,7 @@
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
+import 'package:chat_master/core/widget/snack_bar.dart';
+import 'package:chat_master/features/auth/data/models/register_model.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/auth/presentation/widget/auth_social_icons.dart';
 
@@ -57,15 +59,32 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 hintText: 'Confirm Password',
                 passwordController: confirmPasswordController),
             const SizedBox(height: 30),
-            CustomButton(
-                onPressed: () {
-                  context.read<AuthCubit>().register(
-                        emailController.text,
-                        passwordController.text,
-                        confirmPasswordController.text,
-                      );
-                },
-                text: "Sign Up"),
+            BlocConsumer<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state is AuthRegisterSuccessState) {
+                  snackBar(context, "Register Success", Colors.green);
+                }
+              },
+              builder: (context, state) {
+                return state is AuthRegisterLoadingState
+                    ? const Center(child: CircularProgressIndicator())
+                    : CustomButton(
+                        onPressed: () {
+                           snackBar(context, "Register Success", Colors.green);
+                          // context.read<AuthCubit>().register(
+                          //       RegisterModel(
+                          //         email: emailController.text,
+                          //         password: passwordController.text,
+                          //         covariantPassword:
+                          //             confirmPasswordController.text,
+                          //         name: " nameController.text",
+                          //         phoneNumber: "phoneNumberController.text",
+                          //       ),
+                          //     );
+                        },
+                        text: "Sign Up");
+              },
+            ),
             const SizedBox(height: 40),
             DividerWithText(
               text: " or sign up with",

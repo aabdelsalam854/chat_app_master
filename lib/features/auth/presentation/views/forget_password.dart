@@ -1,15 +1,15 @@
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
-
-
+import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  ForgetPasswordBody();
+    return ForgetPasswordBody();
   }
 }
 
@@ -21,31 +21,10 @@ class ForgetPasswordBody extends StatefulWidget {
 }
 
 class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
-  final TextEditingController _emailController = TextEditingController();
+  final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool _loading = false;
 
-  // Future<void> _sendResetLink() async {
-  //   if (!_formKey.currentState!.validate()) return;
 
-  //   setState(() => _loading = true);
-
-  //   try {
-  //     await FirebaseAuth.instance.sendPasswordResetEmail(
-  //       email: _emailController.text.trim(),
-  //     );
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('تم إرسال رابط إعادة تعيين كلمة المرور')),
-  //     );
-  //     Navigator.pop(context);
-  //   } catch (e) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('حدث خطأ: ${e.toString()}')),
-  //     );
-  //   }
-
-  //   setState(() => _loading = false);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -62,17 +41,22 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: 20),
-         CustomTextFormField(
-           controller: _emailController,
-           hintText: 'Email',
-           keyboardType: TextInputType.emailAddress,
-         ),
-
+              CustomTextFormField(
+                controller: _emailController,
+                hintText: 'Email',
+                keyboardType: TextInputType.emailAddress,
+              ),
               SizedBox(height: 20),
-              CustomButton(onPressed: () {}, text: 'إرسال رابط إعادة تعيين كلمة المرور',),
+              CustomButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                 
+                 context.read<AuthCubit>().forgetPassword(_emailController.text);
+                  }
+                },
+                text: 'إرسال رابط إعادة تعيين كلمة المرور',
+              ),
               SizedBox(height: 20),
-              if (_loading) CircularProgressIndicator(),
-         
             ],
           ),
         ),

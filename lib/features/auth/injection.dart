@@ -14,7 +14,7 @@ Future<void> autInjection(GetIt sl) async {
   sl.registerFactory<AuthUseCases>(() => AuthUseCases(sl()));
 
   // Repository
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl() ));
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl() , sl()));
 
   // Data Sources
   sl.registerLazySingleton<AuthRemoteDataSource>(

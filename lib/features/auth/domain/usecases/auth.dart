@@ -15,8 +15,10 @@ class AuthUseCases {
 //   //*-----------------register------------------*//
   Future<Either<Failure, dynamic>> register(
           RegisterModel registerModel) async =>
-      await authRepository.register(registerModel.email, registerModel.password,
-          registerModel.covariantPassword);
+      await authRepository.register(registerModel);
+//*-----------------resetPassword------------------*//
+  Future<Either<Failure, dynamic>> resetPassword(String email) async =>
+      await authRepository.resetPassword(email);
 
 //   Future<Either<Failure, dynamic>> signout() async =>
 //       await authRepository.signout();

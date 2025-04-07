@@ -2,11 +2,8 @@ import 'package:chat_master/core/error/exception.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:twitter_login/twitter_login.dart';
 
 class FirebaseAuthServices {
-
-
   // FirebaseAuthServices._();
 
   String _mapFirebaseAuthExceptionToString(FirebaseAuthException e) {
@@ -23,10 +20,11 @@ class FirebaseAuthServices {
         return 'An undefined Error happened.';
     }
   }
-Future<User> createUserWithEmailAndPassword(
-      {required String email,
-      required String password,
-    }) async {
+
+  Future<User> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -52,8 +50,20 @@ Future<User> createUserWithEmailAndPassword(
     }
   }
 
-
-
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      // Success - الإيميل موجود وتم إرسال الرابط
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        // المستخدم غير موجود
+        throw CustomException(message: 'البريد الإلكتروني غير مسجل');
+      } else {
+        // خطأ آخر
+        throw CustomException(message: 'حدث خطأ: ${e.message}');
+      }
+    }
+  }
 
 //*----------- Google Login -----------------*/
 
@@ -85,7 +95,7 @@ Future<User> createUserWithEmailAndPassword(
 
 //*------------- Twitter Login -----------------*/
   Future signInWithTwitter() async {
-    // final twitterLogin 
+    // final twitterLogin
     // = TwitterLogin(
     //     apiKey: '<your consumer key>',
     //     apiSecretKey: ' <your consumer secret>',

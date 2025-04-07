@@ -19,16 +19,22 @@ final AuthUseCases authUseCases;
       (user) => emit(AuthLoginSuccessState(user)),
     );
   }
-  void register(String email, String password, String covariantPassword) async {
+  void register(RegisterModel registerModel ) async {
     emit(AuthRegisterLoadingState());
-    final result = await authUseCases.register(RegisterModel (
-      email: email,
-      password: password,
-      covariantPassword: covariantPassword,
-    ));
+    final result = await authUseCases.register(registerModel );
     result.fold(
       (failure) => emit(AuthRegisterFailureState(failure.message)),
       (user) => emit(AuthRegisterSuccessState(user)),
+    );
+  }
+
+
+  void forgetPassword(String email) async {
+    emit(AuthResetPasswordLoadingState());
+    final result = await authUseCases.resetPassword(email);
+    result.fold(
+      (failure) => emit(AuthResetPasswordFailureState(failure.message)),
+      (message) => emit(AuthResetPasswordSuccessState()),
     );
   }
 

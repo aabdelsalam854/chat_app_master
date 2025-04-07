@@ -14,6 +14,9 @@ abstract class AuthRemoteDataSource {
 //*------------------loginWithFacebook------------------*//
   Future<dynamic> loginWithFacebook(String facebookToken);
 
+  //*------------- resetPassword------------------*//
+  Future<dynamic> resetPassword(String email);
+
   Future<dynamic> signout();
 }
 
@@ -61,5 +64,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future loginWithGoogle(String googleToken) {
     // TODO: implement loginWithGoogle
     throw UnimplementedError();
+  }
+  
+  @override
+  Future resetPassword(String email) async {
+    await firebaseAuthServices.resetPassword(email);
+ 
   }
 }

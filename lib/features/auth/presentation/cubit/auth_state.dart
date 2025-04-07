@@ -48,3 +48,22 @@ final class AuthRegisterFailureState extends AuthState {
   @override
   List<Object> get props => [error];
 }
+
+
+final class AuthResetPasswordLoadingState extends AuthState {}
+final class AuthResetPasswordSuccessState extends AuthState {
+
+
+  const AuthResetPasswordSuccessState();
+
+  @override
+  List<Object> get props => [];
+}
+final class AuthResetPasswordFailureState extends AuthState {
+  final String error;
+
+  const AuthResetPasswordFailureState(this.error);
+
+  @override
+  List<Object> get props => [error];
+}
