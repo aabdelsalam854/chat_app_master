@@ -1,7 +1,7 @@
 import 'package:encrypt/encrypt.dart';
 
-const String _iv = 'hrApp1**@@';
-const String _passKey = '@@1**hrApp';
+const String _iv = '1234567890123456';
+const String _passKey = 'hrAppKey12345678';
 
 extension EncryptionToString on String {
   String? decrypt() {

@@ -39,8 +39,8 @@ class MainScreenState extends State<MainScreen> {
           onItemTapped: _onItemTapped,
           items: [
             BottomNavigationBarItem(
-              icon: const Icon(Icons.home_filled, size: 30),
-              label: "chats",
+              icon: const Icon(Icons.message_outlined, size: 30),
+              label: "Messages",
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.flip_camera_android_outlined, size: 30),
@@ -51,8 +51,8 @@ class MainScreenState extends State<MainScreen> {
               label: "groups",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.person, size: 30),
-              label: "profile",
+              icon: const Icon(Icons.call, size: 30),
+              label: "calls",
             ),
           ],
         ));
