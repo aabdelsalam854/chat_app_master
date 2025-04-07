@@ -15,7 +15,7 @@ final AuthUseCases authUseCases;
     emit(AuthLoginLoadingState());
     final result = await authUseCases.login(email, password);
     result.fold(
-      (failure) => emit(AuthLoginFailureState(failure.message)),
+      (failure) => emit(AuthLoginFailureState(failure.msg)),
       (user) => emit(AuthLoginSuccessState(user)),
     );
   }
@@ -23,7 +23,7 @@ final AuthUseCases authUseCases;
     emit(AuthRegisterLoadingState());
     final result = await authUseCases.register(registerModel );
     result.fold(
-      (failure) => emit(AuthRegisterFailureState(failure.message)),
+      (failure) => emit(AuthRegisterFailureState(failure.msg)),
       (user) => emit(AuthRegisterSuccessState(user)),
     );
   }
@@ -33,7 +33,7 @@ final AuthUseCases authUseCases;
     emit(AuthResetPasswordLoadingState());
     final result = await authUseCases.resetPassword(email);
     result.fold(
-      (failure) => emit(AuthResetPasswordFailureState(failure.message)),
+      (failure) => emit(AuthResetPasswordFailureState(failure.msg)),
       (message) => emit(AuthResetPasswordSuccessState()),
     );
   }

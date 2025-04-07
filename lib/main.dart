@@ -1,3 +1,4 @@
+import 'package:chat_master/config/locale/app_localizations_setup.dart';
 import 'package:chat_master/core/constant/bloc_observer.dart';
 import 'package:chat_master/core/styles/app_theme.dart';
 import 'package:chat_master/core/styles/cubit/theme_cubit.dart';
@@ -40,6 +41,9 @@ class ChatApp extends StatelessWidget {
           if (themeState is ThemeChanged) {
             return Responsive(
               child: MaterialApp.router(
+              supportedLocales: AppLocalSetup.supportedLocales,
+              localizationsDelegates: AppLocalSetup.localizationsDelegates,
+             localeResolutionCallback: AppLocalSetup.localeResolutionCallback,
                   debugShowCheckedModeBanner: false,
                   theme: appThemeData[themeState.appTheme]!,
                   routerConfig: AppRouts.router),

@@ -14,7 +14,7 @@ class LoginAndRegisterCubit extends Cubit<LoginAndRegisterState> {
   ) async {
     emit(RegisterLoadingState());
     var request = await loginAndRegisterRepo.register(emailAddress, password);
-    emit(request.fold((failure) => RegisterFailureState(failure.message),
+    emit(request.fold((failure) => RegisterFailureState(failure.msg),
         (register) => RegisterSuccessState(register)));
   }
 
@@ -24,7 +24,7 @@ class LoginAndRegisterCubit extends Cubit<LoginAndRegisterState> {
   ) async {
     emit(LoginLoadingState());
     var request = await loginAndRegisterRepo.login(emailAddress, password);
-    emit(request.fold((failure) => LoginFailureState(failure.message),
+    emit(request.fold((failure) => LoginFailureState(failure.msg),
         (login) => LoginSuccessState(login)));
   }
 

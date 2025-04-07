@@ -1,5 +1,6 @@
 
 import 'package:chat_master/core/error/failure.dart';
+import 'package:chat_master/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
