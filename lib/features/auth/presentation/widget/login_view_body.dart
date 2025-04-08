@@ -1,4 +1,6 @@
+import 'package:chat_master/config/locale/keys_translate.dart';
 import 'package:chat_master/core/constant/validation.dart';
+import 'package:chat_master/core/extensions/translate.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
@@ -53,7 +55,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 CustomTextFormField(
                   validator: Validation.emailValidator,
                   controller: emailController,
-                  hintText: 'Email',
+                  hintText: KeysTranslate.email.tr,
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 16),

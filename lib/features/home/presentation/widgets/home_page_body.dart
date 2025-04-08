@@ -1,5 +1,6 @@
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/styles/cubit/theme_cubit.dart';
+import 'package:chat_master/features/app/presentation/cubits/app/app_cubit.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,7 @@ class HomePageBody extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.read<ThemeCubit>().changeTheme();
+            context.read<AppCubit>().changeTheme();
           },
           child: const Icon(Icons.add),
         ),

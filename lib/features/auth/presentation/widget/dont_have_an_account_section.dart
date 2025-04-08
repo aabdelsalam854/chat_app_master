@@ -1,4 +1,4 @@
-import 'package:chat_master/core/styles/app_color.dart';
+
 import 'package:flutter/material.dart';
 
 
@@ -27,7 +27,7 @@ class DontHaveAnAccountSection extends StatelessWidget {
           child: Text(
             buttonText,
             style: TextStyle(
-              color: AppColors.kCustomBottomColors,
+    
               fontSize: 16,
             ),
           ),

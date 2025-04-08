@@ -16,9 +16,10 @@ class TAppBarTheme {
     // systemOverlayStyle: SystemUiOverlayStyle.light,
     // iconTheme: const IconThemeData(size: 24.0, color: Colors.black),
     iconTheme: IconThemeData(color: AppColors.white),
+
     actionsIconTheme: IconThemeData(size: 24.0, color: Colors.black),
     titleTextStyle: TextStyle(
-        fontSize: 18.0, fontWeight: FontWeight.w600, color: Colors.white),
+        fontSize: 18.0, fontWeight: FontWeight.w600, color: Colors.black),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadiusDirectional.vertical(
         bottom: Radius.circular(10),
@@ -33,7 +34,7 @@ class TAppBarTheme {
     foregroundColor: AppColors.black,
     surfaceTintColor: Colors.transparent,
     // systemOverlayStyle: SystemUiOverlayStyle.light,
-    systemOverlayStyle: SystemUiOverlayStyle.dark,
+    systemOverlayStyle: SystemUiOverlayStyle.light,
     iconTheme: IconThemeData(size: 24.0, color: Colors.black),
     actionsIconTheme: IconThemeData(size: 24.0, color: Colors.white),
     titleTextStyle: TextStyle(

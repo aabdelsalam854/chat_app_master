@@ -1,34 +1,34 @@
 part of 'app_cubit.dart';
 
 abstract class AppState extends Equatable {
-  const AppState();
+  final Locale locale;
+  final String fontFamily;
+  final AppTheme appTheme;
+  const AppState(this.locale, this.fontFamily, this.appTheme);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [ locale, fontFamily, appTheme];
 }
 
-class AppInitial extends AppState {}
+class AppInitial extends AppState {
 
-class GetPageState extends AppState {
-  final int page;
+  const AppInitial(super.locale, super.fontFamily, super.appTheme);
+ @override
+  List<Object> get props => [ locale, fontFamily, appTheme];
 
-  const GetPageState(this.page);
-  @override
-  List<Object> get props => [page];
 }
 
-class NextPageState extends AppState {
-  final int index;
 
-  const NextPageState(this.index);
-  @override
-  List<Object> get props => [index];
+
+class ChangeLocaleState extends AppState {
+  const ChangeLocaleState(super.locale, super.fontFamily, super.appTheme);
+   @override
+  List<Object> get props => [ locale, fontFamily, appTheme];
 }
 
-class PreviousPageState extends AppState {
-  final int index;
+final class ThemeChanged extends AppState {
+  const ThemeChanged(super.locale, super.fontFamily, super.appTheme);
 
-  const PreviousPageState(this.index);
-  @override
-  List<Object> get props => [index];
+ @override
+  List<Object> get props => [ locale, fontFamily, appTheme];
 }

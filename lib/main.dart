@@ -4,7 +4,11 @@ import 'package:chat_master/core/styles/app_theme.dart';
 import 'package:chat_master/core/styles/cubit/theme_cubit.dart';
 import 'package:chat_master/core/routes/app_router.dart';
 import 'package:chat_master/core/services/server_locator.dart';
+import 'package:chat_master/core/utils/app_constants.dart';
+
 import 'package:chat_master/core/widget/responsive_widget.dart';
+import 'package:chat_master/features/app/presentation/cubits/app/app_cubit.dart';
+import 'package:chat_master/features/app/presentation/cubits/locale/locale_cubit.dart';
 import 'package:chat_master/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +21,8 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setUpServerLocator();
 
+  // await sl<AppCubit>().getSavedLang();
+  // await sl<AppCubit>().getSavedTheme();
   runApp(const ChatApp());
 }
 
@@ -25,32 +31,24 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => ThemeCubit(),
-
-        // BlocProvider(
-        //     create: (context) =>
-        //         LoginAndRegisterCubit(sl.get<LoginAndRegisterRepoImpl>())),
-
-        child: Responsive(
-          child: BlocBuilder<ThemeCubit, ThemeState>(
-            builder: (context, themeState) {
-              if (themeState is ThemeChanged) {
-                return MaterialApp.router(
-                    locale: Locale("en"),
-                    supportedLocales: AppLocalSetup.supportedLocales,
-                    localizationsDelegates:
-                        AppLocalSetup.localizationsDelegates,
-                    localeResolutionCallback:
-                        AppLocalSetup.localeResolutionCallback,
-                    debugShowCheckedModeBanner: false,
-                    theme: appThemeData[themeState.appTheme]!,
-                    routerConfig: AppRouts.router);
-              } else {
-                return const SizedBox();
-              }
-            },
-          ),
-        ));
+    return BlocProvider.value(
+      value: sl<AppCubit>()..getSavedLang()..getSavedTheme(),
+      child: Responsive(
+        child: BlocBuilder<AppCubit, AppState>(
+          builder: (context, themeState) {
+            return MaterialApp.router(
+                scaffoldMessengerKey: AppConstants.scaffoldKey,
+                // locale: Locale("en"),
+                supportedLocales: AppLocalSetup.supportedLocales,
+                localizationsDelegates: AppLocalSetup.localizationsDelegates,
+                localeResolutionCallback:
+                    AppLocalSetup.localeResolutionCallback,
+                debugShowCheckedModeBanner: false,
+                theme: appThemeData[themeState.appTheme]!,
+                routerConfig: AppRouts.router);
+          },
+        ),
+      ),
+    );
   }
 }

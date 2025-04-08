@@ -5,12 +5,12 @@ import 'presentation/cubits/app/app_cubit.dart';
 import 'domain/repositories/app_repository.dart';
 import 'data/repositories/app_repository_impl.dart';
 import 'data/datasources/app_local_data_source.dart';
-import 'presentation/cubits/locale/locale_cubit.dart';
+// import 'presentation/cubits/locale/locale_cubit.dart';
 
 Future<void> appInit(GetIt sl) async {
   // Blocs
-  sl.registerFactory<AppCubit>(() => AppCubit(sl()));
-  sl.registerFactory<LocaleCubit>(() => LocaleCubit(sl(), sl()));
+  sl.registerFactory<AppCubit>(() => AppCubit(sl(), sl(), sl()));
+  // sl.registerFactory<LocaleCubit>(() => LocaleCubit(sl(), sl()));
 
   // Use cases
   sl.registerLazySingleton<ChangeLangUseCase>(
