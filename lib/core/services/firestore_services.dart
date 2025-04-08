@@ -42,4 +42,10 @@ class FirestoreServices implements DatabaseServices {
     var userData = await firestore.collection(path).doc(docId).get();
     return userData.data() as Map<String, dynamic>;
   }
+  Future<List<Map<String, dynamic>>> getAllDocuments(String collectionPath) async {
+  final snapshot = await FirebaseFirestore.instance.collection(collectionPath).get();
+
+  return snapshot.docs.map((doc) => doc.data()).toList();
+}
+
 }
