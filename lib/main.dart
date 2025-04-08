@@ -1,4 +1,3 @@
-
 import 'package:chat_master/config/locale/app_localizations_setup.dart';
 import 'package:chat_master/core/constant/bloc_observer.dart';
 import 'package:chat_master/core/styles/app_theme.dart';
@@ -26,34 +25,32 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => ThemeCubit(),
-        ),
+    return BlocProvider(
+        create: (context) => ThemeCubit(),
+
         // BlocProvider(
         //     create: (context) =>
         //         LoginAndRegisterCubit(sl.get<LoginAndRegisterRepoImpl>())),
-      ],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, themeState) {
-          if (themeState is ThemeChanged) {
-            return Responsive(
-              child: MaterialApp.router(
-                  locale: Locale("en"),
-                  supportedLocales: AppLocalSetup.supportedLocales,
-                  localizationsDelegates: AppLocalSetup.localizationsDelegates,
-                  localeResolutionCallback:
-                      AppLocalSetup.localeResolutionCallback,
-                  debugShowCheckedModeBanner: false,
-                  theme: appThemeData[themeState.appTheme]!,
-                  routerConfig: AppRouts.router),
-            );
-          } else {
-            return const SizedBox();
-          }
-        },
-      ),
-    );
+
+        child: Responsive(
+          child: BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, themeState) {
+              if (themeState is ThemeChanged) {
+                return MaterialApp.router(
+                    locale: Locale("en"),
+                    supportedLocales: AppLocalSetup.supportedLocales,
+                    localizationsDelegates:
+                        AppLocalSetup.localizationsDelegates,
+                    localeResolutionCallback:
+                        AppLocalSetup.localeResolutionCallback,
+                    debugShowCheckedModeBanner: false,
+                    theme: appThemeData[themeState.appTheme]!,
+                    routerConfig: AppRouts.router);
+              } else {
+                return const SizedBox();
+              }
+            },
+          ),
+        ));
   }
 }

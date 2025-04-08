@@ -1,4 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
+import 'package:chat_master/core/widget/custom_circle_network_image.dart';
 import 'package:chat_master/features/stories/presentation/pages/stories.dart';
 import 'package:flutter/material.dart';
 
@@ -18,19 +19,7 @@ class StoryItem extends StatelessWidget {
           shape: BoxShape.circle,
           border: Border.all(color: Colors.green, width: 2),
         ),
-        child: ClipOval(
-          child: CachedNetworkImage(
-            imageUrl: story.imageUrl,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => Container(
-              color: Colors.grey[300],
-              child:
-                  const Center(child: Icon(Icons.image, color: Colors.white)),
-            ),
-            errorWidget: (context, url, error) =>
-                const Icon(Icons.error, color: Colors.red),
-          ),
-        ),
+        child: CustomCircleNetworkImage(imageUrl: story.imageUrl),
       ),
       title: Text(
         story.name,
@@ -43,3 +32,4 @@ class StoryItem extends StatelessWidget {
     );
   }
 }
+

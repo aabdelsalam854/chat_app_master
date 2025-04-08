@@ -10,7 +10,7 @@ import 'package:chat_master/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 
-class AppTheme {
+class AppThemes {
   static ThemeData dark(String fontFamily) => _dark(fontFamily);
   static ThemeData light(String fontFamily) => _light(fontFamily);
 
