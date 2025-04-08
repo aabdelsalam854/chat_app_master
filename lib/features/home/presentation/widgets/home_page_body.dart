@@ -19,6 +19,12 @@ class HomePageBody extends StatelessWidget {
         ),
         appBar: AppBar(
           title: Text('chat master'),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.more_vert_sharp),
+            ),
+          ],
         ),
         body: ListView.builder(
           itemCount: 10,

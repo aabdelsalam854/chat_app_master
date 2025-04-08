@@ -1,29 +1,20 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:chat_master/core/constant/cached_key.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/services/server_locator.dart';
-import 'package:chat_master/core/utils/app_constants.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/auth/presentation/views/forget_password.dart';
 import 'package:chat_master/features/chat/presentation/views/chat_views.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/show_file_and_send.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/show_multi_image.dart';
-
 import 'package:chat_master/features/auth/presentation/views/login_view.dart';
-
 import 'package:chat_master/features/auth/presentation/views/register.dart';
-
 import 'package:chat_master/home/presentation/views/user_main_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:go_router/go_router.dart';
-
 import 'package:chat_master/features/chat/presentation/views/widget/show_image.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/show_image_and_send.dart';
-
 import 'package:chat_master/features/chat/presentation/views/widget/video_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -37,13 +28,12 @@ abstract class AppRouts {
               value: sl<AuthCubit>(),
               child: MainScreen(),
             );
-          }   else {
+          } else {
             return BlocProvider.value(
               value: sl<AuthCubit>(),
               child: const LoginViews(),
             );
           }
-      
         }),
     GoRoute(
         path: Routes.kRegisterView,
