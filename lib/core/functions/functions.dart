@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:chat_master/features/app/presentation/cubits/locale/locale_cubit.dart';
+import 'package:chat_master/features/app/presentation/cubits/app/app_cubit.dart';
+
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 

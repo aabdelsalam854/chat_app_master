@@ -1,14 +1,11 @@
 import 'package:chat_master/config/locale/app_localizations_setup.dart';
 import 'package:chat_master/core/constant/bloc_observer.dart';
 import 'package:chat_master/core/styles/app_theme.dart';
-import 'package:chat_master/core/styles/cubit/theme_cubit.dart';
 import 'package:chat_master/core/routes/app_router.dart';
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/core/utils/app_constants.dart';
-
 import 'package:chat_master/core/widget/responsive_widget.dart';
 import 'package:chat_master/features/app/presentation/cubits/app/app_cubit.dart';
-import 'package:chat_master/features/app/presentation/cubits/locale/locale_cubit.dart';
 import 'package:chat_master/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +29,9 @@ class ChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: sl<AppCubit>()..getSavedLang()..getSavedTheme(),
+      value: sl<AppCubit>()
+        ..getSavedLang()
+        ..getSavedTheme(),
       child: Responsive(
         child: BlocBuilder<AppCubit, AppState>(
           builder: (context, themeState) {

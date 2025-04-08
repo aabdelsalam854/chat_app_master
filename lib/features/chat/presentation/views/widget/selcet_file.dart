@@ -26,7 +26,7 @@ class SelectFile extends StatelessWidget {
                 extra: ({'file': pickedFile, 'email': email}),
               );
             }
-            Navigator.pop(context);
+            GoRouter.of(context).pop();
           });
         },
         title: const Text(

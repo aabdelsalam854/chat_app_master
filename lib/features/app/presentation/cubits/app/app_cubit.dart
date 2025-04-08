@@ -5,14 +5,14 @@ import 'package:chat_master/core/usecases/usecase.dart';
 import 'package:chat_master/core/utils/app_constants.dart';
 import 'package:chat_master/features/app/domain/usecases/change_lang.dart';
 import 'package:chat_master/features/app/domain/usecases/get_saved_lang.dart';
-import 'package:chat_master/features/app/presentation/cubits/locale/locale_cubit.dart';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_master/core/utils/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'app_state.dart';
-
+String currentLangCode = '';
 class AppCubit extends Cubit<AppState> {
   final SharedPreferences shared;
   final ChangeLangUseCase changeLangUseCase;
