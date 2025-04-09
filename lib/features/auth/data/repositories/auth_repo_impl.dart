@@ -54,7 +54,9 @@ class AuthRepositoryImpl implements AuthRepository {
           docId: res.uid,
           path: EndPoint.userCollection,
           data: UserModel(
+
             id: res.uid,
+            phoneNumber: null,
             name: registerModel.name,
             email: registerModel.email,
             photoUrl: null,

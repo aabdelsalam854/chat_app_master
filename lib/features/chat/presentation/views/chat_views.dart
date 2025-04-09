@@ -17,11 +17,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
 
-
 class ChatView extends StatefulWidget {
-  const ChatView(this.email, {super.key, });
+  const ChatView(
+    this.email, {
+    super.key,
+  });
   final String email;
- 
+
   @override
   State<ChatView> createState() => _ChatViewState();
 }
@@ -110,13 +112,16 @@ class _ChatViewState extends State<ChatView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
-        stream: FireCloud.getMessages(),
+        stream: ChatService()
+            .getMessages(
+              "chatId",
+              "chatId",
+            )
+            .asBroadcastStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<MessageModel> messagesList = snapshot.data!.docs
-                .map((doc) =>
-                    MessageModel.fromJson(doc.data() as Map<String, dynamic>))
-                .toList();
+            List<MessageModel> messagesList = snapshot.data!;
+    
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -141,14 +146,20 @@ class _ChatViewState extends State<ChatView> {
                     ),
                     Row(
                       children: [
-                        isEmpty
-                            ? recorder(context)
-                            : SendMeaasge(
-                                metadata: null,
-                                type: 'MessageType.text',
-                                message: textVontroller.text,
-                                controller: textVontroller,
-                                email: widget.email),
+                        SendMeaasge(
+                            metadata: null,
+                            type: 'MessageType.text',
+                            message: textVontroller.text,
+                            controller: textVontroller,
+                            email: widget.email),
+                        // isEmpty
+                        //     ? recorder(context)
+                        //     : SendMeaasge(
+                        //         metadata: null,
+                        //         type: 'MessageType.text',
+                        //         message: textVontroller.text,
+                        //         controller: textVontroller,
+                        //         email: widget.email),
                         Expanded(
                           child: CustomTextFormField(
                             icon: IconButton(

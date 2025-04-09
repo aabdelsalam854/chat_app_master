@@ -5,32 +5,37 @@ class UserModel extends Equatable {
   final String id;
   final String name;
   final String email;
+  final String? phoneNumber;
   final String? photoUrl;
   final DateTime? lastSeen;
 
- const UserModel({
+  const UserModel({
     required this.id,
     required this.name,
     required this.email,
+    this.phoneNumber,
     this.photoUrl,
     this.lastSeen,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-     UserModel(
-      id: json['id'] ?? "",
-      name: json['name'] ?? '',
-      email: json['email'] ?? '',
-      photoUrl: json['photoUrl'],
-      lastSeen: json['lastSeen'] != null
-          ? (json['lastSeen'] as Timestamp).toDate()
-          : null,
-    );
+  // تحويل البيانات من JSON
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        id: json['id'] ?? "",
+        name: json['name'] ?? '',
+        email: json['email'] ?? '',
+        phoneNumber: json['phoneNumber'] ?? '',
+        photoUrl: json['photoUrl'],
+        lastSeen: json['lastSeen'] != null
+            ? (json['lastSeen'] as Timestamp).toDate()
+            : null,
+      );
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
       'email': email,
+      'phoneNumber': phoneNumber,
       'photoUrl': photoUrl,
       'lastSeen': lastSeen?.toIso8601String(),
     };
@@ -46,6 +51,5 @@ class UserModel extends Equatable {
   }
 
   @override
-  List<Object?> get props =>  [id, name, email, photoUrl, lastSeen];
-  
+  List<Object?> get props => [id, name, email, phoneNumber, photoUrl, lastSeen];
 }

@@ -24,30 +24,32 @@ class HomePageBody extends StatelessWidget {
           title: Text('chat master'),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push(Routes.kProfile);
+              },
               icon: const Icon(Icons.more_vert_sharp),
             ),
           ],
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            if (state is GetUsersSuccessState){
-                return ListView.builder(
-              itemCount: state.users.length,
-              itemBuilder: (context, index) {
-                return ChatTile(
-                  username: state.users[index].name,
-                  lastMessage: 'Last message from user $index',
-                  time: '${index + 1} min ago',
-                  onTap: () {
-                    // snackBar(context, 'Hello', Colors.red);
-                    GoRouter.of(context)
-                        .push(Routes.kChatView, extra: "aasdasd");
-                  },
-                );
-              },
-            );
-            } else if (state is GetUsersErrorState){
+            if (state is GetUsersSuccessState) {
+              return ListView.builder(
+                itemCount: state.users.length,
+                itemBuilder: (context, index) {
+                  return ChatTile(
+                    username: state.users[index].email,
+                    lastMessage: 'Last message from user $index',
+                    time: '${index + 1} min ago',
+                    onTap: () {
+                      // snackBar(context, 'Hello', Colors.red);
+                      GoRouter.of(context)
+                          .push(Routes.kChatView, extra: state.users[index].id);
+                    },
+                  );
+                },
+              );
+            } else if (state is GetUsersErrorState) {
               return Center(
                 child: Text(state.error),
               );
@@ -58,25 +60,21 @@ class HomePageBody extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                
-                child:ListView.builder(
-                              itemCount: 10,
-                              itemBuilder: (context, index) {
-                return ChatTile(
-                  username: 'User $index',
-                  lastMessage: 'Last message from user $index',
-                  time: '${index + 1} min ago',
-                  onTap: () {
-                    // snackBar(context, 'Hello', Colors.red);
-                
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    return ChatTile(
+                      username: 'User $index',
+                      lastMessage: 'Last message from user $index',
+                      time: '${index + 1} min ago',
+                      onTap: () {
+                        // snackBar(context, 'Hello', Colors.red);
+                      },
+                    );
                   },
-                );
-                              },
-                            ),
+                ),
               );
-            
             }
-          
           },
         ));
   }

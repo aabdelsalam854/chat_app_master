@@ -15,4 +15,7 @@ class Routes {
   static const kForgetPassword = '/ForgetPassword';
 
   static const kHome = "/Home"; 
+
+  static const kSettings = "/Settings";
+  static const kProfile = "/Profile";
 }
