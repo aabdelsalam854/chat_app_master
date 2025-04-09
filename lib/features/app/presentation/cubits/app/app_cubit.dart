@@ -66,7 +66,7 @@ class AppCubit extends Cubit<AppState> {
         final fontFamily =
             isArabic ? AppConstants.fontFamilyAr : AppConstants.fontFamilyEn;
         emit(ChangeLocaleState(
-            Locale(langCode), fontFamily, AppTheme.themeLight));
+            Locale(langCode), fontFamily, state.appTheme));
       },
     );
   }

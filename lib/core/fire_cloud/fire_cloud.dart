@@ -64,7 +64,7 @@ Stream<List<MessageModel>> getMessages(String userId1, String userId2) {
       .snapshots()
       .map((querySnapshot) {
         return querySnapshot.docs.map((doc) {
-          return MessageModel.fromJson(doc.data() as Map<String, dynamic>);
+          return MessageModel.fromJson(doc.data());
         }).toList();
       });
 }

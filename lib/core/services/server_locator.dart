@@ -4,6 +4,7 @@ import 'package:chat_master/core/services/firestore_services.dart';
 import 'package:chat_master/features/app/app_injection.dart';
 import 'package:chat_master/features/auth/injection.dart';
 import 'package:chat_master/features/home/injection.dart';
+import 'package:chat_master/features/profile/injection.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +15,7 @@ Future<void> setUpServerLocator() async {
   appInit(sl);
   homeInjection(sl);
   autInjection(sl);
+  profileInjection(sl);
   sl.registerSingleton<SharedPreferences>(
       await SharedPreferences.getInstance());
 }

@@ -31,9 +31,9 @@ class FirestoreServices implements DatabaseServices {
 
   @override
   Future<void> updateData(
-      {required String path, required Map<String, dynamic> data}) {
-    // TODO: implement updateData
-    throw UnimplementedError();
+      {required String path, required Map<String, dynamic> data ,required String? docId}) async {
+    await firestore.collection(path).doc(docId).update(data);
+
   }
 
   @override
@@ -42,6 +42,7 @@ class FirestoreServices implements DatabaseServices {
     var userData = await firestore.collection(path).doc(docId).get();
     return userData.data() as Map<String, dynamic>;
   }
+  @override
   Future<List<Map<String, dynamic>>> getAllDocuments(String collectionPath) async {
   final snapshot = await FirebaseFirestore.instance.collection(collectionPath).get();
 

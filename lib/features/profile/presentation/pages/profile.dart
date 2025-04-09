@@ -1,87 +1,77 @@
+import 'package:chat_master/core/constant/cached_key.dart';
+import 'package:chat_master/core/encryption/encryption.dart';
+import 'package:chat_master/core/services/server_locator.dart';
+import 'package:chat_master/core/widget/custom_button.dart';
+import 'package:chat_master/core/widget/custom_text_form_field.dart';
+import 'package:chat_master/features/Profile/presentation/cubit/Profile_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final uid =  sl<SharedPreferences>().getString(CachedKey.uid) ?? '';
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
       ),
-      // floatingActionButton: FloatingActionButton(
-      body: ProfileViewBody(),
+      body: BlocProvider.value(
+        value: sl<ProfileCubit>()..getUserData(uid.decrypt as String ),
+        child: ProfileViewBody(),
+      ),
     );
   }
 }
 
-class ProfileViewBody extends StatelessWidget {
+class ProfileViewBody extends StatefulWidget {
   const ProfileViewBody({super.key});
 
   @override
+  State<ProfileViewBody> createState() => _ProfileViewBodyState();
+}
+
+class _ProfileViewBodyState extends State<ProfileViewBody> {
+  final _formKey = GlobalKey<FormState>();
+
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 30,
-        ),
-        Expanded(
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(32),
-                topRight: Radius.circular(32),
-              ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            CustomTextFormField(
+              controller: nameController,
+              keyboardType: TextInputType.name,
             ),
-            child: SingleChildScrollView(
-                child: Column(
-              children: [
-                Row(children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.grey.shade300,
-                  ),
-                  const SizedBox(width: 16),
-                  Column(children: [
-                    Text(
-                      'John Doe',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text('@johndoe',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ))
-                  ])
-                ]),
-                Divider(
-                  color: Colors.grey.shade300,
-                  thickness: 1,
-                  height: 32,
-                ),
-                ListTile(
-                    leading: Icon(
-                      Icons.person,
-                      color: Colors.black,
-                    ),
-                    title: Text('Edit Profile',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                        )))
-              ],
-            )),
-          ),
-        )
-        // Add more widgets here as needed
-      ],
+            const SizedBox(height: 16),
+            CustomTextFormField(
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: 16),
+            CustomTextFormField(
+              controller: phoneController,
+              keyboardType: TextInputType.phone,
+            ),
+            const SizedBox(height: 16),
+            CustomButton(onPressed: () {}, text: "text")
+          ],
+        ),
+      ),
     );
   }
 }

@@ -25,7 +25,7 @@ class HomePageBody extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                GoRouter.of(context).push(Routes.kProfile);
+                GoRouter.of(context).push(Routes.kSettings);
               },
               icon: const Icon(Icons.more_vert_sharp),
             ),

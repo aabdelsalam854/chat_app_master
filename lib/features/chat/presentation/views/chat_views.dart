@@ -1,7 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
+
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/chat_bubble_friend.dart';
@@ -10,11 +12,13 @@ import 'package:chat_master/features/chat/presentation/views/widget/media_select
 import 'package:chat_master/features/chat/presentation/views/widget/send_message.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/timer_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatView extends StatefulWidget {
@@ -111,6 +115,56 @@ class _ChatViewState extends State<ChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            CupertinoIcons.back,
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: GestureDetector(
+          onTap: () {},
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: CachedNetworkImage(
+                  imageUrl: "",
+                  placeholder: (context, url) => Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Image.asset(
+                    "assets/images/facebook.png",
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.cover,
+                  ),
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  widget.email,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: StreamBuilder(
         stream: ChatService()
             .getMessages(
@@ -121,7 +175,7 @@ class _ChatViewState extends State<ChatView> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<MessageModel> messagesList = snapshot.data!;
-    
+
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(16),

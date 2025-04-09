@@ -1,9 +1,4 @@
 
-import 'package:chat_master/features/auth/data/datasources/auth_remote.dart';
-import 'package:chat_master/features/auth/data/repositories/auth_repo_impl.dart';
-import 'package:chat_master/features/auth/domain/repositories/auth_repo.dart';
-import 'package:chat_master/features/auth/domain/usecases/auth.dart';
-import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/home/data/datasources/messages_remote.dart';
 import 'package:chat_master/features/home/data/repositories/messages_repo_impl.dart';
 import 'package:chat_master/features/home/domain/repositories/messages_repo.dart';
