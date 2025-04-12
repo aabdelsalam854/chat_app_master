@@ -24,13 +24,15 @@ class SelectImage extends StatelessWidget {
           ImagePickerHelper.imageSelector(image: imageSource)
               .then((imageFromGallery) {
             if (imageFromGallery != null) {
-              showBottomSheet(
-                context: context,
-                builder: (context) {
-                  return ShowImageAndSend(
-                      imageFromGallery: imageFromGallery, email: email);
-                },
-              );
+              if (context.mounted) {
+                showBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return ShowImageAndSend(
+                        imageFromGallery: imageFromGallery, email: email);
+                  },
+                );
+              }
             }
           });
         },

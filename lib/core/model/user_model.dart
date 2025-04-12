@@ -20,7 +20,7 @@ class UserModel extends Equatable {
     this.status,
   });
 
-  // تحويل البيانات من JSON
+
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'] ?? "",
         name: json['name'] ?? '',

@@ -4,9 +4,6 @@ import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/features/profile/domain/usecases/usecases.dart';
 import 'package:chat_master/features/profile/presentation/cubit/profile_state.dart';
 
-
-
-
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.profileUsecases) : super(ProfileInitial());
   final ProfileUsecases profileUsecases;
@@ -19,14 +16,19 @@ class ProfileCubit extends Cubit<ProfileState> {
       (userModel) => emit(GetUserDataSuccessState(userModel)),
     );
   }
+
   Future<void> updateProfile(UserModel userModel) async {
     emit(UpdateProfileLoadingState());
     final response = await profileUsecases.updateProfile(userModel);
     response.fold(
       (failure) => emit(UpdateProfileErrorState(failure.msg)),
-      (userModel) => emit(UpdateProfileSuccessState(userModel)),
+      (userModel) {
+        emit(UpdateProfileSuccessState(userModel));
+        getUserData(userModel.id);
+      },
     );
   }
+
   Future<void> updatePassword(String password) async {
     emit(UpdatePasswordLoadingState());
     final response = await profileUsecases.updatePassword(password);
@@ -35,6 +37,4 @@ class ProfileCubit extends Cubit<ProfileState> {
       (message) => emit(UpdatePasswordSuccessState(message)),
     );
   }
-  
-
 }

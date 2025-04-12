@@ -3,8 +3,6 @@ import 'package:chat_master/core/utils/select_file_from_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
-
 class SelectFile extends StatelessWidget {
   const SelectFile({
     super.key,
@@ -18,16 +16,29 @@ class SelectFile extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: () async {
-          await SelectFileFromStorage.selectFiles().then((pickedFile) {
-            if (pickedFile != null) {
-              
+          final pickedFile = await SelectFileFromStorage.selectFiles();
+
+          if (pickedFile != null && context.mounted) {
+            await showModalBottomSheet(
+              context: context,
+              isDismissible: false,
+              enableDrag: false,
+              builder: (context) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            );
+
+            if (context.mounted) {
               GoRouter.of(context).push(
                 Routes.kShowFileBeforeSend,
-                extra: ({'file': pickedFile, 'email': email}),
+                extra: {'file': pickedFile, 'email': email},
               );
+
+              Navigator.of(context).pop();
             }
-            GoRouter.of(context).pop();
-          });
+          }
         },
         title: const Text(
           'file',
@@ -37,4 +48,3 @@ class SelectFile extends StatelessWidget {
     );
   }
 }
-

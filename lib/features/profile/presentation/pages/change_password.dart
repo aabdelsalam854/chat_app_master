@@ -13,8 +13,9 @@ import 'package:chat_master/features/profile/presentation/cubit/profile_cubit.da
 import 'package:chat_master/features/profile/presentation/cubit/profile_state.dart';
 
 class ChangePassword extends StatelessWidget {
-  const ChangePassword({super.key,});
-
+  const ChangePassword({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,71 +63,7 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-          
-              // GestureDetector(
-              //   onTap: () {
-              //           Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-              //                   builder: (context) => ShowProfileImage(
-              //                       imageUrl: widget.user.photoUrl!),
-              //                 ),
-              //               );
-          
-              //   },
-              //   child: Stack(
-              //     children: [
-              //       Hero(
-              //         tag: 'profile_image',
-              //         child: Center(
-              //           child: CircleAvatar(
-              //             radius: 50,
-              //             backgroundColor: Colors.grey[300],
-              //             backgroundImage: NetworkImage(
-              //               widget.user.photoUrl ??
-              //                   'https://www.pngall.com/wp-content/uploads/5/Default-Profile-Picture-Avatar-Profile-PNG.png',
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //       Positioned(
-              //         bottom: -1,
-              //         right: 0,
-              //         left: -120,
-              //         child: Container(
-              //           padding: const EdgeInsets.all(6),
-              //           decoration: BoxDecoration(
-              //             shape: BoxShape.circle,
-              //             color: Colors.white,
-              //             boxShadow: [
-              //               BoxShadow(
-              //                 color: Colors.black26,
-              //                 blurRadius: 6,
-              //                 offset: Offset(2, 2),
-              //               ),
-              //             ],
-              //           ),
-              //           child: IconButton(
-              //             onPressed: () {
- 
-              //             },
-              //             icon: const Icon(Icons.camera_alt),
-              //             color: Colors.blue, // تغيير لون الأيقونة
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // CustomTextFormField(
-              //   controller: nameController,
-              //   keyboardType: TextInputType.name,
-              // ),
               const SizedBox(height: 16),
-              // CustomTextFormField(
-              //   controller: emailController,
-              //   keyboardType: TextInputType.emailAddress,
-              // ),
               PasswordField(
                 passwordController: passwordController,
                 hintText: "كلمة المرور",
@@ -153,7 +90,7 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
                 },
                 builder: (context, state) {
                   final isLoading = state is UpdatePasswordLoadingState;
-          
+
                   return Stack(
                     alignment: Alignment.centerRight,
                     children: [
@@ -168,7 +105,7 @@ class _ChangePasswordBodyState extends State<ChangePasswordBody> {
                             );
                             return;
                           }
-          
+
                           if (_formKey.currentState!.validate()) {
                             context
                                 .read<ProfileCubit>()

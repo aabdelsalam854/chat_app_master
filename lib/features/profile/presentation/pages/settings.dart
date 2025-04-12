@@ -24,21 +24,28 @@ class SettingsView extends StatelessWidget {
       ),
       // floatingActionButton: FloatingActionButton(
       body: BlocProvider.value(
-        value: sl<ProfileCubit>()..getUserData(encryptedUid!),
-        child: SettingsViewBody(),
+        value:sl<ProfileCubit>(),
+        child: SettingsViewBody( uid: encryptedUid!,),
       ),
     );
   }
 }
 
 class SettingsViewBody extends StatelessWidget {
-  const SettingsViewBody({super.key});
+  const SettingsViewBody({super.key, required this.uid});
+  final String uid;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
+      buildWhen: (previous, current) =>
+          current is GetUserDataSuccessState ||
+          current is GetUserDataLoadingState ||
+          current is GetUserDataErrorState,
+          bloc:  sl<ProfileCubit>()..getUserData(uid),
       builder: (context, state) {
         if (state is GetUserDataSuccessState) {
+          
           return Column(
             children: [
               SizedBox(
@@ -65,9 +72,9 @@ class SettingsViewBody extends StatelessWidget {
                           SizedBox(
                               height: 90,
                               child: Hero(
-                                tag: state.userModel.photoUrl ?? "",
+                                tag: state.userModel.photoUrl!,
                                 child: CustomCircleNetworkImage(
-                                    imageUrl: state.userModel.photoUrl ?? ""),
+                                    imageUrl: state.userModel.photoUrl!),
                               )),
                           const SizedBox(width: 16),
                           Column(children: [
@@ -79,7 +86,7 @@ class SettingsViewBody extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Text('@johndoe',
+                            Text(state.userModel.status!,
                                 style: TextStyle(
                                   color: Colors.black,
                                 ))

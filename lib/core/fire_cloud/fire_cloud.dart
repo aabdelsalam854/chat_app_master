@@ -11,11 +11,11 @@ class FireCloud {
     await messages.add(message.toJson());
   }
 
-  static String _getConversationId(String currentUserId, String otherUserId) {
-    List<String> users = [currentUserId, otherUserId];
-    users.sort();
-    return users.join('_');
-  }
+  // static String _getConversationId(String currentUserId, String otherUserId) {
+  //   List<String> users = [currentUserId, otherUserId];
+  //   users.sort();
+  //   return users.join('_');
+  // }
 
   static Stream<QuerySnapshot<Object?>> getMessages() {
     CollectionReference messages =
@@ -28,45 +28,46 @@ class FireCloud {
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  Future<void> sendMessage(
+      String userId1, String userId2, MessageModel message) async {
+    String chatId = generateChatId(userId1, userId2);
 
-Future<void> sendMessage(String userId1, String userId2, MessageModel message) async {
-  String chatId = generateChatId(userId1, userId2); 
+    var chatDoc = await _firestore.collection('chats').doc(chatId).get();
 
+    if (!chatDoc.exists) {
+      await _firestore.collection('chats').doc(chatId).set({
+        'participants': [userId1, userId2],
+        'lastMessage': message.message,
+        'lastMessageTime': FieldValue.serverTimestamp(),
+      });
+    }
 
-  var chatDoc = await _firestore.collection('chats').doc(chatId).get();
-
-  if (!chatDoc.exists) {
-
-    await _firestore.collection('chats').doc(chatId).set({
-      'participants': [userId1, userId2],
-      'lastMessage': message.message,
-      'lastMessageTime': FieldValue.serverTimestamp(),
-    });
+    await _firestore
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .add(message.toJson());
   }
 
-  
-  await _firestore.collection('chats').doc(chatId).collection('messages').add(message.toJson());
-}
-String generateChatId(String userId1, String userId2) {
-  List<String> sortedIds = [userId1, userId2]..sort();
-  return sortedIds.join("_");
-}
-Stream<List<MessageModel>> getMessages(String userId1, String userId2) {
-  String chatId = generateChatId(userId1, userId2);
+  String generateChatId(String userId1, String userId2) {
+    List<String> sortedIds = [userId1, userId2]..sort();
+    return sortedIds.join("_");
+  }
 
+  Stream<List<MessageModel>> getMessages(String userId1, String userId2) {
+    String chatId = generateChatId(userId1, userId2);
 
-  return _firestore
-      .collection('chats')
-      .doc(chatId)
-      .collection('messages')
-      .orderBy('time', descending: true) 
-      .limit(20) 
-      .snapshots()
-      .map((querySnapshot) {
-        return querySnapshot.docs.map((doc) {
-          return MessageModel.fromJson(doc.data());
-        }).toList();
-      });
-}
-
+    return _firestore
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .orderBy('time', descending: true)
+        .limit(20)
+        .snapshots()
+        .map((querySnapshot) {
+      return querySnapshot.docs.map((doc) {
+        return MessageModel.fromJson(doc.data());
+      }).toList();
+    });
+  }
 }
