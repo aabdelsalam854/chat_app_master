@@ -61,19 +61,18 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                     Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ShowProfileImage(
-                                imageUrl: widget.user.photoUrl!),
-                          ),
-                        );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ShowProfileImage(imageUrl: widget.user.photoUrl!),
+                        ),
+                      );
                     },
                     child: Hero(
                       tag: widget.user.photoUrl!,
                       child: CustomCircleNetworkImage(
-                        radius: 130,
-                          imageUrl: widget.user.photoUrl ?? ""),
+                          radius: 130, imageUrl: widget.user.photoUrl ?? ""),
                     ),
                   ),
                   Positioned(
@@ -81,23 +80,24 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                     left: 40,
                     child: GestureDetector(
                       onTap: () {
-                                            ImagePickerHelper.imageSelector(image: ImageSource.gallery)
-                      .then((image) {
-                    if (image != null) {
-                      // رفع الصورة إلى Firebase بعد اختيارها
-                      UploadFileInFirebase.uploadFile(image).then((url) {
-                        context.read<ProfileCubit>().updateProfile(
-                              UserModel(
-                                id: widget.user.id,
-                                name: nameController.text,
-                                email: emailController.text,
-                                phoneNumber: phoneController.text,
-                                photoUrl: url,
-                              ),
-                            );
-                      });
-                    }
-                  });
+                        ImagePickerHelper.imageSelector(
+                                image: ImageSource.gallery)
+                            .then((image) {
+                          if (image != null) {
+                            // رفع الصورة إلى Firebase بعد اختيارها
+                            UploadFileInFirebase.uploadFile(image).then((url) {
+                              context.read<ProfileCubit>().updateProfile(
+                                    UserModel(
+                                      id: widget.user.id,
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      phoneNumber: phoneController.text,
+                                      photoUrl: url,
+                                    ),
+                                  );
+                            });
+                          }
+                        });
                       },
                       child: Container(
                         padding: const EdgeInsets.all(4),
