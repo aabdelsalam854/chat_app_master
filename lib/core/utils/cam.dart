@@ -1,20 +1,53 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:chat_master/core/utils/get_file_size.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerHelper {
   static Future<File?> imageSelector({ImageSource? image}) async {
-    XFile? images = await ImagePicker().pickImage(source: image!);
+    XFile? images = await ImagePicker().pickImage(
+      source: image!,
+      imageQuality: 60,
+      maxWidth: 800,
+      maxHeight: 600,
+    );
     // XFile? images = await ImagePicker().pickVideo(
     //   source: image!,
     // );
+
     if (images != null) {
+      final File imageFile = File(images.path);
+
+      int sizeInBytes = await imageFile.length();
+
+      // double sizeInKB = sizeInBytes / 1024;
+      // double sizeInMB = sizeInKB / 1024;
+      // log('Size: $sizeInMB MB');
+      // log('Size: $sizeInKB KB');
+      // log('Size: $sizeInBytes Bytes');
+      log(GetFileSize.getFileSize(sizeInBytes).toString());
+
       return File(images.path);
     }
 
     return null;
   }
+}
+
+Future<Uint8List?> testCompressFile(File file) async {
+  var result = await FlutterImageCompress.compressWithFile(
+    file.absolute.path,
+    minWidth: 2300,
+    minHeight: 1500,
+    quality: 94,
+    rotate: 90,
+  );
+  log(result.toString());
+
+  return result;
 }
 
 class ImageHelper {
@@ -35,12 +68,10 @@ class ImageHelper {
 }
 
 class SelectMediaFromStorage {
- 
   static Future<List<PlatformFile>?> selectMedia() async {
     final res = await FilePicker.platform.pickFiles(
       allowMultiple: true,
       type: FileType.custom,
-      
       allowedExtensions: ['jpg', 'jpeg', 'png', 'mp4'],
     );
     if (res != null) {

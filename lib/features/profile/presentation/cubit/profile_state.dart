@@ -1,4 +1,7 @@
-part of 'profile_cubit.dart';
+
+
+import 'package:chat_master/core/model/user_model.dart';
+import 'package:equatable/equatable.dart';
 
 abstract class ProfileState extends Equatable {
   const ProfileState();
@@ -21,9 +24,11 @@ class GetUserDataErrorState extends ProfileState {
 }
 class UpdateProfileLoadingState extends ProfileState {}
 class UpdateProfileSuccessState extends ProfileState {
-  final String message;
+  final UserModel userdata;
 
-  const UpdateProfileSuccessState(this.message);
+  const UpdateProfileSuccessState(this.userdata);
+  @override
+  List<Object> get props => [userdata];
 }
 class UpdateProfileErrorState extends ProfileState {
   final String error;

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:chat_master/core/constant/cached_key.dart';
+import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
@@ -127,9 +128,8 @@ abstract class AppRouts {
     GoRoute(
       path: Routes.kProfile,
       builder: (context, state) {
-        return BlocProvider.value(
-          value: sl<AuthCubit>(),
-          child: const ProfileView(),
+        return  ProfileView(
+        user: state.extra as UserModel,
         );
       },
     )

@@ -65,7 +65,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is AuthRegisterSuccessState) {
-                  snackBar(context, "Register Success", Colors.green);
+                  snackBar(
+                      context: context,
+                      text: "Register Success",
+                      color: Colors.green);
                 }
               },
               builder: (context, state) {
@@ -76,23 +79,23 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                           if (formKey.currentState!.validate()) {
                             if (passwordController.text !=
                                 confirmPasswordController.text) {
-                              snackBar(context, "Passwords do not match",
-                                  Colors.red);
+                              snackBar(
+                                  context: context,
+                                  text: "Passwords do not match",
+                                  color: Colors.red);
                               return;
                             }
-                               context.read<AuthCubit>().register(
-                                RegisterModel(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  covariantPassword:
-                                      confirmPasswordController.text,
-                                  name: " nameController.text",
-                                  phoneNumber: "phoneNumberController.text",
-                                ),
-                              );
+                            context.read<AuthCubit>().register(
+                                  RegisterModel(
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    covariantPassword:
+                                        confirmPasswordController.text,
+                                    name: "",
+                                    phoneNumber: "",
+                                  ),
+                                );
                           }
-
-                       
                         },
                         text: "Sign Up");
               },

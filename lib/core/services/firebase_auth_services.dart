@@ -24,7 +24,7 @@ class FirebaseAuthServices {
   ///
   /// The string returned is based on the [code] of the exception. If the
   /// exception is not one of the above, then the default 'An undefined Error
-/// *****  7e4a8533-b777-4a13-92b7-8ac4369a6766  ******
+  /// *****  7e4a8533-b777-4a13-92b7-8ac4369a6766  ******
   String _mapFirebaseAuthExceptionToString(FirebaseAuthException e) {
     switch (e.code) {
       case 'user-not-found':
@@ -39,6 +39,17 @@ class FirebaseAuthServices {
         return 'An undefined Error happened.';
     }
   }
+
+  // Future<User> updateUserdata() async {
+  //   try {
+  //     final user = FirebaseAuth.instance.currentUser;
+  //     // await user!.verifyBeforeUpdateEmail();
+  //     await user!.updatePassword( );
+  //     return user;
+  //   } on FirebaseAuthException catch (e) {
+  //     throw CustomException(message: _mapFirebaseAuthExceptionToString(e));
+  //   }
+  // }
 
   Future<User> createUserWithEmailAndPassword({
     required String email,

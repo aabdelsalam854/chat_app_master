@@ -2,9 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:chat_master/core/model/user_model.dart';
 
 import 'package:chat_master/features/profile/domain/usecases/usecases.dart';
-import 'package:equatable/equatable.dart';
+import 'package:chat_master/features/profile/presentation/cubit/profile_state.dart';
 
-part 'profile_state.dart';
+
+
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.profileUsecases) : super(ProfileInitial());
@@ -22,7 +23,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(UpdateProfileLoadingState());
     final response = await profileUsecases.updateProfile(userModel);
     response.fold(
-      (failure) => emit(UpdateProfileErrorState(failure.message)),
+      (failure) => emit(UpdateProfileErrorState(failure.msg)),
       (userModel) => emit(UpdateProfileSuccessState(userModel)),
     );
   }

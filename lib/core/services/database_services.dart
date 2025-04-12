@@ -3,7 +3,7 @@ abstract class DatabaseServices {
       {String? docId,
       required String path,
       required Map<String, dynamic> data});
-  Future<void> updateData(
+  Future<dynamic> updateData(
       {required String path, required Map<String, dynamic> data  ,required String? docId,});
   Future<void> deleteData({required String path});
   Future<void> setData(

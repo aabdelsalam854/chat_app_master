@@ -98,10 +98,10 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) {
                     if (state is AuthLoginSuccessState) {
-                      snackBar(context, "Login Success", Colors.green);
+                      snackBar( context:  context,text:  "Login Success",color:  Colors.green);
                       GoRouter.of(context).go(Routes.kHome);
                     } else if (state is AuthLoginFailureState) {
-                      snackBar(context, state.error, Colors.red);
+                      snackBar( context:  context,text:  state.error,color:  Colors.red);
                     }
                   },
                   builder: (context, state) {

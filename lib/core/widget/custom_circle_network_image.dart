@@ -17,6 +17,7 @@ class CustomCircleNetworkImage extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.cover,
+        filterQuality: FilterQuality.high,
         imageBuilder: (context, imageProvider) => CircleAvatar(
           radius: 30,
           backgroundColor: Colors.transparent,
