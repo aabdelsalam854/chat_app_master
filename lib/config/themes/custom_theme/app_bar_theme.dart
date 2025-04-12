@@ -15,7 +15,7 @@ class TAppBarTheme {
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     // systemOverlayStyle: SystemUiOverlayStyle.light,
     // iconTheme: const IconThemeData(size: 24.0, color: Colors.black),
-    iconTheme: IconThemeData(color: AppColors.white),
+    iconTheme: IconThemeData(color: AppColors.black,),
 
     actionsIconTheme: IconThemeData(size: 24.0, color: Colors.black),
     titleTextStyle: TextStyle(
@@ -35,7 +35,7 @@ class TAppBarTheme {
     surfaceTintColor: Colors.transparent,
     // systemOverlayStyle: SystemUiOverlayStyle.light,
     systemOverlayStyle: SystemUiOverlayStyle.light,
-    iconTheme: IconThemeData(size: 24.0, color: Colors.black),
+    iconTheme: IconThemeData(size: 24.0, color: Colors.white),
     actionsIconTheme: IconThemeData(size: 24.0, color: Colors.white),
     titleTextStyle: TextStyle(
         fontSize: 18.0, fontWeight: FontWeight.w600, color: Colors.white),

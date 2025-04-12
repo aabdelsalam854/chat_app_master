@@ -13,6 +13,7 @@ class AppConstants {
         minWidth: 100.w,
       );
   static final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  static final navigatorKey = GlobalKey<NavigatorState>();
 }
 
 class SharedPrefKeys {

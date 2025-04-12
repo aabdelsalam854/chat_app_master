@@ -37,6 +37,7 @@ class ChatApp extends StatelessWidget {
           builder: (context, themeState) {
             return MaterialApp.router(
                 scaffoldMessengerKey: AppConstants.scaffoldKey,
+                // navigatorKey: AppConstants.navigatorKey,
                 // locale: Locale("en"),
                 supportedLocales: AppLocalSetup.supportedLocales,
                 localizationsDelegates: AppLocalSetup.localizationsDelegates,

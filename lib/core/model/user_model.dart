@@ -8,6 +8,7 @@ class UserModel extends Equatable {
   final String? phoneNumber;
   final String? photoUrl;
   final DateTime? lastSeen;
+  final String? status;
 
   const UserModel({
     required this.id,
@@ -16,6 +17,7 @@ class UserModel extends Equatable {
     this.phoneNumber,
     this.photoUrl,
     this.lastSeen,
+    this.status,
   });
 
   // تحويل البيانات من JSON
@@ -24,6 +26,7 @@ class UserModel extends Equatable {
         name: json['name'] ?? '',
         email: json['email'] ?? '',
         phoneNumber: json['phoneNumber'] ?? '',
+        status: json['status'] ?? '',
         photoUrl: json['photoUrl'],
         lastSeen: json['lastSeen'] != null
             ? (json['lastSeen'] as Timestamp).toDate()
@@ -36,6 +39,7 @@ class UserModel extends Equatable {
       'name': name,
       'email': email,
       'phoneNumber': phoneNumber,
+      'status': status,
       'photoUrl': photoUrl,
       'lastSeen': lastSeen?.toIso8601String(),
     };
@@ -46,10 +50,12 @@ class UserModel extends Equatable {
       'name': name,
       'email': email,
       'photoUrl': photoUrl,
+      'phoneNumber': phoneNumber,
+      'status': status,
       'lastSeen': FieldValue.serverTimestamp(),
     };
   }
 
   @override
-  List<Object?> get props => [id, name, email, phoneNumber, photoUrl, lastSeen];
+  List<Object?> get props => [id, name, email, phoneNumber, photoUrl, lastSeen, status];
 }

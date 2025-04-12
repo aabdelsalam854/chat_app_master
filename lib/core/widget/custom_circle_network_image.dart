@@ -5,24 +5,25 @@ import 'package:flutter/material.dart';
 class CustomCircleNetworkImage extends StatelessWidget {
   const CustomCircleNetworkImage({
     super.key,
-    required this.imageUrl,
+    required this.imageUrl, this.radius,
   });
 
   final String imageUrl;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
 
-      child: CachedNetworkImage(
+      child:imageUrl.isNotEmpty? CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.cover,
+
         filterQuality: FilterQuality.high,
         imageBuilder: (context, imageProvider) => CircleAvatar(
-          radius: 30,
+          radius:radius?? 30,
           backgroundColor: Colors.transparent,
           backgroundImage: imageProvider,
-      
         ),
         placeholder: (context, url) => Container(
           color: Colors.grey[300],
@@ -31,8 +32,8 @@ class CustomCircleNetworkImage extends StatelessWidget {
           child: const Center(child: Icon(Icons.image, color: Colors.white)),
         ),
         errorWidget: (context, url, error) =>
-            const Icon(Icons.error, color: Colors.red),
-      ),
+            Image.asset("assets/images/man.png"),
+      ): Image.asset("assets/images/man.png"),
     );
   }
 }

@@ -58,27 +58,34 @@ class SettingsViewBody extends StatelessWidget {
                   child: SingleChildScrollView(
                       child: Column(
                     children: [
-                      Row(children: [
-                      SizedBox(
-                        height: 90,
-                        
-                        child: CustomCircleNetworkImage(imageUrl: state.userModel.photoUrl??"")),
-                        const SizedBox(width: 16),
-                        Column(children: [
-                          Text(
-                            state.userModel.name,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text('@johndoe',
+                      GestureDetector(
+                        onTap: () => GoRouter.of(context)
+                            .push(Routes.kProfile, extra: state.userModel),
+                        child: Row(children: [
+                          SizedBox(
+                              height: 90,
+                              child: Hero(
+                                tag: state.userModel.photoUrl ?? "",
+                                child: CustomCircleNetworkImage(
+                                    imageUrl: state.userModel.photoUrl ?? ""),
+                              )),
+                          const SizedBox(width: 16),
+                          Column(children: [
+                            Text(
+                              state.userModel.name,
                               style: TextStyle(
                                 color: Colors.black,
-                              ))
-                        ])
-                      ]),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text('@johndoe',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ))
+                          ])
+                        ]),
+                      ),
                       Divider(
                         color: Colors.grey.shade300,
                         thickness: 1,
@@ -86,14 +93,13 @@ class SettingsViewBody extends StatelessWidget {
                       ),
                       ListTile(
                           onTap: () {
-                            GoRouter.of(context)
-                                .push(Routes.kProfile, extra: state.userModel);
+                            GoRouter.of(context).push(Routes.kChangePassword);
                           },
                           leading: Icon(
-                            Icons.person,
+                            Icons.password,
                             color: Colors.black,
                           ),
-                          title: Text('Edit Profile',
+                          title: Text('Change Password',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
