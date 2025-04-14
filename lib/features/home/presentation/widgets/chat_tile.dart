@@ -6,6 +6,7 @@ class ChatTile extends StatelessWidget {
   final String username;
   final String lastMessage;
   final String time;
+  final String imgUrl;
   final VoidCallback? onTap;
 
   const ChatTile({
@@ -14,6 +15,7 @@ class ChatTile extends StatelessWidget {
     required this.lastMessage,
     required this.time,
     this.onTap,
+    required this.imgUrl,
   });
 
   @override
@@ -21,12 +23,8 @@ class ChatTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       leading: GestureDetector(
-        onTap: () {
-          print("object");
-        },
-        child: CustomCircleNetworkImage(
-            imageUrl:
-                'https://images.unsplash.com/photo-1575936123452-b67c3203c357?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+        onTap: () {},
+        child: CustomCircleNetworkImage(imageUrl: imgUrl),
       ), // Placeholder for the image URL
       title: Text(
         maxLines: 1,

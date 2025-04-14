@@ -36,13 +36,16 @@ class HomePageBody extends StatelessWidget {
                 itemCount: state.users.length,
                 itemBuilder: (context, index) {
                   return ChatTile(
+                    imgUrl: state.users[index].photoUrl!,
                     username: state.users[index].email,
                     lastMessage: 'Last message from user $index',
                     time: '${index + 1} min ago',
                     onTap: () {
                       // snackBar(context, 'Hello', Colors.red);
-                      GoRouter.of(context)
-                          .push(Routes.kChatView, extra: state.users[index].id);
+                      GoRouter.of(context).push(
+                        Routes.kChatView,
+                        extra: state.users[index].id,
+                      );
                     },
                   );
                 },
@@ -62,6 +65,7 @@ class HomePageBody extends StatelessWidget {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return ChatTile(
+                      imgUrl: "",
                       username: 'User $index',
                       lastMessage: 'Last message from user $index',
                       time: '${index + 1} min ago',
