@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:chat_master/core/constant/cached_key.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/routes/routes.dart';
@@ -53,8 +54,15 @@ abstract class AppRouts {
     GoRoute(
       path: Routes.kChatView,
       builder: (context, state) {
+        final data = state.extra as Map<String, dynamic>;
+
         return ChatView(
-          state.extra as String,
+          email: data['email'] as String,
+          name: data['name'] as String,
+          photoUrl: data['photoUrl'] as String?,
+          uid: data['id'] as String
+
+
         );
       },
     ),

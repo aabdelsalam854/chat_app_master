@@ -19,7 +19,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       throw Exception('User not logged in');
     }
 
-    await user.updatePassword(password);
+    await user.verifyBeforeUpdateEmail("newEmail");
   }
 
   @override

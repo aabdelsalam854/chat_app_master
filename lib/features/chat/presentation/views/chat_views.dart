@@ -1,9 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
-
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/chat_bubble_friend.dart';
@@ -11,36 +9,35 @@ import 'package:chat_master/features/chat/presentation/views/widget/chat_puple.d
 import 'package:chat_master/features/chat/presentation/views/widget/media_selection.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/send_message.dart';
 import 'package:chat_master/features/chat/presentation/views/widget/timer_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
-
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatView extends StatefulWidget {
-  const ChatView(
-    this.email, {
-    super.key,
-  });
   final String email;
+  final String uid;
+  final String? name;
+  final String? photoUrl;
+
+  const ChatView(
+      {super.key, required this.email,required this.uid, this.name, this.photoUrl});
 
   @override
   State<ChatView> createState() => _ChatViewState();
 }
 
 class _ChatViewState extends State<ChatView> {
-  final TextEditingController textVontroller = TextEditingController();
-  CollectionReference message =
-      FirebaseFirestore.instance.collection("messages");
+  final TextEditingController textController = TextEditingController();
+
   bool isRecording = false;
   bool isEmpty = true;
   final controller = ScrollController();
   late AudioRecorder record;
-  final timeCountroller = TimeController();
+  final timeController = TimeController();
 
   @override
   void initState() {
@@ -50,16 +47,16 @@ class _ChatViewState extends State<ChatView> {
 
   @override
   void dispose() {
-    textVontroller.dispose();
+    textController.dispose();
     controller.dispose();
 
     super.dispose();
   }
 
-  controlr() {
-    controller.animateTo(0,
-        duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
-  }
+  // _controller() {
+  //   controller.animateTo(0,
+  //       duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+  // }
 
   void startRecord() async {
     final location = await getApplicationDocumentsDirectory();
@@ -68,7 +65,7 @@ class _ChatViewState extends State<ChatView> {
       await record.start(const RecordConfig(),
           path: '${location.path}/$name.m4a');
     }
-    timeCountroller.startTimer();
+    timeController.startTimer();
     debugPrint('start record');
   }
 
@@ -77,7 +74,7 @@ class _ChatViewState extends State<ChatView> {
     setState(() {
       isRecording = false;
     });
-    timeCountroller.stopTimer();
+    timeController.stopTimer();
     final url = await UploadFileInFirebase.uploadFile(File(finalPath!));
     await FireCloud.sendMessage(
       MessageModel(
@@ -97,14 +94,14 @@ class _ChatViewState extends State<ChatView> {
 
   void resumeRecord() async {
     await record.resume();
-    timeCountroller.resumeTimer();
+    timeController.resumeTimer();
 
     debugPrint('resumeRecord');
   }
 
   void pauseRecord() async {
     await record.pause();
-    timeCountroller.pauseTimer();
+    timeController.pauseTimer();
     debugPrint('pauseRecord');
   }
 
@@ -115,55 +112,10 @@ class _ChatViewState extends State<ChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            CupertinoIcons.back,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: GestureDetector(
-          onTap: () {},
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: CachedNetworkImage(
-                  imageUrl: "",
-                  placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => Image.asset(
-                    "assets/images/facebook.png",
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.cover,
-                  ),
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  widget.email,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-        ),
+      appBar: chatsAppBar(
+        context,
+        image: widget.photoUrl,
+        name: widget.name,
       ),
       body: StreamBuilder(
         stream: ChatService()
@@ -203,16 +155,16 @@ class _ChatViewState extends State<ChatView> {
                         SendMeaasge(
                             metadata: null,
                             type: 'MessageType.text',
-                            message: textVontroller.text,
-                            controller: textVontroller,
+                            message: textController.text,
+                            controller: textController,
                             email: widget.email),
                         // isEmpty
                         //     ? recorder(context)
                         //     : SendMeaasge(
                         //         metadata: null,
                         //         type: 'MessageType.text',
-                        //         message: textVontroller.text,
-                        //         controller: textVontroller,
+                        //         message: textController.text,
+                        //         controller: textController,
                         //         email: widget.email),
                         Expanded(
                           child: CustomTextFormField(
@@ -227,7 +179,7 @@ class _ChatViewState extends State<ChatView> {
                               },
                               icon: const Icon(Icons.add),
                             ),
-                            controller: textVontroller,
+                            controller: textController,
                             hintText: 'Type a message',
                           ),
                         ),
@@ -241,6 +193,63 @@ class _ChatViewState extends State<ChatView> {
             return const Text('Loading');
           }
         },
+      ),
+    );
+  }
+
+  AppBar chatsAppBar(BuildContext context, {String? name, String? image}) {
+    return AppBar(
+      backgroundColor: Colors.grey,
+      leading: IconButton(
+        icon: const Icon(
+          CupertinoIcons.back,
+        ),
+        onPressed: () => Navigator.pop(context),
+      ),
+      title: GestureDetector(
+        onTap: () {},
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: image == null
+                  ? Image.asset("assets/images/facebook.png",
+                      width: 40, height: 40, fit: BoxFit.cover)
+                  : CachedNetworkImage(
+                      imageUrl: image,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Image.asset(
+                        "assets/images/facebook.png",
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.cover,
+                      ),
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.cover,
+                    ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                widget.name!,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -263,7 +272,7 @@ class _ChatViewState extends State<ChatView> {
                             });
                             if (isRecording = true) {
                             } else {
-                              timeCountroller.stopTimer();
+                              timeController.stopTimer();
                             }
                           },
                           icon: const Icon(Icons.mic)),
@@ -286,7 +295,7 @@ class _ChatViewState extends State<ChatView> {
                           },
                           icon: const Icon(Icons.stop)),
                       TimerWidget(
-                        controller: timeCountroller,
+                        controller: timeController,
                       ),
                     ],
                   ),
@@ -296,29 +305,3 @@ class _ChatViewState extends State<ChatView> {
         child: isRecording ? const Icon(Icons.stop) : const Icon(Icons.mic));
   }
 }
-             //     TextField(
-                        //   controller: textVontroller,
-                        //   maxLines: 5,
-                        //   minLines: 1,
-                        //   decoration: InputDecoration(
-                        //     suffixIcon: const Icon(Icons.add),
-                        //     hintText: 'Type a message',
-                        //     hintStyle:
-                        //         const TextStyle(color: Color(0xFF424243)),
-                        //     enabledBorder: const OutlineInputBorder(
-                        //         borderRadius:
-                        //             BorderRadius.all(Radius.circular(16)),
-                        //         borderSide:
-                        //             BorderSide(color: Color(0xFF212222))),
-                        //     focusedBorder: const OutlineInputBorder(
-                        //         borderRadius:
-                        //             BorderRadius.all(Radius.circular(16)),
-                        //         borderSide:
-                        //             BorderSide(color: Color(0xFF424243))),
-                        //     border: const OutlineInputBorder(
-                        //         borderRadius:
-                        //             BorderRadius.all(Radius.circular(16)),
-                        //         borderSide:
-                        //             BorderSide(color: Color(0xFF212222))),
-                        //   ),
-                        // )

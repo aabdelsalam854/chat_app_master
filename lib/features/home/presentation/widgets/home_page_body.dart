@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +17,7 @@ class HomePageBody extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // context.read<AppCubit>().changeTheme();
+           log(FirebaseAuth.instance.currentUser!.tenantId!);
           },
           child: const Icon(Icons.add),
         ),
@@ -36,7 +39,7 @@ class HomePageBody extends StatelessWidget {
                 itemCount: state.users.length,
                 itemBuilder: (context, index) {
                   return ChatTile(
-                    imgUrl: state.users[index].photoUrl!,
+                    imgUrl: state.users[index].photoUrl??"",
                     username: state.users[index].email,
                     lastMessage: 'Last message from user $index',
                     time: '${index + 1} min ago',
@@ -44,7 +47,14 @@ class HomePageBody extends StatelessWidget {
                       // snackBar(context, 'Hello', Colors.red);
                       GoRouter.of(context).push(
                         Routes.kChatView,
-                        extra: state.users[index].id,
+                        extra: {
+                          'email': state.users[index].email,
+                          'name': state.users[index].name,
+                          'photoUrl': state.users[index].photoUrl,
+                          'id': state.users[index].id
+
+
+                        },
                       );
                     },
                   );

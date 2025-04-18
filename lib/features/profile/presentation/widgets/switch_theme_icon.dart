@@ -48,28 +48,28 @@ class SwitchThemeIcon extends StatelessWidget {
   }
 }
 
-
 class LanguageSwitch extends StatelessWidget {
   const LanguageSwitch({super.key});
 
   @override
   Widget build(BuildContext context) {
- 
     final isArabic = context.read<AppCubit>().state.locale.languageCode == 'ar';
     return GestureDetector(
       onTap: () {
-   isArabic? context.read<AppCubit>().toEnglish() :     context.read<AppCubit>().toArabic();
+        isArabic
+            ? context.read<AppCubit>().toEnglish()
+            : context.read<AppCubit>().toArabic();
       },
       child: Container(
         width: 80,
         height: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-            color: isArabic ? Colors.blue : Colors.grey.shade300,
+          color: isArabic ? Colors.blue : Colors.grey.shade300,
         ),
         child: Stack(
           alignment: Alignment.center,
-   children: [
+          children: [
             // Texts for AR/EN in the background
             Align(
               alignment: Alignment.centerLeft,
@@ -126,8 +126,3 @@ class LanguageSwitch extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
