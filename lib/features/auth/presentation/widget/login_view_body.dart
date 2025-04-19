@@ -50,7 +50,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   'assets/images/login.png',
                   height: 200,
                 ),
-                CustomTitleText(title: "Sign in to your account"),
+                const CustomTitleText(title: "Sign in to your account"),
                 const SizedBox(height: 30),
                 CustomTextFormField(
                   validator: Validation.emailValidator,
@@ -119,11 +119,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   },
                 ),
                 const SizedBox(height: 40),
-                DividerWithText(
+                const DividerWithText(
                   text: "Or Sign in with",
                 ),
                 const SizedBox(height: 20),
-                AuthSocialIcons(),
+                const AuthSocialIcons(),
                 const SizedBox(height: 30),
                 DontHaveAnAccountSection(
                   title: "Don't have an account ?",

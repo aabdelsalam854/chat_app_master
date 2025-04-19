@@ -18,7 +18,7 @@ class AppCubit extends Cubit<AppState> {
   final ChangeLangUseCase changeLangUseCase;
   final GetSavedLangUseCase getSavedLangUseCase;
   AppCubit(this.shared, this.changeLangUseCase, this.getSavedLangUseCase)
-      : super(AppInitial(
+      : super(const AppInitial(
           Locale(AppStrings.arCode),
           AppConstants.fontFamilyAr,
           AppTheme.themeDark,

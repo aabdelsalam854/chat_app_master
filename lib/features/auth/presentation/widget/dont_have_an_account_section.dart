@@ -17,7 +17,7 @@ class DontHaveAnAccountSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -26,7 +26,7 @@ class DontHaveAnAccountSection extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             buttonText,
-            style: TextStyle(
+            style: const TextStyle(
     
               fontSize: 16,
             ),

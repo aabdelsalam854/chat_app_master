@@ -9,7 +9,7 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ForgetPasswordBody();
+    return const ForgetPasswordBody();
   }
 }
 
@@ -28,24 +28,24 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('إعادة تعيين كلمة المرور')),
+      appBar: AppBar(title: const Text('إعادة تعيين كلمة المرور')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
-              Text(
+              const Text(
                 'أدخل بريدك الإلكتروني لإرسال رابط إعادة تعيين كلمة المرور.',
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomTextFormField(
                 controller: _emailController,
                 hintText: 'Email',
                 keyboardType: TextInputType.emailAddress,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -56,7 +56,7 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
                 },
                 text: 'إرسال رابط إعادة تعيين كلمة المرور',
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

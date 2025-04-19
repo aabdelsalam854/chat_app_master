@@ -11,7 +11,7 @@ class StartChatBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Select a user'),
+          title: const Text('Select a user'),
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
@@ -24,7 +24,7 @@ class StartChatBody extends StatelessWidget {
                 child: Text(state.error),
               );
             } else {
-              return ConversationLoading();
+              return const ConversationLoading();
             }
           },
         ));

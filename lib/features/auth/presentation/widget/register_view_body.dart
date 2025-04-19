@@ -49,7 +49,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               'assets/images/login.png',
               height: 200,
             ),
-            CustomTitleText(title: "Create your account"),
+            const CustomTitleText(title: "Create your account"),
             CustomTextFormField(
               controller: emailController,
               hintText: 'Email',
@@ -103,11 +103,11 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               },
             ),
             const SizedBox(height: 40),
-            DividerWithText(
+            const DividerWithText(
               text: " or sign up with",
             ),
             const SizedBox(height: 20),
-            AuthSocialIcons(),
+            const AuthSocialIcons(),
             DontHaveAnAccountSection(
               title: "Already have an account ?",
               buttonText: "Sign in",

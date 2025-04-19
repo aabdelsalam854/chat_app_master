@@ -34,7 +34,7 @@ final AuthUseCases authUseCases;
     final result = await authUseCases.resetPassword(email);
     result.fold(
       (failure) => emit(AuthResetPasswordFailureState(failure.msg)),
-      (message) => emit(AuthResetPasswordSuccessState()),
+      (message) => emit(const AuthResetPasswordSuccessState()),
     );
   }
 

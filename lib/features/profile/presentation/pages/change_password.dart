@@ -23,7 +23,7 @@ class ChangePassword extends StatelessWidget {
       appBar: AppBar(title: const Text('Change Password')),
       body: BlocProvider.value(
         value: sl<ProfileCubit>(),
-        child: ChangePasswordBody(),
+        child: const ChangePasswordBody(),
       ),
     );
   }

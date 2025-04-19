@@ -14,6 +14,6 @@ void snackBar({required BuildContext context,required String text,required Color
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(12),
     ),
-    duration: Duration(seconds: 5),
+    duration: const Duration(seconds: 5),
   ));
 }

@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
             child: const Icon(Icons.add),
           ),
           appBar: AppBar(
-            title: Text('Chat Master'),
+            title: const Text('Chat Master'),
             actions: [
               IconButton(
                 onPressed: () {

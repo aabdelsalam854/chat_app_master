@@ -30,16 +30,16 @@ class _HomePageBodyState extends State<HomePageBody> {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         if (state is GetAllConversationsLoadingState) {
-          return ConversationLoading();
+          return const ConversationLoading();
         } else if (state is GetAllConversationsErrorState) {
           return Center(child: Text(state.error));
         } else if (state is GetAllConversationsSuccessState) {
           if (state.AllConversations.isEmpty) {
-            return EmptyChatWidget();
+            return const EmptyChatWidget();
           }
           return GetAllConversationItem(conversations: state.AllConversations);
         }
-        return Center(child: Text('No conversations available.'));
+        return const Center(child: Text('No conversations available.'));
       },
     );
   }

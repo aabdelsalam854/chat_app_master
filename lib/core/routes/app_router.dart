@@ -39,7 +39,7 @@ abstract class AppRouts {
             log(kUid);
             return BlocProvider.value(
               value: sl<AuthCubit>(),
-              child: MainScreen(),
+              child: const MainScreen(),
             );
           } else {
             return BlocProvider.value(
@@ -55,7 +55,7 @@ abstract class AppRouts {
     GoRoute(
         path: Routes.kHome,
         builder: (context, state) {
-          return MainScreen();
+          return const MainScreen();
         }),
     GoRoute(
       path: Routes.kChatView,
@@ -140,7 +140,7 @@ abstract class AppRouts {
     GoRoute(
       path: Routes.kChangePassword,
       builder: (context, state) {
-        return ChangePassword();
+        return const ChangePassword();
       },
     ),
     GoRoute(

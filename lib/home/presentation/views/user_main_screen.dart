@@ -39,20 +39,20 @@ class MainScreenState extends State<MainScreen> {
           selectedIndex: _selectedIndex,
           onItemTapped: _onItemTapped,
           items: [
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.message_outlined, size: 30),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.message_outlined, size: 30),
               label: "Messages",
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.flip_camera_android_outlined, size: 30),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.flip_camera_android_outlined, size: 30),
               label: "stories",
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.groups_2_outlined, size: 30),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.groups_2_outlined, size: 30),
               label: "groups",
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.call, size: 30),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.call, size: 30),
               label: "calls",
             ),
           ],

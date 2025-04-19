@@ -22,7 +22,7 @@ class SettingsView extends StatelessWidget {
     final encryptedUid = uid.decrypt();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
       ),
       // floatingActionButton: FloatingActionButton(
       body: BlocProvider.value(
@@ -51,7 +51,7 @@ class SettingsViewBody extends StatelessWidget {
         if (state is GetUserDataSuccessState) {
           return Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Expanded(
@@ -83,14 +83,14 @@ class SettingsViewBody extends StatelessWidget {
                           Column(children: [
                             Text(
                               state.userModel.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(state.userModel.status!,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black,
                                 ))
                           ])
@@ -105,17 +105,17 @@ class SettingsViewBody extends StatelessWidget {
                           onTap: () {
                             GoRouter.of(context).push(Routes.kChangePassword);
                           },
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.password,
                             color: Colors.black,
                           ),
-                          title: Text('Change Password',
+                          title: const Text('Change Password',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ))),
-                      ListTile(
+                      const ListTile(
                           trailing: SwitchThemeIcon(),
                           title: Text('Theme',
                               style: TextStyle(
@@ -123,7 +123,7 @@ class SettingsViewBody extends StatelessWidget {
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ))),
-                      ListTile(
+                      const ListTile(
                           trailing: LanguageSwitch(),
                           title: Text('language',
                               style: TextStyle(
@@ -148,11 +148,11 @@ class SettingsViewBody extends StatelessWidget {
             ],
           );
         } else if (state is GetUserDataLoadingState) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state is GetUserDataErrorState) {
           return Center(child: Text('Error: ${state.error}'));
         } else {
-          return Center(child: Text('Unknown state'));
+          return const Center(child: Text('Unknown state'));
         }
       },
     );

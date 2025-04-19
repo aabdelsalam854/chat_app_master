@@ -18,7 +18,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: const Text('Profile'),
       ),
       body: ProfileViewBody(
         user: user,
@@ -55,7 +55,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
       listener: (context, state) {
         if (state is UpdateProfileSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+            const SnackBar(
               content: Text('Profile updated successfully!'),
             ),
           );
