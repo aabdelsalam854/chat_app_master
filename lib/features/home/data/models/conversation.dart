@@ -13,11 +13,10 @@ class Conversation {
 
   factory Conversation.fromJson(Map<String, dynamic> json) => Conversation(
       lastMessage: json['lastMessage'],
-      lastMessageTime:parseDateTime( json['lastMessageTime'].toDate().toString()),
+      lastMessageTime:
+          parseDateTime(json['lastMessageTime'].toDate().toString()),
       participants: Participants.fromJson(json['participants']));
 }
-
-
 
 class Participants {
   final UserModel sender;

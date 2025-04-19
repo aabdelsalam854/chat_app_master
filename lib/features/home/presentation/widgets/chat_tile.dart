@@ -40,10 +40,10 @@ class ChatTile extends StatelessWidget {
         lastMessage,
         style: TextStyle(fontSize: 16, color: Colors.grey),
       ),
-      // trailing: Text(
-      //   time,
-      //   style: TextStyle(fontSize: 16, color: Colors.grey),
-      // ),
+      trailing: Text(
+        time,
+        style: TextStyle(fontSize: 16, color: Colors.grey),
+      ),
     );
   }
 }
