@@ -1,7 +1,5 @@
-
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
-
 
 class PasswordField extends StatefulWidget {
   const PasswordField({
@@ -10,12 +8,14 @@ class PasswordField extends StatefulWidget {
     this.validator,
     required this.hintText,
     this.icon,
+    this.onEditingComplete,
   });
 
   final TextEditingController passwordController;
   final String? Function(String?)? validator;
   final String hintText;
   final Widget? icon;
+  final Function()? onEditingComplete;
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -26,7 +26,6 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   void dispose() {
-    widget.passwordController.dispose();
     isShow.dispose();
     super.dispose();
   }
@@ -41,7 +40,7 @@ class _PasswordFieldState extends State<PasswordField> {
           controller: widget.passwordController,
           obscureText: value,
           keyboardType: TextInputType.visiblePassword,
-             onEditingComplete: () => FocusScope.of(context).nextFocus(),
+          onEditingComplete: widget.onEditingComplete,
           icon: PasswordToggleIcon(isShow: isShow),
           validator: widget.validator,
         );

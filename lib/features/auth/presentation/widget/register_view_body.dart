@@ -40,6 +40,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       padding: const EdgeInsets.all(24),
       child: Form(
+          // autovalidateMode: AutovalidateMode.onUserInteraction,
         key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,57 +62,41 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               hintText: 'name',
               keyboardType: TextInputType.name,
               validator: Validation.nameValidator,
-               onEditingComplete: () => FocusScope.of(context).nextFocus(),
-      
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
             ),
             const SizedBox(height: 16),
             PasswordField(
-                hintText: 'Password',
-                passwordController: passwordController,
-                validator: Validation.passwordValidator,
-                      
-                ),
+              hintText: 'Password',
+              passwordController: passwordController,
+              validator: Validation.passwordValidator,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
+            ),
             const SizedBox(height: 16),
             PasswordField(
-                hintText: 'Confirm Password',
-                passwordController: confirmPasswordController),
+              hintText: 'Confirm Password',
+              passwordController: confirmPasswordController,
+              validator: Validation.passwordValidator,
+              onEditingComplete: () => FocusScope.of(context).unfocus(),
+            ),
             const SizedBox(height: 30),
             BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
                 if (state is AuthRegisterSuccessState) {
+                  _cleanForm();
                   snackBar(
                       context: context,
                       text: "Register Success",
                       color: Colors.green);
+                } else if (state is AuthRegisterFailureState) {
+                  snackBar(
+                      context: context, text: state.error, color: Colors.red);
                 }
               },
               builder: (context, state) {
                 return state is AuthRegisterLoadingState
                     ? const Center(child: CircularProgressIndicator())
                     : CustomButton(
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {
-                            if (passwordController.text !=
-                                confirmPasswordController.text) {
-                              snackBar(
-                                  context: context,
-                                  text: "Passwords do not match",
-                                  color: Colors.red);
-                              return;
-                            }
-                            context.read<AuthCubit>().register(
-                                  RegisterModel(
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    covariantPassword:
-                                        confirmPasswordController.text,
-                                    name: nameController.text,
-                                    phoneNumber: "",
-                                  ),
-                                );
-                          }
-                        },
-                        text: "Sign Up");
+                        onPressed: _submitRegisterForm, text: "Sign Up");
               },
             ),
             const SizedBox(height: 40),
@@ -131,5 +116,34 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
         ),
       ),
     );
+  }
+
+  void _submitRegisterForm() {
+    if (formKey.currentState!.validate()) {
+      if (passwordController.text != confirmPasswordController.text) {
+        snackBar(
+            context: context,
+            text: "Passwords do not match",
+            color: Colors.red);
+        return;
+      }
+
+      context.read<AuthCubit>().register(
+            RegisterModel(
+              email: emailController.text,
+              password: passwordController.text,
+              covariantPassword: confirmPasswordController.text,
+              name: nameController.text,
+              phoneNumber: "",
+            ),
+          );
+    }
+  }
+
+  void _cleanForm() {
+    emailController.clear();
+    passwordController.clear();
+    confirmPasswordController.clear();
+    nameController.clear();
   }
 }
