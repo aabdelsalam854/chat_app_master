@@ -14,18 +14,10 @@ class GetAllConversationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (conversations.isEmpty) {
-      return  Center(child:TextButton(onPressed: (){
-        GoRouter.of(context).push(Routes.kStartChat);
-      }
-      , child: const Text("Lets Start Chatting"),));
-    }
-
     return ListView.builder(
       itemCount: conversations.length,
       itemBuilder: (context, index) {
         final conversationsData = conversations[index];
-
         return ChatTile(
           imgUrl: conversationsData.participants.receiver.photoUrl ?? "",
           username: conversationsData.participants.receiver.name,
