@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../../core/fire_cloud/fire_cloud.dart';

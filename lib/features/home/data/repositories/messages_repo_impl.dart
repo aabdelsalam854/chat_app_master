@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/error/failures.dart';
 import 'package:chat_master/features/home/data/datasources/messages_remote.dart';
@@ -14,6 +16,7 @@ class MessageRepositoryImpl implements MessageRepository {
     try {
       final res = await messagesRemote.getUsers();
       res.removeWhere((element) => element.id == kUid);
+      log(kUid);
       return Right(res);
     } catch (e) {
       return Left(ServerFailure(e.toString()));

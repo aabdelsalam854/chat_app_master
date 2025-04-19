@@ -18,6 +18,7 @@ class GetAllConversationItem extends StatelessWidget {
       itemCount: conversations.length,
       itemBuilder: (context, index) {
         final conversationsData = conversations[index];
+
         return ChatTile(
           imgUrl: conversationsData.participants.receiver.photoUrl ?? "",
           username: conversationsData.participants.receiver.name,

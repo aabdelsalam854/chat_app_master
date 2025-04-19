@@ -24,7 +24,11 @@ class ChatView extends StatefulWidget {
   final String? photoUrl;
 
   const ChatView(
-      {super.key, required this.email,required this.uid, this.name, this.photoUrl});
+      {super.key,
+      required this.email,
+      required this.uid,
+      this.name,
+      this.photoUrl});
 
   @override
   State<ChatView> createState() => _ChatViewState();
@@ -157,7 +161,7 @@ class _ChatViewState extends State<ChatView> {
                             type: 'MessageType.text',
                             message: textController.text,
                             controller: textController,
-                            email: widget.email),
+                            email: widget.uid),
                         // isEmpty
                         //     ? recorder(context)
                         //     : SendMeaasge(
