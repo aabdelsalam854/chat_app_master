@@ -21,12 +21,12 @@ class MessageRepositoryImpl implements MessageRepository {
   }
 
   @override
-  Future<Either<Failure, List<Conversation>>> getAllConversations() async {
+  Stream<Either<Failure, List<Conversation>>> getAllConversations() async* {
     try {
-      final res = await messagesRemote.getAllConversations();
-      return Right(res);
+      final stream = messagesRemote.getAllConversations();
+      yield* stream.map((event) => Right(event));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      yield Left(ServerFailure(e.toString()));
     }
   }
 }

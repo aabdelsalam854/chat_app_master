@@ -10,5 +10,5 @@ abstract class MessageRepository {
   // Future<dynamic> deleteMessage(String userId, String chatId, String messageId);
   // Future<dynamic> updateMessage(String userId, String chatId, String messageId, String newMessage);
   // Future<dynamic> getMessageById(String userId, String chatId, String messageId);
-   Future<Either<Failure,List<Conversation>>> getAllConversations();
+   Stream<Either<Failure,List<Conversation>>> getAllConversations();
 }

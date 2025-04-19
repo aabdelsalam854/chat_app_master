@@ -9,13 +9,9 @@ abstract class MessagesRemoteDataSource {
     String userId,
   );
 
-  Future<List<Conversation>> getAllConversations();
+  Stream<List<Conversation>> getAllConversations();
 
-// Future<dynamic> sendMessage(String userId, String chatId, String message);
-// Future<dynamic> deleteMessage(String userId, String chatId, String messageId);
-// Future<dynamic> updateMessage(String userId, String chatId, String messageId, String newMessage);
-// Future<dynamic> getMessageById(String userId, String chatId, String messageId);
-// Future<dynamic> getAllMessages(String userId, String chatId);
+
 }
 
 class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
@@ -33,9 +29,12 @@ class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
   }
 
   @override
-  Future<List<Conversation>> getAllConversations() async {
-    final conversation =
-        await firestore.getAllDocuments("chats");
-    return conversation.map((e) => Conversation.fromJson(e)).toList();
+  Stream<List<Conversation>> getAllConversations() {
+    return firestore.getCollectionStream('chats').map((snapshot) {
+      return snapshot.docs
+          .map((doc) =>
+              Conversation.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+    });
   }
 }

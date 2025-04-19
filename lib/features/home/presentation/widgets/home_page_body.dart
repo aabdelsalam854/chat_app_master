@@ -1,93 +1,71 @@
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
+import 'package:chat_master/features/home/presentation/widgets/conversation_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shimmer/shimmer.dart';
 
-class HomePageBody extends StatelessWidget {
+class HomePageBody extends StatefulWidget {
   const HomePageBody({super.key});
+
+  @override
+  State<HomePageBody> createState() => _HomePageBodyState();
+}
+
+class _HomePageBodyState extends State<HomePageBody> {
+  @override
+  void initState() {
+    context.read<HomeCubit>().getAllConversations();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            GoRouter.of(context).push(Routes.kStartChat);
-          },
-          child: const Icon(Icons.add),
-        ),
-        appBar: AppBar(
-          title: Text('chat master'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                GoRouter.of(context).push(Routes.kSettings);
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          GoRouter.of(context).push(Routes.kStartChat);
+        },
+        child: const Icon(Icons.add),
+      ),
+      appBar: AppBar(
+        title: Text('Chat Master'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              GoRouter.of(context).push(Routes.kSettings);
+            },
+            icon: const Icon(Icons.more_vert_sharp),
+          ),
+        ],
+      ),
+      body: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          if (state is GetAllConversationsLoadingState) {
+            return ConversationLoading();
+          } else if (state is GetAllConversationsErrorState) {
+            return Center(child: Text(state.error));
+          } else if (state is GetAllConversationsSuccessState) {
+            final conversations = state.AllConversations;
+            return ListView.builder(
+              itemCount: conversations.length,
+              itemBuilder: (context, index) {
+                final conversationsData = conversations[index];
+                return ChatTile(
+                  imgUrl:
+                      conversationsData.participants.receiver.photoUrl ?? "",
+                  username: conversationsData.participants.receiver.name,
+                  lastMessage: conversationsData.lastMessage,
+                  time: conversationsData.lastMessageTime,
+                  onTap: () {},
+                );
               },
-              icon: const Icon(Icons.more_vert_sharp),
-            ),
-          ],
-        ),
-        body: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            if (state is GetAllConversationsSuccessState) {
-              return ListView.builder(
-                itemCount: state.AllConversations.length,
-                itemBuilder: (context, index) {
-                  return ChatTile(
-                    imgUrl: state.AllConversations[index].participants.receiver
-                            .photoUrl ??
-                        "",
-                    username: state.AllConversations[index].participants
-                            .receiver.name ??
-                        "",
-                    lastMessage:
-                        state.AllConversations[index].lastMessage ?? "",
-                    time: state.AllConversations[index].lastMessageTime ?? "",
-                    onTap: () {
-                      // snackBar(context, 'Hello', Colors.red);
-                      // GoRouter.of(context).push(
-                      //   Routes.kChatView,
-                      //   extra: {
-                      //     'email': state.users[index].email,
-                      //     'name': state.users[index].name,
-                      //     'photoUrl': state.users[index].photoUrl,
-                      //     'id': state.users[index].id
-                      //   },
-                      // );
-                    },
-                  );
-                },
-              );
-            } else if (state is GetUsersErrorState) {
-              return Center(
-                child: Text(state.error),
-              );
-            } else {
-              return Shimmer(
-                gradient: const LinearGradient(
-                  colors: [Colors.grey, Colors.white],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return ChatTile(
-                      imgUrl: "",
-                      username: 'User $index',
-                      lastMessage: 'Last message from user $index',
-                      time: '${index + 1} min ago',
-                      onTap: () {
-                        // snackBar(context, 'Hello', Colors.red);
-                      },
-                    );
-                  },
-                ),
-              );
-            }
-          },
-        ));
+            );
+          }
+          return Center(child: Text('No conversations available.'));
+        },
+      ),
+    );
   }
 }
