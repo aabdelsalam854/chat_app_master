@@ -10,11 +10,10 @@ class EmptyChatWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: TextButton(
-      onPressed: () {
-        GoRouter.of(context).push(Routes.kStartChat);
-      },
-      child: const Text("Let's Start Chatting"),
-    ));
+      child: TextButton(
+        onPressed: () => GoRouter.of(context).push(Routes.kStartChat),
+        child: const Text("Let's Start Chatting"),
+      ),
+    );
   }
 }
