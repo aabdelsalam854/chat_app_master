@@ -25,6 +25,8 @@ String parseDate(String date) =>
 String parseDateTime(String date) =>
     DateFormat('yyyy-MM-dd').add_jm().format(DateTime.parse(date));
 
+String parseTime(String date) => DateFormat('hh:mm a').format(DateTime.parse(date));
+
 Future<XFile?> pickImage(ImageSource source) async =>
     await ImagePicker().pickImage(source: source);
 

@@ -26,24 +26,40 @@ class ChatTile extends StatelessWidget {
         onTap: () {},
         child: CustomCircleNetworkImage(imageUrl: imgUrl),
       ), // Placeholder for the image URL
-      title: Text(
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        username,
-        style: TextStyle(
-          fontSize: 2.h,
-          fontWeight: FontWeight.bold,
-          fontFamily: "IBMPlexSans",
-        ),
+      title: Row(
+        children: [
+          Expanded(
+            flex: 4,
+            child: Text(
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              username,
+              style: TextStyle(
+                fontSize: 2.h,
+                fontWeight: FontWeight.bold,
+                fontFamily: "IBMPlexSans",
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(
+              time,
+              style: TextStyle(
+                  fontSize: 9, color: Colors.grey, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
       ),
-      subtitle: Text(
-        lastMessage,
-        style: TextStyle(fontSize: 16, color: Colors.grey),
+      subtitle: Row(
+        children: [
+          Text(
+            lastMessage,
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+        ],
       ),
-      trailing: Text(
-        time,
-        style: TextStyle(fontSize: 16, color: Colors.grey),
-      ),
+      // trailing:
     );
   }
 }
