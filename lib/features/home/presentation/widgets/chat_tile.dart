@@ -29,34 +29,27 @@ class ChatTile extends StatelessWidget {
       title: Row(
         children: [
           Expanded(
-            flex: 4,
-            child: Text(
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              username,
-              style: TextStyle(
-                fontSize: 2.h,
-                fontWeight: FontWeight.bold,
-                fontFamily: "IBMPlexSans",
-              ),
-            ),
-          ),
+              flex: 4,
+              child: Text(
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  username,
+                  style: TextStyle(
+                      fontSize: 2.h,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "IBMPlexSans"))),
           Expanded(
-            flex: 1,
-            child: Text(
-              time,
-              style: TextStyle(
-                  fontSize: 9, color: Colors.grey, fontWeight: FontWeight.bold),
-            ),
-          ),
+              flex: 1,
+              child: Text(time,
+                  style: TextStyle(
+                      fontSize: 9,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold))),
         ],
       ),
       subtitle: Row(
         children: [
-          Text(
-            lastMessage,
-            style: TextStyle(fontSize: 16, color: Colors.grey),
-          ),
+          Text(lastMessage, style: TextStyle(fontSize: 16, color: Colors.grey)),
         ],
       ),
       // trailing:
