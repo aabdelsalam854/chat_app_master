@@ -34,10 +34,10 @@ class _HomePageBodyState extends State<HomePageBody> {
         } else if (state is GetAllConversationsErrorState) {
           return Center(child: Text(state.error));
         } else if (state is GetAllConversationsSuccessState) {
-          if (state.AllConversations.isEmpty) {
+          if (state.allConversations.isEmpty) {
             return const EmptyChatWidget();
           }
-          return GetAllConversationItem(conversations: state.AllConversations);
+          return GetAllConversationItem(conversations: state.allConversations);
         }
         return const Center(child: Text('No conversations available.'));
       },

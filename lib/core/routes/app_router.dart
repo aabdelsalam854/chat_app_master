@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 import 'dart:io';
 import 'package:chat_master/core/constant/cached_key.dart';
 import 'package:chat_master/core/constant/constant.dart';
@@ -34,9 +34,8 @@ abstract class AppRouts {
         path: Routes.kLogin,
         builder: (context, state) {
           if (sl<SharedPreferences>().getString(CachedKey.uid) != null) {
-            log(sl<SharedPreferences>().getString(CachedKey.uid)!);
             kUid = sl<SharedPreferences>().getString(CachedKey.uid)!.decrypt()!;
-            log(kUid);
+
             return BlocProvider.value(
               value: sl<AuthCubit>(),
               child: const MainScreen(),

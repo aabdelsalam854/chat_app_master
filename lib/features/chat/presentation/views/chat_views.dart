@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
@@ -53,6 +52,7 @@ class _ChatViewState extends State<ChatView> {
   void dispose() {
     textController.dispose();
     controller.dispose();
+    record.dispose();
 
     super.dispose();
   }
@@ -91,7 +91,7 @@ class _ChatViewState extends State<ChatView> {
     );
 
     // stopwatch.reset();
-    log('File uploaded to $url');
+
     debugPrint(finalPath);
     debugPrint('stop Record');
   }
@@ -107,10 +107,6 @@ class _ChatViewState extends State<ChatView> {
     await record.pause();
     timeController.pauseTimer();
     debugPrint('pauseRecord');
-  }
-
-  void dipose() {
-    record.dispose();
   }
 
   @override

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/model/user_model.dart';
@@ -27,16 +25,6 @@ class SendMeaasge extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
-        log(controller!.text);
-        log(message);
-        log(MessageModel(
-          message: message,
-          id: email,
-          type: type,
-          metadata: metadata,
-          time: DateTime.now(),
-        ).toJson().toString());
-
         ChatService().sendMessage(
             kUid,
             email,

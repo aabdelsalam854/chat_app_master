@@ -28,10 +28,10 @@ class GetUsersErrorState extends HomeState {
 class GetAllConversationsLoadingState extends HomeState {}
 
 class GetAllConversationsSuccessState extends HomeState {
-  final List<Conversation> AllConversations;
-  const GetAllConversationsSuccessState(this.AllConversations);
+  final List<Conversation> allConversations;
+  const GetAllConversationsSuccessState(this.allConversations);
   @override
-  List<Object> get props => [AllConversations];
+  List<Object> get props => [allConversations];
 }
 
 class GetAllConversationsErrorState extends HomeState {
