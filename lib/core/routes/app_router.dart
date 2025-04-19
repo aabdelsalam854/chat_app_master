@@ -10,6 +10,8 @@ import 'package:chat_master/features/chat/presentation/views/widget/show_file_an
 import 'package:chat_master/features/chat/presentation/views/widget/show_multi_image.dart';
 import 'package:chat_master/features/auth/presentation/views/login_view.dart';
 import 'package:chat_master/features/auth/presentation/views/register.dart';
+import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
+import 'package:chat_master/features/home/presentation/pages/start_chat.dart';
 import 'package:chat_master/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:chat_master/features/profile/presentation/pages/change_password.dart';
 import 'package:chat_master/features/profile/presentation/pages/profile_view.dart';
@@ -55,13 +57,10 @@ abstract class AppRouts {
         final data = state.extra as Map<String, dynamic>;
 
         return ChatView(
-          email: data['email'] as String,
-          name: data['name'] as String,
-          photoUrl: data['photoUrl'] as String?,
-          uid: data['id'] as String
-
-
-        );
+            email: data['email'] as String,
+            name: data['name'] as String,
+            photoUrl: data['photoUrl'] as String?,
+            uid: data['id'] as String);
       },
     ),
     GoRoute(
@@ -148,5 +147,13 @@ abstract class AppRouts {
             ),
           );
         }),
+    GoRoute(
+        path: Routes.kStartChat,
+        builder: (context, state) {
+          return BlocProvider.value(
+            value: sl<HomeCubit>(),
+            child: const StartChat(),
+          );
+        })
   ]);
 }

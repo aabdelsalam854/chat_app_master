@@ -19,4 +19,7 @@ class Routes {
   static const kSettings = "/Settings";
   static const kProfile = "/Profile";
   static const kChangePassword = "/ChangePassword";
+
+  static const kStartChat = "/StartChat";
+
 }

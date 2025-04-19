@@ -6,56 +6,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
-class HomePageBody extends StatelessWidget {
-  const HomePageBody({super.key});
+class StartChatBody extends StatelessWidget {
+  const StartChatBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            GoRouter.of(context).push(Routes.kStartChat);
-          },
-          child: const Icon(Icons.add),
-        ),
         appBar: AppBar(
-          title: Text('chat master'),
-          actions: [
-            IconButton(
-              onPressed: () {
-                GoRouter.of(context).push(Routes.kSettings);
-              },
-              icon: const Icon(Icons.more_vert_sharp),
-            ),
-          ],
+          title: Text('Select a user'),
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            if (state is GetAllConversationsSuccessState) {
+            if (state is GetUsersSuccessState) {
               return ListView.builder(
-                itemCount: state.AllConversations.length,
+                itemCount: state.users.length,
                 itemBuilder: (context, index) {
                   return ChatTile(
-                    imgUrl: state.AllConversations[index].participants.receiver
-                            .photoUrl ??
-                        "",
-                    username: state.AllConversations[index].participants
-                            .receiver.name ??
-                        "",
-                    lastMessage:
-                        state.AllConversations[index].lastMessage ?? "",
-                    time: state.AllConversations[index].lastMessageTime ?? "",
+                    imgUrl: state.users[index].photoUrl ?? "",
+                    username: state.users[index].name,
+                    lastMessage: 'Last message from user $index',
+                    time: '${index + 1} min ago',
                     onTap: () {
                       // snackBar(context, 'Hello', Colors.red);
-                      // GoRouter.of(context).push(
-                      //   Routes.kChatView,
-                      //   extra: {
-                      //     'email': state.users[index].email,
-                      //     'name': state.users[index].name,
-                      //     'photoUrl': state.users[index].photoUrl,
-                      //     'id': state.users[index].id
-                      //   },
-                      // );
+                      GoRouter.of(context).push(
+                        Routes.kChatView,
+                        extra: {
+                          'email': state.users[index].email,
+                          'name': state.users[index].name,
+                          'photoUrl': state.users[index].photoUrl,
+                          'id': state.users[index].id
+                        },
+                      );
                     },
                   );
                 },

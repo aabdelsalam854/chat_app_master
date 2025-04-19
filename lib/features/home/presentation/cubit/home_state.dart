@@ -22,3 +22,19 @@ class GetUsersErrorState extends HomeState{
   @override
   List<Object> get props => [error];
 }
+
+
+class GetAllConversationsLoadingState extends HomeState{}
+class GetAllConversationsSuccessState extends HomeState{
+ final List<Conversation> AllConversations;
+  const GetAllConversationsSuccessState(this.AllConversations);
+  @override
+  List<Object> get props => [AllConversations];
+}
+class GetAllConversationsErrorState extends HomeState{
+  final String error;
+  const GetAllConversationsErrorState(this.error);
+  @override
+  List<Object> get props => [error];
+}
+
