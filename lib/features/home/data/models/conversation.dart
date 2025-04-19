@@ -5,16 +5,20 @@ class Conversation {
   final String lastMessage;
   final String lastMessageTime;
   final Participants participants;
+  final List<dynamic> userIds;
 
   Conversation(
       {required this.lastMessage,
       required this.lastMessageTime,
-      required this.participants});
+      required this.participants,
+      required this.userIds});
 
   factory Conversation.fromJson(Map<String, dynamic> json) => Conversation(
-      lastMessage: json['lastMessage'],
-      lastMessageTime: parseTime(json['lastMessageTime'].toDate().toString()),
-      participants: Participants.fromJson(json['participants']));
+        lastMessage: json['lastMessage'],
+        lastMessageTime: parseTime(json['lastMessageTime'].toDate().toString()),
+        participants: Participants.fromJson(json['participants']),
+        userIds: json['users'],
+      );
 }
 
 class Participants {

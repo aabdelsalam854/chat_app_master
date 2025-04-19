@@ -40,7 +40,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       padding: const EdgeInsets.all(24),
       child: Form(
-          // autovalidateMode: AutovalidateMode.onUserInteraction,
+        // autovalidateMode: AutovalidateMode.onUserInteraction,
         key: formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +96,10 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                 return state is AuthRegisterLoadingState
                     ? const Center(child: CircularProgressIndicator())
                     : CustomButton(
-                        onPressed: _submitRegisterForm, text: "Sign Up");
+                        onPressed: () {
+                          _submitRegisterForm(context);
+                        },
+                        text: "Sign Up");
               },
             ),
             const SizedBox(height: 40),
@@ -118,13 +121,16 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
     );
   }
 
-  void _submitRegisterForm() {
+  void _submitRegisterForm(BuildContext context) {
     if (formKey.currentState!.validate()) {
       if (passwordController.text != confirmPasswordController.text) {
-        snackBar(
-            context: context,
-            text: "Passwords do not match",
-            color: Colors.red);
+        if (context.mounted) {
+          snackBar(
+              context: context,
+              text: "Passwords do not match",
+              color: Colors.red);
+        }
+
         return;
       }
 

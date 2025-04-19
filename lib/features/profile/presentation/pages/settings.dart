@@ -1,16 +1,13 @@
 import 'package:chat_master/core/constant/cached_key.dart';
 import 'package:chat_master/core/encryption/encryption.dart';
-import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/core/widget/custom_circle_network_image.dart';
-import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:chat_master/features/profile/presentation/cubit/profile_state.dart';
 import 'package:chat_master/features/profile/presentation/widgets/switch_theme_icon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
