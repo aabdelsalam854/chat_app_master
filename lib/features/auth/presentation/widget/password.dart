@@ -26,6 +26,7 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   void dispose() {
+    widget.passwordController.dispose();
     isShow.dispose();
     super.dispose();
   }
