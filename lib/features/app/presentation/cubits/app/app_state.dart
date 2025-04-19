@@ -7,28 +7,24 @@ abstract class AppState extends Equatable {
   const AppState(this.locale, this.fontFamily, this.appTheme);
 
   @override
-  List<Object> get props => [ locale, fontFamily, appTheme];
+  List<Object> get props => [locale, fontFamily, appTheme];
 }
 
 class AppInitial extends AppState {
-
   const AppInitial(super.locale, super.fontFamily, super.appTheme);
- @override
-  List<Object> get props => [ locale, fontFamily, appTheme];
-
+  @override
+  List<Object> get props => [locale, fontFamily, appTheme];
 }
-
-
 
 class ChangeLocaleState extends AppState {
   const ChangeLocaleState(super.locale, super.fontFamily, super.appTheme);
-   @override
-  List<Object> get props => [ locale, fontFamily, appTheme];
+  @override
+  List<Object> get props => [locale, fontFamily, appTheme];
 }
 
 final class ThemeChanged extends AppState {
   const ThemeChanged(super.locale, super.fontFamily, super.appTheme);
 
- @override
-  List<Object> get props => [ locale, fontFamily, appTheme];
+  @override
+  List<Object> get props => [locale, fontFamily, appTheme];
 }

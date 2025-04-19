@@ -37,10 +37,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-
-
   @override
-  Future<UserModel> register(RegisterModel userRequest)  async{
+  Future<UserModel> register(RegisterModel userRequest) async {
     final user = await firebaseAuthServices.createUserWithEmailAndPassword(
       email: userRequest.email,
       password: userRequest.password,
@@ -51,7 +49,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future signout() async {
     await firebaseAuthServices.logout();
-  
   }
 
   @override
@@ -65,16 +62,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     // TODO: implement loginWithGoogle
     throw UnimplementedError();
   }
-  
+
   @override
   Future resetPassword(String email) async {
     await firebaseAuthServices.resetPassword(email);
- 
   }
-  
+
   @override
-  Future deleteUser()  async {
+  Future deleteUser() async {
     await firebaseAuthServices.deleteUser();
-  
   }
 }

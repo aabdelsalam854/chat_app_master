@@ -1,9 +1,7 @@
-
 import 'package:chat_master/features/chat/presentation/views/widget/build_message_type_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/model/messages_model.dart';
-
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
@@ -17,7 +15,6 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
@@ -31,15 +28,13 @@ class ChatBubble extends StatelessWidget {
             topRight: Radius.circular(32),
             bottomRight: Radius.circular(32),
             bottomLeft: Radius.circular(0),
-           
           ),
-         
         ),
         child: SizedBox(
-          child:  BuildMessageTypeWidget(messageModel: messageModel, message: message),
+          child: BuildMessageTypeWidget(
+              messageModel: messageModel, message: message),
         ),
       ),
     );
   }
-
 }

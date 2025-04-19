@@ -49,7 +49,8 @@ class ChatTile extends StatelessWidget {
       ),
       subtitle: Row(
         children: [
-          Text(lastMessage, style: const TextStyle(fontSize: 16, color: Colors.grey)),
+          Text(lastMessage,
+              style: const TextStyle(fontSize: 16, color: Colors.grey)),
         ],
       ),
       // trailing:

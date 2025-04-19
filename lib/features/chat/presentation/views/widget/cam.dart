@@ -9,8 +9,6 @@ import 'package:chat_master/features/chat/presentation/views/widget/show_send.da
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
-
 class CameraWidget extends StatefulWidget {
   const CameraWidget({super.key, required this.cameras, required this.email});
   final List<CameraDescription> cameras;

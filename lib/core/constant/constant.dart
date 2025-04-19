@@ -1,3 +1,1 @@
-
-String kUid = '' ;
-
+String kUid = '';

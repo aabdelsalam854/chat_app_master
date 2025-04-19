@@ -5,7 +5,6 @@ import 'package:chat_master/features/app/presentation/cubits/app/app_cubit.dart'
 import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 // Get Platform
 String get getPlatform => Platform.operatingSystem;
 // Get Current App Language
@@ -25,7 +24,8 @@ String parseDate(String date) =>
 String parseDateTime(String date) =>
     DateFormat('yyyy-MM-dd').add_jm().format(DateTime.parse(date));
 
-String parseTime(String date) => DateFormat('hh:mm a').format(DateTime.parse(date));
+String parseTime(String date) =>
+    DateFormat('hh:mm a').format(DateTime.parse(date));
 
 Future<XFile?> pickImage(ImageSource source) async =>
     await ImagePicker().pickImage(source: source);

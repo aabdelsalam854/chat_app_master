@@ -156,22 +156,23 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                     keyboardType: TextInputType.phone,
                   ),
                   const SizedBox(height: 20),
-                CustomButton(onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    context.read<ProfileCubit>().updateProfile(
-                          UserModel(
-                            id: widget.user.id,
-                            name: nameController.text,
-                            email: emailController.text,
-                            phoneNumber: phoneController.text,
-                            status: statusController.text,
-                            photoUrl: widget.user.photoUrl,
-                            lastSeen: widget.user.lastSeen,
-
-                          ),
-                        );
-                  }
-                }, text: "Save"),
+                  CustomButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<ProfileCubit>().updateProfile(
+                                UserModel(
+                                  id: widget.user.id,
+                                  name: nameController.text,
+                                  email: emailController.text,
+                                  phoneNumber: phoneController.text,
+                                  status: statusController.text,
+                                  photoUrl: widget.user.photoUrl,
+                                  lastSeen: widget.user.lastSeen,
+                                ),
+                              );
+                        }
+                      },
+                      text: "Save"),
                 ],
               ),
             ),

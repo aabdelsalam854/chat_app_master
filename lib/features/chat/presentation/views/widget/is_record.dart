@@ -60,9 +60,8 @@ class _IsRecordState extends State<IsRecord> {
               });
             }
           },
-          icon: isPlaying
-              ? const Icon(Icons.stop)
-              : const Icon(Icons.play_arrow),
+          icon:
+              isPlaying ? const Icon(Icons.stop) : const Icon(Icons.play_arrow),
         )),
         const Spacer(),
         IconButton(

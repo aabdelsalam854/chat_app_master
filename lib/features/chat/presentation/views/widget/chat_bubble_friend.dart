@@ -10,8 +10,6 @@ class ChatBubbleFriend extends StatelessWidget {
   final MessageModel messageModel;
   @override
   Widget build(BuildContext context) {
-    
-
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
@@ -26,7 +24,8 @@ class ChatBubbleFriend extends StatelessWidget {
               bottomLeft: Radius.circular(32),
             ),
             color: Color(0xFF44A048)),
-        child: BuildMessageTypeWidget(messageModel: messageModel, message: message),
+        child: BuildMessageTypeWidget(
+            messageModel: messageModel, message: message),
       ),
     );
   }

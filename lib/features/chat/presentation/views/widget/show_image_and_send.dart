@@ -7,7 +7,6 @@ import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 
-
 class ShowImageAndSend extends StatelessWidget {
   const ShowImageAndSend({
     super.key,

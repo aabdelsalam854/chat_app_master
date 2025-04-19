@@ -1,4 +1,3 @@
-
 import 'package:chat_master/core/widget/responsive_widget.dart';
 
 extension SizeExtension on num {

@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, required this.onPressed, required this.text});
@@ -21,7 +19,7 @@ class CustomButton extends StatelessWidget {
           style: TextButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            backgroundColor:Colors.greenAccent,
+            backgroundColor: Colors.greenAccent,
           ),
           child: Text(text),
         ),

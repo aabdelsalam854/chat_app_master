@@ -2,7 +2,6 @@ import 'package:chat_master/core/extensions/size.dart';
 import 'package:chat_master/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-
 class TTextFormFieldTheme {
   TTextFormFieldTheme._();
 

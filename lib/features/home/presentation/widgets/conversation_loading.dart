@@ -1,4 +1,3 @@
-
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';

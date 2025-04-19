@@ -1,8 +1,5 @@
-
 import 'package:chat_master/features/auth/presentation/widget/social_login_button.dart';
 import 'package:flutter/material.dart';
-
-
 
 class AuthSocialIcons extends StatelessWidget {
   const AuthSocialIcons({

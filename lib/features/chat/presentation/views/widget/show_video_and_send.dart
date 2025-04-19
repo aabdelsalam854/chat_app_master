@@ -46,7 +46,6 @@ class VideoPageState extends State<VideoPage> {
             icon: const Icon(Icons.check),
             onPressed: () {
               Navigator.pop(context);
-              
             },
           )
         ],

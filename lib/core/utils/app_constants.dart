@@ -1,7 +1,6 @@
 import 'package:chat_master/core/extensions/size.dart';
 import 'package:flutter/material.dart';
 
-
 class AppConstants {
   static const String fontFamilyAr = 'DroidKufi';
   static const String fontFamilyEn = 'IBMPlexSans';

@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
-
 
 class DontHaveAnAccountSection extends StatelessWidget {
   const DontHaveAnAccountSection({
-    super.key, required this.title, required this.buttonText, required this.onPressed,
+    super.key,
+    required this.title,
+    required this.buttonText,
+    required this.onPressed,
   });
   final String title;
   final String buttonText;
@@ -27,7 +28,6 @@ class DontHaveAnAccountSection extends StatelessWidget {
           child: Text(
             buttonText,
             style: const TextStyle(
-    
               fontSize: 16,
             ),
           ),

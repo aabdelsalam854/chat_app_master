@@ -11,7 +11,6 @@ import 'package:chat_master/features/chat/presentation/views/widget/selcet_file.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
 class MediaSelection extends StatelessWidget {
   const MediaSelection({
     super.key,
@@ -37,17 +36,14 @@ class MediaSelection extends StatelessWidget {
               child: ListTile(
                 onTap: () async {
                   await availableCameras().then((value) {
-
-                    if (context.mounted){
-                         Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CameraWidget(
-                            email: email,
-                            cameras: value)),
-                    );
+                    if (context.mounted) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                CameraWidget(email: email, cameras: value)),
+                      );
                     }
-                 
                   });
                 },
                 title: const Text('camera'),
@@ -62,11 +58,10 @@ class MediaSelection extends StatelessWidget {
                       List<File> imageFile = mediaSelect
                           .map((media) => File(media.path!))
                           .toList();
-                          if (context.mounted){
-                                   GoRouter.of(context).push(Routes.kMediaSelection,
-                          extra: ({'imageFile': imageFile, 'email': email}));
-                          }
-               
+                      if (context.mounted) {
+                        GoRouter.of(context).push(Routes.kMediaSelection,
+                            extra: ({'imageFile': imageFile, 'email': email}));
+                      }
                     }
                   });
                 },
@@ -74,7 +69,6 @@ class MediaSelection extends StatelessWidget {
                 leading: const Icon(Icons.camera),
               ),
             ),
-       
             SelectFile(email: email),
             const SizedBox(
               height: 30,

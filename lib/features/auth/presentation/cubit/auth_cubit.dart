@@ -9,7 +9,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this.authUseCases) : super(AuthInitial());
 
-final AuthUseCases authUseCases;
+  final AuthUseCases authUseCases;
 
   void login(String email, String password) async {
     emit(AuthLoginLoadingState());
@@ -19,15 +19,15 @@ final AuthUseCases authUseCases;
       (user) => emit(AuthLoginSuccessState(user)),
     );
   }
-  void register(RegisterModel registerModel ) async {
+
+  void register(RegisterModel registerModel) async {
     emit(AuthRegisterLoadingState());
-    final result = await authUseCases.register(registerModel );
+    final result = await authUseCases.register(registerModel);
     result.fold(
       (failure) => emit(AuthRegisterFailureState(failure.msg)),
       (user) => emit(AuthRegisterSuccessState(user)),
     );
   }
-
 
   void forgetPassword(String email) async {
     emit(AuthResetPasswordLoadingState());
@@ -37,6 +37,4 @@ final AuthUseCases authUseCases;
       (message) => emit(const AuthResetPasswordSuccessState()),
     );
   }
-
-
 }

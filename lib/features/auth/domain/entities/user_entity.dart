@@ -4,7 +4,8 @@ class UserEntity extends Equatable {
   final String email;
   final String name;
   final String uid;
-  const UserEntity({required this.email, required this.name, required this.uid});
+  const UserEntity(
+      {required this.email, required this.name, required this.uid});
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => UserEntity(
         email: json['email'],

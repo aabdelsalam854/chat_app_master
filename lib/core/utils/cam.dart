@@ -82,26 +82,24 @@ class SelectMediaFromStorage {
   }
 }
 
+// Future<void> getMedia() async {
+//   final picker = ImagePicker();
+//   final pickedFile = await picker.getMedia(source: ImageSource.gallery);
 
-
-  // Future<void> getMedia() async {
-  //   final picker = ImagePicker();
-  //   final pickedFile = await picker.getMedia(source: ImageSource.gallery);
-
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       if (pickedFile.path.endsWith('.mp4')) {
-  //         _videoFile = File(pickedFile.path);
-  //         _videoPlayerController = VideoPlayerController.file(_videoFile)..initialize().then((_) {
-  //           setState(() {});
-  //         });
-  //       } else {
-  //         _imageFile = File(pickedFile.path);
-  //         _videoFile = null;
-  //         _videoPlayerController?.dispose();
-  //       }
-  //     } else {
-  //       print('No media selected.');
-  //     }
-  //   });
-  // }
+//   setState(() {
+//     if (pickedFile != null) {
+//       if (pickedFile.path.endsWith('.mp4')) {
+//         _videoFile = File(pickedFile.path);
+//         _videoPlayerController = VideoPlayerController.file(_videoFile)..initialize().then((_) {
+//           setState(() {});
+//         });
+//       } else {
+//         _imageFile = File(pickedFile.path);
+//         _videoFile = null;
+//         _videoPlayerController?.dispose();
+//       }
+//     } else {
+//       print('No media selected.');
+//     }
+//   });
+// }

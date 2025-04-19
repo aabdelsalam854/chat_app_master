@@ -20,7 +20,6 @@ class UserModel extends Equatable {
     this.status,
   });
 
-
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'] ?? "",
         name: json['name'] ?? '',
@@ -57,5 +56,6 @@ class UserModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, email, phoneNumber, photoUrl, lastSeen, status];
+  List<Object?> get props =>
+      [id, name, email, phoneNumber, photoUrl, lastSeen, status];
 }

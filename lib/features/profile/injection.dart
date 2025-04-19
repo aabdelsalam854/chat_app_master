@@ -4,7 +4,6 @@ import 'package:chat_master/features/profile/domain/repositories/profile_repo.da
 import 'package:chat_master/features/profile/domain/usecases/usecases.dart';
 import 'package:chat_master/features/profile/presentation/cubit/profile_cubit.dart';
 
-
 import 'package:get_it/get_it.dart';
 
 Future<void> profileInjection(GetIt sl) async {

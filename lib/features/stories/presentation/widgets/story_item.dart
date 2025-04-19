@@ -1,4 +1,3 @@
-
 import 'package:chat_master/core/widget/custom_circle_network_image.dart';
 import 'package:chat_master/features/stories/presentation/pages/stories.dart';
 import 'package:flutter/material.dart';
@@ -32,4 +31,3 @@ class StoryItem extends StatelessWidget {
     );
   }
 }
-

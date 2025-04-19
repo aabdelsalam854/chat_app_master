@@ -18,7 +18,8 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.textAlign = TextAlign.start,
     this.onSaved,
-    this.onEditingComplete, this.textInputAction,
+    this.onEditingComplete,
+    this.textInputAction,
   });
 
   final String? Function(String?)? validator;

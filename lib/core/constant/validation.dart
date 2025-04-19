@@ -1,7 +1,6 @@
 // validation.dart
 
 class Validation {
-
   // Email validation
   static String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -13,7 +12,7 @@ class Validation {
   }
 
   // Password validation
-   static String? passwordValidator(String? value) {
+  static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your password';
     } else if (value.length < 8) {
@@ -40,7 +39,7 @@ class Validation {
     return null;
   }
 
-static String? nameValidator(String? value) {
+  static String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter your name';
     } else if (value.length < 3) {
@@ -48,9 +47,4 @@ static String? nameValidator(String? value) {
     }
     return null;
   }
-
-
-
-
-
 }

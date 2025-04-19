@@ -16,7 +16,7 @@ class ShowImage extends StatelessWidget {
         height: screenSize.height,
         child: Image.network(
           message!,
-),
+        ),
       ),
     );
   }

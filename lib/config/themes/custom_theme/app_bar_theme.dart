@@ -15,7 +15,9 @@ class TAppBarTheme {
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     // systemOverlayStyle: SystemUiOverlayStyle.light,
     // iconTheme: const IconThemeData(size: 24.0, color: Colors.black),
-    iconTheme: IconThemeData(color: AppColors.black,),
+    iconTheme: IconThemeData(
+      color: AppColors.black,
+    ),
 
     actionsIconTheme: IconThemeData(size: 24.0, color: Colors.black),
     titleTextStyle: TextStyle(

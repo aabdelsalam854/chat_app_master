@@ -12,7 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:chat_master/core/utils/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 part 'app_state.dart';
+
 String currentLangCode = '';
+
 class AppCubit extends Cubit<AppState> {
   final SharedPreferences shared;
   final ChangeLangUseCase changeLangUseCase;
@@ -65,8 +67,7 @@ class AppCubit extends Cubit<AppState> {
         currentLangCode = langCode;
         final fontFamily =
             isArabic ? AppConstants.fontFamilyAr : AppConstants.fontFamilyEn;
-        emit(ChangeLocaleState(
-            Locale(langCode), fontFamily, state.appTheme));
+        emit(ChangeLocaleState(Locale(langCode), fontFamily, state.appTheme));
       },
     );
   }

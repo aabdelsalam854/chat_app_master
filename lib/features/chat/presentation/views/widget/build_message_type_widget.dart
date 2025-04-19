@@ -6,8 +6,6 @@ import 'package:chat_master/features/chat/presentation/views/widget/is_video.dar
 
 import 'package:flutter/material.dart';
 
-
-
 class BuildMessageTypeWidget extends StatelessWidget {
   const BuildMessageTypeWidget(
       {super.key, required this.messageModel, required this.message});

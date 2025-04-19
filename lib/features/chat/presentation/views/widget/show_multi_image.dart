@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -8,7 +7,6 @@ import 'package:chat_master/core/widget/custom_text_form_field.dart';
 
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/data/model/metadata_model.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

@@ -32,7 +32,7 @@ class IsFileState extends State<IsFile> {
             path = await DownloadFile.downloadAndOpenFile(
                 fileUrl: widget.message,
                 fileName: widget.messageModel.metadata!.fileType ?? '');
-            
+
             setState(() {
               fileOpened = true;
             });
@@ -42,7 +42,6 @@ class IsFileState extends State<IsFile> {
         }
         OpenFile.open(path);
       },
-      
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 1 / 2,
         child: Container(

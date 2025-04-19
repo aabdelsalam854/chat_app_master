@@ -20,8 +20,8 @@ class FileChatBubbleimage extends StatelessWidget {
         children: [
           Image.file(
             File(url),
-            width: 200, 
-            height: 200, 
+            width: 200,
+            height: 200,
             fit: BoxFit.cover,
           ),
         ],
