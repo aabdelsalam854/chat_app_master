@@ -40,6 +40,7 @@ class _PasswordFieldState extends State<PasswordField> {
           controller: widget.passwordController,
           obscureText: value,
           keyboardType: TextInputType.visiblePassword,
+             onEditingComplete: () => FocusScope.of(context).nextFocus(),
           icon: PasswordToggleIcon(isShow: isShow),
           validator: widget.validator,
         );

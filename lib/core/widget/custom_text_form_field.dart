@@ -18,6 +18,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.textAlign = TextAlign.start,
     this.onSaved,
+    this.onEditingComplete, this.textInputAction,
   });
 
   final String? Function(String?)? validator;
@@ -35,15 +36,16 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxLength;
   final TextAlign textAlign;
   final Function(String?)? onSaved;
+  final Function()? onEditingComplete;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
-          textInputAction:
-              TextInputAction.done, 
-
+          onEditingComplete: onEditingComplete,
+          textInputAction: textInputAction,
           onSaved: onSaved,
           validator: validator ??
               (data) {

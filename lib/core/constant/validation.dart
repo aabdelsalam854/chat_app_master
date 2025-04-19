@@ -39,4 +39,18 @@ class Validation {
     }
     return null;
   }
+
+static String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your name';
+    } else if (value.length < 3) {
+      return 'Name must be at least 3 characters';
+    }
+    return null;
+  }
+
+
+
+
+
 }

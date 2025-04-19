@@ -5,7 +5,6 @@ import 'package:chat_master/core/widget/snack_bar.dart';
 import 'package:chat_master/features/auth/data/models/register_model.dart';
 import 'package:chat_master/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:chat_master/features/auth/presentation/widget/auth_social_icons.dart';
-
 import 'package:chat_master/features/auth/presentation/widget/divider_with_text.dart';
 import 'package:chat_master/features/auth/presentation/widget/dont_have_an_account_section.dart';
 import 'package:chat_master/features/auth/presentation/widget/password.dart';
@@ -24,18 +23,21 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final nameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    nameController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       padding: const EdgeInsets.all(24),
       child: Form(
         key: formKey,
@@ -51,12 +53,24 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
               controller: emailController,
               hintText: 'Email',
               keyboardType: TextInputType.emailAddress,
+              validator: Validation.emailValidator,
+              onEditingComplete: () => FocusScope.of(context).nextFocus(),
+            ),
+            CustomTextFormField(
+              controller: nameController,
+              hintText: 'name',
+              keyboardType: TextInputType.name,
+              validator: Validation.nameValidator,
+               onEditingComplete: () => FocusScope.of(context).nextFocus(),
+      
             ),
             const SizedBox(height: 16),
             PasswordField(
                 hintText: 'Password',
                 passwordController: passwordController,
-                validator: Validation.passwordValidator),
+                validator: Validation.passwordValidator,
+                      
+                ),
             const SizedBox(height: 16),
             PasswordField(
                 hintText: 'Confirm Password',
@@ -91,7 +105,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
                                     password: passwordController.text,
                                     covariantPassword:
                                         confirmPasswordController.text,
-                                    name: "",
+                                    name: nameController.text,
                                     phoneNumber: "",
                                   ),
                                 );

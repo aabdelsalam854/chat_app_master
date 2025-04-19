@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:chat_master/core/constant/cached_key.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/routes/routes.dart';
@@ -12,7 +11,6 @@ import 'package:chat_master/features/chat/presentation/views/widget/show_multi_i
 import 'package:chat_master/features/auth/presentation/views/login_view.dart';
 import 'package:chat_master/features/auth/presentation/views/register.dart';
 import 'package:chat_master/features/profile/presentation/cubit/profile_cubit.dart';
-
 import 'package:chat_master/features/profile/presentation/pages/change_password.dart';
 import 'package:chat_master/features/profile/presentation/pages/profile_view.dart';
 import 'package:chat_master/features/profile/presentation/pages/settings.dart';
