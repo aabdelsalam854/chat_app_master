@@ -31,10 +31,11 @@ class FirestoreServices implements DatabaseServices {
 
   @override
   Future<dynamic> updateData(
-      {required String path, required Map<String, dynamic> data ,required String? docId}) async {
+      {required String path,
+      required Map<String, dynamic> data,
+      required String? docId}) async {
     await firestore.collection(path).doc(docId).update(data);
     return data;
-
   }
 
   @override
@@ -43,17 +44,20 @@ class FirestoreServices implements DatabaseServices {
     var userData = await firestore.collection(path).doc(docId).get();
     return userData.data() as Map<String, dynamic>;
   }
-  @override
-  Future<List<Map<String, dynamic>>> getAllDocuments(String collectionPath) async {
-  final snapshot = await FirebaseFirestore.instance.collection(collectionPath).get();
 
-  return snapshot.docs.map((doc) => doc.data()).toList();
-}
+  @override
+  Future<List<Map<String, dynamic>>> getAllDocuments(
+      String collectionPath) async {
+    final snapshot =
+        await FirebaseFirestore.instance.collection(collectionPath).get();
+
+    return snapshot.docs.map((doc) => doc.data()).toList();
+  }
 
   @override
   Stream<QuerySnapshot<Object?>> getCollectionStream(String collectionPath) {
-final stream = FirebaseFirestore.instance.collection(collectionPath).snapshots();
-return stream;
+    final stream =
+        FirebaseFirestore.instance.collection(collectionPath).snapshots();
+    return stream;
   }
-
 }

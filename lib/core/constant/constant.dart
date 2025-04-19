@@ -1,3 +1,3 @@
 
-String kToken = '' ;
+String kUid = '' ;
 

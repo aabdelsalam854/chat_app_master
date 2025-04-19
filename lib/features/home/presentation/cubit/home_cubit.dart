@@ -16,7 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
   StreamSubscription? _subscription;
   Future<void> getUsers() async {
     emit(GetUsersLoadingState());
-    var data = await usecases.getUsers('7SQ43pgmTqTgBeVKiflmyzPl4wp1');
+    var data = await usecases.getUsers();
     data.fold(
       (failure) {
         emit(GetUsersErrorState(failure.msg));

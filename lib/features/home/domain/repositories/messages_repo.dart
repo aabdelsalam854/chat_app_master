@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:chat_master/core/model/user_model.dart';
 
 abstract class MessageRepository {
-  Future<Either<Failure, List<UserModel>>> getUsers(String userId);
+  Future<Either<Failure, List<UserModel>>> getUsers();
   // Future<dynamic> sendMessage(String userId, String chatId, String message);
   // Future<dynamic> deleteMessage(String userId, String chatId, String messageId);
   // Future<dynamic> updateMessage(String userId, String chatId, String messageId, String newMessage);

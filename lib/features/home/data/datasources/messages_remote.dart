@@ -6,7 +6,7 @@ import 'package:chat_master/features/home/data/models/conversation.dart';
 
 abstract class MessagesRemoteDataSource {
   Future<List<UserModel>> getUsers(
-    String userId,
+  
   );
 
   Stream<List<Conversation>> getAllConversations();
@@ -20,7 +20,7 @@ class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
 
   @override
   Future<List<UserModel>> getUsers(
-    String userId,
+
   ) async {
     final users = await firestore.getAllDocuments(EndPoint.userCollection);
     return users.map((e) {

@@ -8,8 +8,8 @@ import 'package:chat_master/core/model/user_model.dart';
 class MessagesUsecases {
   final MessageRepository messagesRepo;
   MessagesUsecases(this.messagesRepo);
-  Future<Either<Failure, List<UserModel>>> getUsers(String userId) =>
-      messagesRepo.getUsers(userId);
+  Future<Either<Failure, List<UserModel>>> getUsers() =>
+      messagesRepo.getUsers();
   Stream<Either<Failure, List<Conversation>>> getAllConversations() =>
       messagesRepo.getAllConversations();
 }

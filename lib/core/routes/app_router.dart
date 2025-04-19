@@ -1,5 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:chat_master/core/constant/cached_key.dart';
+import 'package:chat_master/core/constant/constant.dart';
+import 'package:chat_master/core/encryption/encryption.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/services/server_locator.dart';
@@ -30,7 +33,10 @@ abstract class AppRouts {
     GoRoute(
         path: Routes.kLogin,
         builder: (context, state) {
-          if (sl<SharedPreferences>().get(CachedKey.uid) != null) {
+          if (sl<SharedPreferences>().getString(CachedKey.uid) != null) {
+            log(sl<SharedPreferences>().getString(CachedKey.uid)!);
+            kUid = sl<SharedPreferences>().getString(CachedKey.uid)!.decrypt()!;
+            log(kUid);
             return BlocProvider.value(
               value: sl<AuthCubit>(),
               child: MainScreen(),

@@ -1,3 +1,4 @@
+import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/error/failures.dart';
 import 'package:chat_master/features/home/data/datasources/messages_remote.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
@@ -9,10 +10,10 @@ class MessageRepositoryImpl implements MessageRepository {
   final MessagesRemoteDataSource messagesRemote;
   MessageRepositoryImpl(this.messagesRemote);
   @override
-  Future<Either<Failure, List<UserModel>>> getUsers(String userId) async {
+  Future<Either<Failure, List<UserModel>>> getUsers() async {
     try {
-      final res = await messagesRemote.getUsers(userId);
-      res.removeWhere((element) => element.id == userId);
+      final res = await messagesRemote.getUsers();
+      res.removeWhere((element) => element.id == kUid);
       return Right(res);
     } catch (e) {
       return Left(ServerFailure(e.toString()));

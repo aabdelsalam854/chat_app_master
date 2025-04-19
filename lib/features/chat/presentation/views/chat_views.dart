@@ -80,7 +80,7 @@ class _ChatViewState extends State<ChatView> {
       MessageModel(
         metadata: null,
         message: url,
-        id: widget.email,
+        id: widget.uid,
         time: DateTime.now(),
         type: 'MessageType.record',
       ),

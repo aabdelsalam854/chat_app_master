@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:chat_master/core/constant/constant.dart';
+import 'package:chat_master/core/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/fire_cloud/fire_cloud.dart';
@@ -34,19 +37,29 @@ class SendMeaasge extends StatelessWidget {
           metadata: metadata,
           time: DateTime.now(),
         ).toJson().toString());
-      
-     ChatService()
-          .sendMessage(
 
-              "chatId",
-                "chatId",
-              MessageModel(
-                message: controller!.text,
-                id: email,
-                type: type,
-                metadata: null,
-                time: DateTime.now(),
-              ));
+        ChatService().sendMessage(
+            kUid,
+            email,
+            MessageModel(
+              message: controller!.text,
+              id: email,
+              type: type,
+              metadata: null,
+              time: DateTime.now(),
+            ),
+            UserModel(
+              email: kUid,
+              name: "kName",
+              photoUrl: "kPhotoUrl",
+              id: kUid,
+            ),
+            UserModel(
+              email: kUid,
+              name: "kName",
+              photoUrl: "kPhotoUrl",
+              id: kUid,
+            ));
 
         // await FireCloud.sendMessage(MessageModel(
         //   message: message,

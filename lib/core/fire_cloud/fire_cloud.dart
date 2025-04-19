@@ -1,4 +1,5 @@
 import 'package:chat_master/core/constant/endpoint.dart';
+import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -28,15 +29,19 @@ class FireCloud {
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> sendMessage(
-      String userId1, String userId2, MessageModel message) async {
+  Future<void> sendMessage(String userId1, String userId2, MessageModel message,
+      UserModel user1, UserModel user2) async {
     String chatId = generateChatId(userId1, userId2);
 
     var chatDoc = await _firestore.collection('chats').doc(chatId).get();
 
     if (!chatDoc.exists) {
       await _firestore.collection('chats').doc(chatId).set({
-        'participants': [userId1, userId2],
+        'participants': {
+          "sender": user1.toJson(),
+          "receiver": user2.toJson(),
+        },
+        'users': [userId1, userId2],
         'lastMessage': message.message,
         'lastMessageTime': FieldValue.serverTimestamp(),
       });
@@ -53,6 +58,18 @@ class ChatService {
     List<String> sortedIds = [userId1, userId2]..sort();
     return sortedIds.join("_");
   }
+
+  // Stream<List<ConversationModel>> getAllConversations(String currentUserId) {
+  //   return _firestore
+  //       .collection('chats')
+  //       .where('users', arrayContains: currentUserId)
+  //       .orderBy('lastMessageTime', descending: true)
+  //       .snapshots()
+  //       .map((snapshot) => snapshot.docs.map((doc) {
+  //             final data = doc.data();
+  //             return ConversationModel.fromJson(data);
+  //           }).toList());
+  // }
 
   Stream<List<MessageModel>> getMessages(String userId1, String userId2) {
     String chatId = generateChatId(userId1, userId2);
