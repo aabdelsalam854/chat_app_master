@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/error/failures.dart';
 import 'package:chat_master/features/home/data/datasources/messages_remote.dart';
@@ -28,11 +26,10 @@ class MessageRepositoryImpl implements MessageRepository {
     try {
       final stream = messagesRemote.getAllConversations();
       yield* stream.map((event) {
-        // final filtered =
-        //     event.where((element) => element.userIds.contains(kUid)).toList();
+        final filtered =
+            event.where((element) => element.userIds.contains(kUid)).toList();
 
-      
-        return Right(event);
+        return Right(filtered);
       });
     } catch (e) {
       yield Left(ServerFailure(e.toString()));

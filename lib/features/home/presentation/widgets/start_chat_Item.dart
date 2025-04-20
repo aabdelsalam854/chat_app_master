@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
@@ -18,10 +21,9 @@ class StartChatItem extends StatelessWidget {
         return ChatTile(
           imgUrl: users[index].photoUrl ?? "",
           username: users[index].name,
-          lastMessage: 'Last message from user $index',
+          lastMessage:users[index].status??"",
           time: '${index + 1} min ago',
           onTap: () {
-            // snackBar(context, 'Hello', Colors.red);
             GoRouter.of(context).pushReplacement(
               Routes.kChatView,
               extra: {

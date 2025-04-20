@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
@@ -21,8 +20,8 @@ class GetAllConversationItem extends StatelessWidget {
       itemCount: conversations.length,
       itemBuilder: (context, index) {
         final conversationsData = conversations[index];
-      
-        final isSender = conversationsData.participants.sender.id != kUid;
+
+        final isSender = conversationsData.participants.sender.id == kUid;
         final otherUser = isSender
             ? conversationsData.participants.receiver
             : conversationsData.participants.sender;
@@ -32,18 +31,17 @@ class GetAllConversationItem extends StatelessWidget {
           lastMessage: conversationsData.lastMessage,
           time: conversationsData.lastMessageTime,
           onTap: () {
-            log(kUid);
-            log(conversationsData.participants.sender.id);
-            log(conversationsData.participants.receiver.id);
-            // GoRouter.of(context).push(
-            //   Routes.kChatView,
-            //   extra: {
-            //     'email': otherUser.email,
-            //     'name': otherUser.name,
-            //     'photoUrl': otherUser.photoUrl,
-            //     'id': otherUser.id,
-            //   },
-            // );
+            // log(otherUser.id);
+            // log(kUid);
+            GoRouter.of(context).push(
+              Routes.kChatView,
+              extra: {
+                'email': otherUser.email,
+                'name': otherUser.name,
+                'photoUrl': otherUser.photoUrl,
+                'id': otherUser.id,
+              },
+            );
           },
         );
       },

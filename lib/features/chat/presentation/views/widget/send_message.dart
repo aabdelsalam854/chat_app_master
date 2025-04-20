@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/model/user_model.dart';
@@ -25,6 +27,9 @@ class SendMeaasge extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
+        log(email);
+        log(kUid);
+
         ChatService().sendMessage(
             kUid,
             email,
@@ -42,10 +47,10 @@ class SendMeaasge extends StatelessWidget {
               id: kUid,
             ),
             UserModel(
-              email: kUid,
+              email: email,
               name: "kName",
               photoUrl: "kPhotoUrl",
-              id: kUid,
+              id: email,
             ));
 
         // await FireCloud.sendMessage(MessageModel(
