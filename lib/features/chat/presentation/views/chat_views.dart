@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
@@ -46,6 +48,8 @@ class _ChatViewState extends State<ChatView> {
   void initState() {
     super.initState();
     record = AudioRecorder();
+    log(kUid);
+    log(widget.uid);
   }
 
   @override
@@ -120,11 +124,12 @@ class _ChatViewState extends State<ChatView> {
       body: StreamBuilder(
         stream: ChatService()
             .getMessages(
-              "chatId",
-              "chatId",
+              widget.uid,
+              kUid,
             )
             .asBroadcastStream(),
         builder: (context, snapshot) {
+          log(snapshot.data.toString());
           if (snapshot.hasData) {
             List<MessageModel> messagesList = snapshot.data!;
 

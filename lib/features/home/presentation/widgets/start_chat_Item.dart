@@ -22,7 +22,7 @@ class StartChatItem extends StatelessWidget {
           time: '${index + 1} min ago',
           onTap: () {
             // snackBar(context, 'Hello', Colors.red);
-            GoRouter.of(context).push(
+            GoRouter.of(context).pushReplacement(
               Routes.kChatView,
               extra: {
                 'email': users[index].email,

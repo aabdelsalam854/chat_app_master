@@ -88,7 +88,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                           );
                         },
                         child: Hero(
-                          tag: widget.user.photoUrl!,
+                          tag: widget.user.photoUrl??"",
                           child: CustomCircleNetworkImage(
                               radius: 130,
                               imageUrl: widget.user.photoUrl ?? ""),

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
@@ -18,21 +21,29 @@ class GetAllConversationItem extends StatelessWidget {
       itemCount: conversations.length,
       itemBuilder: (context, index) {
         final conversationsData = conversations[index];
+      
+        final isSender = conversationsData.participants.sender.id != kUid;
+        final otherUser = isSender
+            ? conversationsData.participants.receiver
+            : conversationsData.participants.sender;
         return ChatTile(
-          imgUrl: conversationsData.participants.receiver.photoUrl ?? "",
-          username: conversationsData.participants.receiver.name,
+          imgUrl: otherUser.photoUrl ?? "",
+          username: otherUser.name,
           lastMessage: conversationsData.lastMessage,
           time: conversationsData.lastMessageTime,
           onTap: () {
-            GoRouter.of(context).push(
-              Routes.kChatView,
-              extra: {
-                'email': conversationsData.participants.receiver.email,
-                'name': conversationsData.participants.receiver.name,
-                'photoUrl': conversationsData.participants.receiver.photoUrl,
-                'id': conversationsData.participants.receiver.id
-              },
-            );
+            log(kUid);
+            log(conversationsData.participants.sender.id);
+            log(conversationsData.participants.receiver.id);
+            // GoRouter.of(context).push(
+            //   Routes.kChatView,
+            //   extra: {
+            //     'email': otherUser.email,
+            //     'name': otherUser.name,
+            //     'photoUrl': otherUser.photoUrl,
+            //     'id': otherUser.id,
+            //   },
+            // );
           },
         );
       },
