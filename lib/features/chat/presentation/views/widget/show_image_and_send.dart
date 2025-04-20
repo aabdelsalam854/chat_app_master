@@ -44,22 +44,22 @@ class ShowImageAndSend extends StatelessWidget {
                 final bytes = await file.readAsBytes();
                 final image = img.decodeImage(bytes);
 
-                await FireCloud.sendMessage(
-                  MessageModel(
-                      message: upDateurl,
-                      id: email,
-                      type: 'MessageType.image',
-                      time: DateTime.now(),
-                      metadata: MetadataModel(
-                        details: null,
-                        fileType: null,
-                        fileName:
-                            imageFromGallery.path.split('/').last, // اسم الملف
-                        fileSize: fileSize.toString(), // حجم الملف
-                        width: image!.width, // عرض الصورة
-                        height: image.height, // ارتفاع الصورة
-                      )),
-                );
+                // await FireCloud.sendMessage(
+                //   MessageModel(
+                //       message: upDateurl,
+                //       id: email,
+                //       type: 'MessageType.image',
+                //       time: DateTime.now(),
+                //       metadata: MetadataModel(
+                //         details: null,
+                //         fileType: null,
+                //         fileName:
+                //             imageFromGallery.path.split('/').last, // اسم الملف
+                //         fileSize: fileSize.toString(), // حجم الملف
+                //         width: image!.width, // عرض الصورة
+                //         height: image.height, // ارتفاع الصورة
+                //       )),
+                // );
               },
             ),
           ),

@@ -84,15 +84,15 @@ class _ChatViewState extends State<ChatView> {
     });
     timeController.stopTimer();
     final url = await UploadFileInFirebase.uploadFile(File(finalPath!));
-    await FireCloud.sendMessage(
-      MessageModel(
-        metadata: null,
-        message: url,
-        id: widget.uid,
-        time: DateTime.now(),
-        type: 'MessageType.record',
-      ),
-    );
+    // await FireCloud.sendMessage(
+    //   MessageModel(
+    //     metadata: null,
+    //     message: url,
+    //     id: widget.uid,
+    //     time: DateTime.now(),
+    //     type: 'MessageType.record',
+    //   ),
+    // );
 
     // stopwatch.reset();
 

@@ -144,20 +144,21 @@ class _ShowMultiImageState extends State<ShowMultiImage> {
                           fileType = 'MessageType.image';
                           break;
                       }
-                      await FireCloud.sendMessage(MessageModel(
-                        message: imageUrl,
-                        id: widget.email,
-                        type: fileType,
-                        metadata: MetadataModel(
-                          fileName: widget.file[index].path.split('/').last,
-                          fileSize: null,
-                          width: null,
-                          height: null,
-                          fileType: widget.file[index].path.split('.').last,
-                          details: controller.text,
-                        ),
-                        time: DateTime.now(),
-                      ));
+                      // await FireCloud.sendMessage(MessageModel(
+                      //   message: imageUrl,
+                      //   id: widget.email,
+                      //   type: fileType,
+                      //   metadata: MetadataModel(
+                      //     fileName: widget.file[index].path.split('/').last,
+                      //     fileSize: null,
+                      //     width: null,
+                      //     height: null,
+                      //     fileType: widget.file[index].path.split('.').last,
+                      //     details: controller.text,
+                      //   ),
+                      //   time: DateTime.now(),
+                      // )
+                      // );
                     }
                   },
                   child: const Text('Send All'),

@@ -34,21 +34,21 @@ class ShowSend extends StatelessWidget {
 
                 final upDateurl =
                     await UploadFileInFirebase.uploadFile(File(videoUrl.path));
-                await FireCloud.sendMessage(
-                  MessageModel(
-                      message: upDateurl,
-                      id: email,
-                      type: 'MessageType.video',
-                      time: DateTime.now(),
-                      metadata: MetadataModel(
-                        details: null,
-                        fileType: null,
-                        fileName: 'mp4',
-                        fileSize: null,
-                        width: 5,
-                        height: 5,
-                      )),
-                );
+                // await FireCloud.sendMessage(
+                //   MessageModel(
+                //       message: upDateurl,
+                //       id: email,
+                //       type: 'MessageType.video',
+                //       time: DateTime.now(),
+                //       metadata: MetadataModel(
+                //         details: null,
+                //         fileType: null,
+                //         fileName: 'mp4',
+                //         fileSize: null,
+                //         width: 5,
+                //         height: 5,
+                //       )),
+                // );
               },
             ),
           )
