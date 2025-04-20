@@ -32,3 +32,8 @@ Future<XFile?> pickImage(ImageSource source) async =>
 
 Future<List<XFile>?> pickMultiImage() async =>
     await ImagePicker().pickMultiImage();
+
+String generateChatId(String userId1, String userId2) {
+  List<String> sortedIds = [userId1, userId2]..sort();
+  return sortedIds.join("_");
+}

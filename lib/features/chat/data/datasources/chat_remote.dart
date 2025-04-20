@@ -13,14 +13,8 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
   ChatRemoteDataSourceImpl(this._databaseServices);
   @override
-  String generateChatId(String userId1, String userId2) {
-    List<String> sortedIds = [userId1, userId2]..sort();
-    return sortedIds.join("_");
-  }
-
   @override
   Stream<List<MessageModel>> getMessages(String chatId) {
-    // String chatId = generateChatId(userId1, userId2);
     return _databaseServices
         .getCollectionStream(
             collectionPath: EndPoint.kChatCollection,

@@ -1,21 +1,22 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_master/core/constant/constant.dart';
-import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
+import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
+import 'package:chat_master/features/chat/data/model/messages_model.dart';
+import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
+import 'package:chat_master/features/chat/presentation/widget/chat_app_bar.dart';
+import 'package:chat_master/features/chat/presentation/widget/chat_body.dart';
 import 'package:chat_master/features/chat/presentation/widget/chat_bubble_friend.dart';
 import 'package:chat_master/features/chat/presentation/widget/chat_bubble.dart';
 import 'package:chat_master/features/chat/presentation/widget/media_selection.dart';
 import 'package:chat_master/features/chat/presentation/widget/send_message.dart';
 import 'package:chat_master/features/chat/presentation/widget/timer_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_master/features/chat/data/model/messages_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatView extends StatefulWidget {
@@ -116,146 +117,19 @@ class _ChatViewState extends State<ChatView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: chatsAppBar(
-        context,
-        image: widget.photoUrl,
-        name: widget.name,
-      ),
-      body: StreamBuilder(
-        stream: ChatService()
-            .getMessages(
-              widget.uid,
-              kUid,
-            )
-            .asBroadcastStream(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<MessageModel> messagesList = snapshot.data!;
-
-            return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        reverse: true,
-                        controller: controller,
-                        itemBuilder: (context, index) {
-                          return messagesList[index].id == widget.email
-                              ? ChatBubble(
-                                  messageModel: messagesList[index],
-                                  message: messagesList[index].message,
-                                )
-                              : ChatBubbleFriend(
-                                  message: messagesList[index].message,
-                                  messageModel: messagesList[index]);
-                        },
-                        itemCount: messagesList.length,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        SendMessage(
-                            metadata: null,
-                            type: 'MessageType.text',
-                            message: textController.text,
-                            controller: textController,
-                            email: widget.uid),
-                        // isEmpty
-                        //     ? recorder(context)
-                        //     : SendMessage(
-                        //         metadata: null,
-                        //         type: 'MessageType.text',
-                        //         message: textController.text,
-                        //         controller: textController,
-                        //         email: widget.email),
-                        Expanded(
-                          child: CustomTextFormField(
-                            icon: IconButton(
-                              onPressed: () {
-                                showBottomSheet(
-                                  context: context,
-                                  builder: (context) {
-                                    return MediaSelection(email: widget.email);
-                                  },
-                                );
-                              },
-                              icon: const Icon(Icons.add),
-                            ),
-                            controller: textController,
-                            hintText: 'Type a message',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            );
-          } else {
-            return const Text('Loading');
-          }
-        },
-      ),
-    );
-  }
-
-  AppBar chatsAppBar(BuildContext context, {String? name, String? image}) {
-    return AppBar(
-      backgroundColor: Colors.grey,
-      leading: IconButton(
-        icon: const Icon(
-          CupertinoIcons.back,
+        appBar: chatsAppBar(
+          context,
+          image: widget.photoUrl,
+          name: widget.name,
         ),
-        onPressed: () => Navigator.pop(context),
-      ),
-      title: GestureDetector(
-        onTap: () {},
-        child: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: image == null
-                  ? Image.asset("assets/images/facebook.png",
-                      width: 40, height: 40, fit: BoxFit.cover)
-                  : CachedNetworkImage(
-                      imageUrl: image,
-                      placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Image.asset(
-                        "assets/images/facebook.png",
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                      ),
-                      width: 40,
-                      height: 40,
-                      fit: BoxFit.cover,
-                    ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                widget.name!,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+        body: BlocProvider(
+          create: (context) =>
+              sl<ChatCubit>()..getMessages(userId1: kUid, userId2: widget.uid),
+          child: ChatBody(
+              widget: widget,
+              controller: controller,
+              textController: textController),
+        ));
   }
 
   GestureDetector recorder(BuildContext context) {
@@ -309,3 +183,4 @@ class _ChatViewState extends State<ChatView> {
         child: isRecording ? const Icon(Icons.stop) : const Icon(Icons.mic));
   }
 }
+
