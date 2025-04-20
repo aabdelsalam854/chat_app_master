@@ -26,7 +26,6 @@ class ImagePickerHelper {
       // log('Size: $sizeInMB MB');
       // log('Size: $sizeInKB KB');
       // log('Size: $sizeInBytes Bytes');
- 
 
       return File(images.path);
     }
@@ -43,7 +42,6 @@ Future<Uint8List?> testCompressFile(File file) async {
     quality: 94,
     rotate: 90,
   );
-
 
   return result;
 }
@@ -73,7 +71,6 @@ class SelectMediaFromStorage {
       allowedExtensions: ['jpg', 'jpeg', 'png', 'mp4'],
     );
     if (res != null) {
-     
       return res.files;
     }
     return null;

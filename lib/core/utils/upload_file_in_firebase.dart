@@ -29,7 +29,6 @@ class UploadFileInFirebaseMuiflty {
       imagesUrls.add(downloadUrl);
     }
 
-
     return imagesUrls;
   }
 }

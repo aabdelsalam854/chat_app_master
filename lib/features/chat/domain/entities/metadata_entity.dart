@@ -17,5 +17,6 @@ class MetadataEntity extends Equatable {
       required this.height});
 
   @override
-  List<Object?> get props => [fileName, details, fileSize, width, height ,fileType];
+  List<Object?> get props =>
+      [fileName, details, fileSize, width, height, fileType];
 }

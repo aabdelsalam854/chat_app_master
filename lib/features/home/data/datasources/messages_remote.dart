@@ -23,7 +23,9 @@ class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
 
   @override
   Stream<List<Conversation>> getAllConversations() {
-    return firestore.getCollectionStream('chats').map((snapshot) {
+    return firestore
+        .getCollectionStream(collectionPath: 'chats')
+        .map((snapshot) {
       return snapshot.docs
           .map((doc) =>
               Conversation.fromJson(doc.data() as Map<String, dynamic>))

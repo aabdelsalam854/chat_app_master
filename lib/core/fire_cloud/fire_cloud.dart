@@ -1,9 +1,6 @@
-import 'package:chat_master/core/constant/endpoint.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 
 // message.orderBy('time', descending: true).snapshots(),
 class ChatService {

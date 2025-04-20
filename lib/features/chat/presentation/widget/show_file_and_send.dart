@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/get_file_size.dart';
-import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:chat_master/features/chat/presentation/widget/build_file_widget.dart';
 import 'package:chat_master/features/chat/presentation/widget/send_message.dart';

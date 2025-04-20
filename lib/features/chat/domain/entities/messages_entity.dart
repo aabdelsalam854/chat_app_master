@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class MessagesEntity extends Equatable {
   final String message;
   final String type;
-final String id;
+  final String id;
   final DateTime time;
   final MetadataModel? metadata;
 
@@ -16,5 +16,5 @@ final String id;
       required this.metadata});
 
   @override
-  List<Object?> get props => [message, type, time, metadata , id];
+  List<Object?> get props => [message, type, time, metadata, id];
 }

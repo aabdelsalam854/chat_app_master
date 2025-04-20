@@ -1,9 +1,6 @@
 import 'dart:io';
-import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
-import 'package:chat_master/features/chat/data/model/messages_model.dart';
-import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 

@@ -18,5 +18,12 @@ abstract class DatabaseServices {
       {required String path, required String docId});
   Future<List<Map<String, dynamic>>> getAllDocuments(String collectionPath);
 
-  Stream<QuerySnapshot<Object?>> getCollectionStream(String collectionPath);
+  Stream<QuerySnapshot<Object?>> getCollectionStream({
+    required String collectionPath,
+    String? docId,
+    String? subCollectionPath,
+    String? orderByField,
+    bool descending = false,
+    int? limit,
+  });
 }

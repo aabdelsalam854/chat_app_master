@@ -54,10 +54,40 @@ class FirestoreServices implements DatabaseServices {
     return snapshot.docs.map((doc) => doc.data()).toList();
   }
 
+  // @override
+  // Stream<QuerySnapshot<Object?>> getCollectionStream(String collectionPath) {
+  //   final stream =
+  //       FirebaseFirestore.instance.collection(collectionPath).snapshots();
+  //   return stream;
+  // }
+
   @override
-  Stream<QuerySnapshot<Object?>> getCollectionStream(String collectionPath) {
-    final stream =
-        FirebaseFirestore.instance.collection(collectionPath).snapshots();
-    return stream;
+  Stream<QuerySnapshot<Object?>> getCollectionStream({
+    required String collectionPath,
+    String? docId,
+    String? subCollectionPath,
+    String? orderByField,
+    bool descending = false,
+    int? limit,
+  }) {
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection(collectionPath);
+    Query query;
+
+    if (docId != null && subCollectionPath != null) {
+      query = collectionRef.doc(docId).collection(subCollectionPath);
+    } else {
+      query = collectionRef;
+    }
+
+    if (orderByField != null) {
+      query = query.orderBy(orderByField, descending: descending);
+    }
+
+    if (limit != null) {
+      query = query.limit(limit);
+    }
+
+    return query.snapshots();
   }
 }
