@@ -1,19 +1,14 @@
-class MetadataModel {
-  final String? fileName;
-  final String? details;
-  final String? fileSize;
-  final dynamic fileType;
-  final int? width;
-  final int? height;
+import 'package:chat_master/features/chat/domain/entities/metadata_entity.dart';
 
-  MetadataModel({
-    required this.fileName,
-    required this.fileSize,
-    required this.width,
-    required this.height,
-    required this.fileType,
-    required this.details,
-  });
+class MetadataModel extends MetadataEntity {
+  const MetadataModel(
+      {required super.fileName,
+      required super.details,
+      required super.fileSize,
+      required super.width,
+      required super.fileType,
+      required super.height});
+
   factory MetadataModel.fromJson(Map<String, dynamic> jsonData) {
     return MetadataModel(
       fileName: jsonData['fileName'],

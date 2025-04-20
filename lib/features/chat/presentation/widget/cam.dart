@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:chat_master/core/routes/routes.dart';
 
 import 'package:chat_master/core/utils/cam.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/show_send.dart';
+import 'package:chat_master/features/chat/presentation/widget/show_send.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

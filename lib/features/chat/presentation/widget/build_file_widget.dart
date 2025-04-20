@@ -1,4 +1,4 @@
-import 'package:chat_master/features/chat/presentation/views/widget/file_tipe.dart';
+import 'package:chat_master/features/chat/presentation/widget/file_tipe.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';

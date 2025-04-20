@@ -3,11 +3,11 @@ import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/get_file_size.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/data/model/metadata_model.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/build_file_widget.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/send_message.dart';
+import 'package:chat_master/features/chat/presentation/widget/build_file_widget.dart';
+import 'package:chat_master/features/chat/presentation/widget/send_message.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/upload_file_in_firebase.dart';
+import '../../../../core/utils/upload_file_in_firebase.dart';
 
 class ShowFileBeforeSend extends StatelessWidget {
   const ShowFileBeforeSend({
@@ -48,7 +48,7 @@ class ShowFileBeforeSend extends StatelessWidget {
                 //       height: null,
                 //       width: null,
                 //     )));
-                SendMeaasge(
+                SendMessage(
                     message: url,
                     email: email!,
                     type: 'MessageType.File',
@@ -56,7 +56,7 @@ class ShowFileBeforeSend extends StatelessWidget {
                       fileName: pickedFile!.name,
                       details: null,
                       fileSize: GetFileSize.getFileSize(pickedFile!.size),
-                      fileType: pickedFile!.extension,
+                      fileType: pickedFile!.extension!,
                       height: null,
                       width: null,
                     ));

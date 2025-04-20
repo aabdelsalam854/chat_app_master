@@ -5,11 +5,11 @@ import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/chat_bubble_friend.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/chat_puple.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/media_selection.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/send_message.dart';
-import 'package:chat_master/features/chat/presentation/views/widget/timer_widget.dart';
+import 'package:chat_master/features/chat/presentation/widget/chat_bubble_friend.dart';
+import 'package:chat_master/features/chat/presentation/widget/chat_bubble.dart';
+import 'package:chat_master/features/chat/presentation/widget/media_selection.dart';
+import 'package:chat_master/features/chat/presentation/widget/send_message.dart';
+import 'package:chat_master/features/chat/presentation/widget/timer_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
@@ -129,7 +129,6 @@ class _ChatViewState extends State<ChatView> {
             )
             .asBroadcastStream(),
         builder: (context, snapshot) {
-          log(snapshot.data.toString());
           if (snapshot.hasData) {
             List<MessageModel> messagesList = snapshot.data!;
 
@@ -157,7 +156,7 @@ class _ChatViewState extends State<ChatView> {
                     ),
                     Row(
                       children: [
-                        SendMeaasge(
+                        SendMessage(
                             metadata: null,
                             type: 'MessageType.text',
                             message: textController.text,
@@ -165,7 +164,7 @@ class _ChatViewState extends State<ChatView> {
                             email: widget.uid),
                         // isEmpty
                         //     ? recorder(context)
-                        //     : SendMeaasge(
+                        //     : SendMessage(
                         //         metadata: null,
                         //         type: 'MessageType.text',
                         //         message: textController.text,

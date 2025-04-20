@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 
-import '../../../../../core/fire_cloud/dowinlod_file.dart';
+import '../../../../core/fire_cloud/dowinlod_file.dart';
 
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 

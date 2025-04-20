@@ -9,8 +9,8 @@ import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-class SendMeaasge extends StatelessWidget {
-  const SendMeaasge({
+class SendMessage extends StatelessWidget {
+  const SendMessage({
     super.key,
     this.controller,
     required this.email,

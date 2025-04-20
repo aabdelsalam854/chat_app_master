@@ -1,8 +1,8 @@
-import 'package:chat_master/features/chat/presentation/views/widget/show_image_and_send.dart';
+import 'package:chat_master/features/chat/presentation/widget/show_image_and_send.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../../core/utils/cam.dart';
+import '../../../../core/utils/cam.dart';
 
 class SelectImage extends StatelessWidget {
   const SelectImage({

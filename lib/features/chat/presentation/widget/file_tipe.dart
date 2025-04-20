@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utils/get_file_size.dart';
+import '../../../../core/utils/get_file_size.dart';
 
 class FileTipe extends StatelessWidget {
   const FileTipe({
