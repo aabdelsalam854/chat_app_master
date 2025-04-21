@@ -22,7 +22,9 @@ class ChatBody extends StatelessWidget {
     return BlocBuilder<ChatCubit, ChatState>(
       builder: (context, state) {
         if (state is GetMessagesSuccessState) {
+
           final messagesList = state.messages;
+          
           return GetChatItem(
               controller: controller,
               messagesList: messagesList,
