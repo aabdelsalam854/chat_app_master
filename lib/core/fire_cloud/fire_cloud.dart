@@ -1,3 +1,4 @@
+import 'package:chat_master/core/functions/functions.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,28 +45,12 @@ class ChatService {
       'lastMessage': message.message,
       'lastMessageTime': FieldValue.serverTimestamp(),
       'lastMessageType': message.type,
-    });
+    }
+    );
   }
 
-  String generateChatId(String userId1, String userId2) {
-    List<String> sortedIds = [userId1, userId2]..sort();
-    return sortedIds.join("_");
-  }
-
-  Stream<List<MessageModel>> getMessages(String userId1, String userId2) {
-    String chatId = generateChatId(userId1, userId2);
-
-    return _firestore
-        .collection('chats')
-        .doc(chatId)
-        .collection('messages')
-        .orderBy('time', descending: true)
-        .limit(20)
-        .snapshots()
-        .map((querySnapshot) {
-      return querySnapshot.docs.map((doc) {
-        return MessageModel.fromJson(doc.data());
-      }).toList();
-    });
-  }
+  // String generateChatId(String userId1, String userId2) {
+  //   List<String> sortedIds = [userId1, userId2]..sort();
+  //   return sortedIds.join("_");
+  // }
 }

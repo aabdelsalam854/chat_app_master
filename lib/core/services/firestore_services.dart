@@ -9,12 +9,18 @@ class FirestoreServices implements DatabaseServices {
   Future<void> addData(
       {required String path,
       required Map<String, dynamic> data,
+      String? subCollectionPath,
       String? docId}) async {
-    if (docId != null) {
-      await firestore.collection(path).doc(docId).set(data);
-    } else {
-      await firestore.collection(path).add(data);
+    if (subCollectionPath != null && docId != null) {
+      await firestore
+          .collection(path)
+          .doc(docId)
+          .collection(subCollectionPath)
+          .add(data);
+      return;
     }
+
+    await firestore.collection(path).add(data);
   }
 
   @override
@@ -24,9 +30,12 @@ class FirestoreServices implements DatabaseServices {
 
   @override
   Future<void> setData(
-      {required String path, required Map<String, dynamic> data}) {
-    // TODO: implement setData
-    throw UnimplementedError();
+      {required String path, required Map<String, dynamic> data, String? docId}) async {
+    if (docId != null) {
+      await firestore.collection(path).doc(docId).set(data);
+    } else {
+      await firestore.collection(path).add(data);
+    }
   }
 
   @override
@@ -39,27 +48,22 @@ class FirestoreServices implements DatabaseServices {
   }
 
   @override
-  Future<Map<String, dynamic>> getData(
-      {required String path, required String docId}) async {
-    var userData = await firestore.collection(path).doc(docId).get();
-    return userData.data() as Map<String, dynamic>;
-  }
+Future<Map<String, dynamic>?> getData({
+  required String path,
+  required String docId,
+}) async {
+  final doc = await firestore.collection(path).doc(docId).get();
+  return doc.exists ? doc.data() as Map<String, dynamic>? : null;
+}
+
 
   @override
   Future<List<Map<String, dynamic>>> getAllDocuments(
       String collectionPath) async {
-    final snapshot =
-        await FirebaseFirestore.instance.collection(collectionPath).get();
+    final snapshot = await firestore.collection(collectionPath).get();
 
     return snapshot.docs.map((doc) => doc.data()).toList();
   }
-
-  // @override
-  // Stream<QuerySnapshot<Object?>> getCollectionStream(String collectionPath) {
-  //   final stream =
-  //       FirebaseFirestore.instance.collection(collectionPath).snapshots();
-  //   return stream;
-  // }
 
   @override
   Stream<QuerySnapshot<Object?>> getCollectionStream({
@@ -70,8 +74,7 @@ class FirestoreServices implements DatabaseServices {
     bool descending = false,
     int? limit,
   }) {
-    CollectionReference collectionRef =
-        FirebaseFirestore.instance.collection(collectionPath);
+    CollectionReference collectionRef = firestore.collection(collectionPath);
     Query query;
 
     if (docId != null && subCollectionPath != null) {

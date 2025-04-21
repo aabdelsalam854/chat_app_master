@@ -63,26 +63,17 @@ class GetChatItem extends StatelessWidget {
                 //         controller: textController,
                 //         email: widget.email),
 
-                
                 Expanded(
                   child: CustomTextFormField(
                     icon: IconButton(
                       onPressed: () {
                         showAppBottomSheet(
-                       enableDrag: true,
-
+                          enableDrag: true,
                           context,
-                   
                           builder: (context) {
                             return MediaSelection(email: widget.email);
-                          },   
+                          },
                         );
-                        // showBottomSheet(
-                        //   context: context,
-                        //   builder: (context) {
-                        //     return MediaSelection(email: widget.email);
-                        //   },
-                        // );
                       },
                       icon: const Icon(Icons.add),
                     ),

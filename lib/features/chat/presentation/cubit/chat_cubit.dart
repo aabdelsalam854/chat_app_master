@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:chat_master/core/model/user_model.dart';
+import 'package:chat_master/features/chat/data/model/messages_model.dart';
 
 import 'package:chat_master/features/chat/domain/usecases/chat_usecase.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_state.dart';
+import 'package:chat_master/features/chat/presentation/widget/send_message.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   ChatCubit(this.usecases) : super(ChatInitial());
@@ -19,6 +22,27 @@ class ChatCubit extends Cubit<ChatState> {
       either.fold(
         (failure) => emit(GetMessagesErrorState(failure.msg)),
         (messages) => emit(GetMessagesSuccessState(messages)),
+      );
+    });
+  }
+
+  sendMessage(
+      {required String userId1,
+      required String userId2,
+      required MessageModel message,
+      required UserModel user1,
+      required UserModel user2}) {
+    emit(SendMessageLoadingState());
+    var result = usecases.sendMessage(
+        userId1: userId1,
+        userId2: userId2,
+        message: message,
+        user1: user1,
+        user2: user2);
+    result.then((value) {
+      value.fold(
+        (failure) => emit(SendMessageErrorState(failure.msg)),
+        (send) => emit(const SendMessageSuccessState(true)),
       );
     });
   }

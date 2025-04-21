@@ -1,4 +1,3 @@
-
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:equatable/equatable.dart';
 
@@ -24,6 +23,24 @@ class GetMessagesSuccessState extends ChatState {
 class GetMessagesErrorState extends ChatState {
   final String msg;
   const GetMessagesErrorState(this.msg);
+
+  @override
+  List<Object> get props => [msg];
+}
+
+class SendMessageLoadingState extends ChatState {}
+
+class SendMessageSuccessState extends ChatState {
+  final bool send;
+  const SendMessageSuccessState(this.send);
+
+  @override
+  List<Object> get props => [send];
+}
+
+class SendMessageErrorState extends ChatState {
+  final String msg;
+  const SendMessageErrorState(this.msg);
 
   @override
   List<Object> get props => [msg];

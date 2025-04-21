@@ -32,6 +32,6 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   @override
   Future getUserData(String uid) async {
     var userData = await database.getData(path: 'users', docId: uid);
-    return UserModel.fromJson(userData);
+    return UserModel.fromJson(userData!);
   }
 }

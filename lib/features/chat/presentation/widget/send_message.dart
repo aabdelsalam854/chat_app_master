@@ -1,11 +1,14 @@
 import 'package:chat_master/core/constant/constant.dart';
+import 'package:chat_master/core/extensions/media_query.dart';
 import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/data/model/metadata_model.dart';
+import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/record/audio_recorder_view/audio_recorder_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @immutable
 class SendMessage extends StatefulWidget {
@@ -49,32 +52,32 @@ class _SendMessageState extends State<SendMessage> {
     super.dispose();
   }
 
-  Future<void> _sendMessage(String message) async {
+  Future<void> _sendMessage(String message, BuildContext context) async {
     if (message.isEmpty) return;
 
-    await ChatService().sendMessage(
-      kUid,
-      widget.email,
-      MessageModel(
-        message: message,
-        id: widget.email,
-        type: widget.type,
-        metadata: widget.metadata,
-        time: DateTime.now(),
-      ),
-      UserModel(
-        email: kUid,
-        name: "kName",
-        photoUrl: "kPhotoUrl",
-        id: kUid,
-      ),
-      UserModel(
-        email: widget.email,
-        name: "kName",
-        photoUrl: "kPhotoUrl",
-        id: widget.email,
-      ),
-    );
+    await context.read<ChatCubit>().sendMessage(
+          message: MessageModel(
+            message: message,
+            id: widget.email,
+            type: widget.type,
+            metadata: widget.metadata,
+            time: DateTime.now(),
+          ),
+          userId1: kUid,
+          userId2: widget.email,
+          user1: UserModel(
+            email: kUid,
+            name: "kName",
+            photoUrl: "kPhotoUrl",
+            id: kUid,
+          ),
+          user2: UserModel(
+            email: widget.email,
+            name: "kName",
+            photoUrl: "kPhotoUrl",
+            id: widget.email,
+          ),
+        );
 
     widget.controller?.clear();
     _messageNotifier.value = '';
@@ -94,7 +97,7 @@ class _SendMessageState extends State<SendMessage> {
               return;
             }
 
-            await _sendMessage(value);
+            await _sendMessage(value, context);
           },
           icon: Icon(
             value.isEmpty ? Icons.mic : Icons.send,

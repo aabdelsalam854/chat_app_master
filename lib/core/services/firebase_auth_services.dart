@@ -6,25 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FirebaseAuthServices {
   // FirebaseAuthServices._();
 
-/*************  ✨ Windsurf Command ⭐  *************/
-  /// Maps a [FirebaseAuthException] to a user-friendly string.
-  ///
-  /// This takes the [FirebaseAuthException] and returns a string that is
-  /// suitable for showing to the user. This is used to handle the different
-  /// types of exceptions that can occur when calling
-  /// [FirebaseAuth.instance.createUserWithEmailAndPassword].
-  ///
-  /// The strings returned are:
-  ///
-  /// * 'No user found for that email.'
-  /// * 'Wrong password provided for that user.'
-  /// * 'The account already exists for that email.'
-  /// * 'Operation not allowed.'
-  /// * 'An undefined Error happened.'
-  ///
-  /// The string returned is based on the [code] of the exception. If the
-  /// exception is not one of the above, then the default 'An undefined Error
-  /// *****  7e4a8533-b777-4a13-92b7-8ac4369a6766  ******
+
   String _mapFirebaseAuthExceptionToString(FirebaseAuthException e) {
     switch (e.code) {
       case 'user-not-found':
