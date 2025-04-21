@@ -27,8 +27,10 @@ class SendMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
-       
-        ChatService().sendMessage(
+        if (controller == null || controller!.text.isEmpty) {
+          return;
+        }
+        await ChatService().sendMessage(
             kUid,
             email,
             MessageModel(
@@ -51,13 +53,6 @@ class SendMessage extends StatelessWidget {
               id: email,
             ));
 
-        // await FireCloud.sendMessage(MessageModel(
-        //   message: message,
-        //   id: email,
-        //   type: type,
-        //   metadata: null,
-        //   time: DateTime.now(),
-        // ));
         if (controller != null) {
           controller!.clear();
         } else {
