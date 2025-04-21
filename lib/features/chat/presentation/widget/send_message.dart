@@ -1,6 +1,5 @@
 import 'package:chat_master/core/constant/constant.dart';
-import 'package:chat_master/core/extensions/media_query.dart';
-import 'package:chat_master/core/fire_cloud/fire_cloud.dart';
+
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';

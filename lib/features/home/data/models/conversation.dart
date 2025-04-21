@@ -20,13 +20,6 @@ class Conversation {
         participants: Participants.fromJson(json['participants']),
         userIds: json['users'],
       );
-
-  // Map<String, dynamic> toJson() => {
-  //       'lastMessage': lastMessage,
-  //       'lastMessageTime': lastMessageTime,
-  //       'participants': participants.toJson(),
-  //       'users': userIds,
-  //     };
 }
 
 class Participants {
@@ -38,20 +31,4 @@ class Participants {
   factory Participants.fromJson(Map<String, dynamic> json) => Participants(
       sender: UserModel.fromJson(json['sender']),
       receiver: UserModel.fromJson(json['receiver']));
-  // Map<String, dynamic> toJson() => {
-  //       'sender': sender.toJson(),
-  //       'receiver': receiver.toJson(),
-  //     };
 }
-
-
-//  Conversation(
-//           lastMessage: message.message,
-//           lastMessageTime: message.time,
-//           participants: Participants(
-//             sender: user1,
-//             receiver: user2,
-//           ),
-//           userIds: [user1.id, user2.id],
-//         ).toJson(),
-        

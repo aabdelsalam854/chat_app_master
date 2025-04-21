@@ -1,3 +1,4 @@
+import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
@@ -34,7 +35,7 @@ class GetChatItem extends StatelessWidget {
                 reverse: true,
                 controller: controller,
                 itemBuilder: (context, index) {
-                  return messagesList[index].id == widget.email
+                  return messagesList[index].id == kUid
                       ? ChatBubble(
                           messageModel: messagesList[index],
                           message: messagesList[index].message,

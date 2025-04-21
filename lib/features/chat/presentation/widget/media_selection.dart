@@ -5,7 +5,7 @@ import 'package:chat_master/core/routes/routes.dart';
 
 import 'package:chat_master/core/utils/cam.dart';
 import 'package:chat_master/features/chat/presentation/widget/cam.dart';
-import 'package:chat_master/features/chat/presentation/widget/divider_widget.dart';
+
 import 'package:chat_master/features/chat/presentation/widget/selcet_file.dart';
 
 import 'package:flutter/material.dart';
