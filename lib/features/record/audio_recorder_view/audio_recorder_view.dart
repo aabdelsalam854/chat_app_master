@@ -4,7 +4,6 @@ import 'package:chat_master/features/record/audio_recorder_view/play_pause_butto
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:record/record.dart';
-import 'package:path/path.dart' as path;
 
 import 'audio_waves_view.dart';
 
@@ -16,9 +15,7 @@ class AudioRecorderView extends StatelessWidget {
     return RepositoryProvider<AudioRecorderController>(
       create: (context) => AudioRecorderController(
         AudioRecorderFileHelper(),
-        (message) {
-          print(message);
-        },
+        (message) {},
       ),
       child: const _AudioRecorderViewBody(),
     );
@@ -26,7 +23,7 @@ class AudioRecorderView extends StatelessWidget {
 }
 
 class _AudioRecorderViewBody extends StatefulWidget {
-  const _AudioRecorderViewBody({super.key});
+  const _AudioRecorderViewBody();
 
   @override
   State<_AudioRecorderViewBody> createState() => _AudioRecorderViewBodyState();
@@ -51,83 +48,82 @@ class _AudioRecorderViewBodyState extends State<_AudioRecorderViewBody> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.ltr,
-      child: Column(
-        children: [
-          const AudioWavesView(),
-
-          const SizedBox(height: 16),
-
-          const _TimerText(),
-
-          Row(
-            textDirection: TextDirection.rtl,
-            children: [
-              GestureDetector(
-                onTap: (){
-                  context.read<AudioRecorderController>().stop((voiceNoteModel){
-                    // Navigator.pop(context,voiceNoteModel);
-                  });
-                },
-                child: Text(
-                  "Save note",
-                  // style: AppTextStyles.medium(
-                  //   color: AppColors.background,
-                  //   fontSize: 18
-                  // ),
+        textDirection: TextDirection.ltr,
+        child: Column(
+          children: [
+            const AudioWavesView(),
+            const SizedBox(height: 16),
+            const _TimerText(),
+            Row(
+              textDirection: TextDirection.rtl,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    context
+                        .read<AudioRecorderController>()
+                        .stop((voiceNoteModel) {
+                      // Navigator.pop(context,voiceNoteModel);
+                    });
+                  },
+                  child: Text(
+                    "Save note",
+                    // style: AppTextStyles.medium(
+                    //   color: AppColors.background,
+                    //   fontSize: 18
+                    // ),
+                  ),
                 ),
-              ),
-
-              const Spacer(),
-
-              StreamBuilder(
-                stream: audioRecorderService.recordStateStream,
-                builder: (context, snapshot) {
-                  return PlayPauseButton(
-                    isPlaying: snapshot.data == RecordState.record,
-                    onTap: () {
-                      if(snapshot.data == RecordState.pause){
-                        audioRecorderService.resume();
-                      }else{
-                        audioRecorderService.pause();
-                      }
-                    },
-                  );
-                },
-              ),
-
-              const Spacer(),
-
-              GestureDetector(
-                onTap: (){
-                  context.read<AudioRecorderController>().stop((voiceNoteModel){
-                    if(voiceNoteModel == null){
-                      Navigator.pop(context);
-                    }else{
-                      context.read<AudioRecorderController>().delete(voiceNoteModel.path).then((value){
+                const Spacer(),
+                StreamBuilder(
+                  stream: audioRecorderService.recordStateStream,
+                  builder: (context, snapshot) {
+                    return PlayPauseButton(
+                      isPlaying: snapshot.data == RecordState.record,
+                      onTap: () {
+                        if (snapshot.data == RecordState.pause) {
+                          audioRecorderService.resume();
+                        } else {
+                          audioRecorderService.pause();
+                        }
+                      },
+                    );
+                  },
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    context
+                        .read<AudioRecorderController>()
+                        .stop((voiceNoteModel) {
+                      if (voiceNoteModel == null) {
                         Navigator.pop(context);
-                      });
-                    }
-
-                  });
-                },
-                child: Text(
-                  "Dismiss",
-                  // style: AppTextStyles.medium(
-                  //   color: AppColors.red,
-                  //   fontSize: 18
-                  // ),
-                ),
-              )
-            ],
-          )
-        ],
-      )
-    );
+                      } else {
+                        context
+                            .read<AudioRecorderController>()
+                            .delete(voiceNoteModel.path)
+                            .then((value) {
+                          Navigator.pop(context);
+                        });
+                      }
+                    });
+                  },
+                  child: Text(
+                    "Dismiss",
+                    // style: AppTextStyles.medium(
+                    //   color: AppColors.red,
+                    //   fontSize: 18
+                    // ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ));
   }
 }
+
 class _TimerText extends StatelessWidget {
-  const _TimerText({super.key});
+  const _TimerText();
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +139,7 @@ class _TimerText extends StatelessWidget {
           final int seconds = durationInSec % 60;
 
           return Text(
-            '${minutes.toString().padLeft(2,'0')} : ${seconds.toString().padLeft(2,'0')}',
+            '${minutes.toString().padLeft(2, '0')} : ${seconds.toString().padLeft(2, '0')}',
             // style: AppTextStyles.medium(
             //     color: AppColors.background
             // ),
