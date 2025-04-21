@@ -1,10 +1,7 @@
 import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
-
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

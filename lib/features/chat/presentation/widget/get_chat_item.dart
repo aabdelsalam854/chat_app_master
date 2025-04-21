@@ -1,3 +1,4 @@
+import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/presentation/pages/chat_views.dart';
@@ -67,12 +68,21 @@ class GetChatItem extends StatelessWidget {
                   child: CustomTextFormField(
                     icon: IconButton(
                       onPressed: () {
-                        showBottomSheet(
-                          context: context,
+                        showAppBottomSheet(
+                       enableDrag: true,
+
+                          context,
+                   
                           builder: (context) {
                             return MediaSelection(email: widget.email);
-                          },
+                          },   
                         );
+                        // showBottomSheet(
+                        //   context: context,
+                        //   builder: (context) {
+                        //     return MediaSelection(email: widget.email);
+                        //   },
+                        // );
                       },
                       icon: const Icon(Icons.add),
                     ),

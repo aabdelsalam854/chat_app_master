@@ -28,10 +28,6 @@ class MediaSelection extends StatelessWidget {
         color: Colors.black26,
         child: Column(
           children: [
-            const SizedBox(
-              height: 20,
-              child: DividerWidget(),
-            ),
             Card(
               child: ListTile(
                 onTap: () async {

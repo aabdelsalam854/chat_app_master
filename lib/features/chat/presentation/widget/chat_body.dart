@@ -20,11 +20,14 @@ class ChatBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ChatCubit, ChatState>(
+      buildWhen: (previous, current) =>
+          current is GetMessagesSuccessState ||
+          current is GetMessagesLoadingState ||
+          current is GetMessagesErrorState,
       builder: (context, state) {
         if (state is GetMessagesSuccessState) {
-
           final messagesList = state.messages;
-          
+
           return GetChatItem(
               controller: controller,
               messagesList: messagesList,
