@@ -27,9 +27,7 @@ class SendMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () async {
-        log(email);
-        log(kUid);
-
+       
         ChatService().sendMessage(
             kUid,
             email,
