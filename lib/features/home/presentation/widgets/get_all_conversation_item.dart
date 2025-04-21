@@ -1,4 +1,5 @@
 import 'package:chat_master/core/constant/constant.dart';
+import 'package:chat_master/core/functions/functions.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
@@ -28,8 +29,11 @@ class GetAllConversationItem extends StatelessWidget {
           imgUrl: otherUser.photoUrl ?? "",
           username: otherUser.name,
           lastMessage: conversationsData.lastMessage,
-          time: conversationsData.lastMessageTime,
+          time: parseTime(
+            conversationsData.lastMessageTime.toString(),
+          ),
           onTap: () {
+            // log(conversationsData.participants.sender.id);
             // log(otherUser.id);
             // log(kUid);
             GoRouter.of(context).push(

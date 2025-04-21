@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_master/core/constant/endpoint.dart';
 
 import 'package:chat_master/core/model/user_model.dart';
@@ -34,6 +36,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             limit: 20)
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
+       
         return MessageModel.fromJson(doc.data() as Map<String, dynamic>);
       }).toList();
     });

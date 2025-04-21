@@ -1,9 +1,9 @@
-import 'package:chat_master/core/functions/functions.dart';
 import 'package:chat_master/core/model/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Conversation {
   final String lastMessage;
-  final String lastMessageTime;
+  final DateTime lastMessageTime;
   final Participants participants;
   final List<dynamic> userIds;
 
@@ -15,17 +15,18 @@ class Conversation {
 
   factory Conversation.fromJson(Map<String, dynamic> json) => Conversation(
         lastMessage: json['lastMessage'],
-        lastMessageTime: parseTime(json['lastMessageTime'].toDate().toString()),
+        lastMessageTime:
+            (json['lastMessageTime'] as Timestamp?)?.toDate() ?? DateTime.now(),
         participants: Participants.fromJson(json['participants']),
         userIds: json['users'],
       );
 
-  Map<String, dynamic> toJson() => {
-        'lastMessage': lastMessage,
-        'lastMessageTime': lastMessageTime,
-        'participants': participants.toJson(),
-        'users': userIds,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       'lastMessage': lastMessage,
+  //       'lastMessageTime': lastMessageTime,
+  //       'participants': participants.toJson(),
+  //       'users': userIds,
+  //     };
 }
 
 class Participants {
@@ -37,8 +38,20 @@ class Participants {
   factory Participants.fromJson(Map<String, dynamic> json) => Participants(
       sender: UserModel.fromJson(json['sender']),
       receiver: UserModel.fromJson(json['receiver']));
-  Map<String, dynamic> toJson() => {
-        'sender': sender.toJson(),
-        'receiver': receiver.toJson(),
-      };
+  // Map<String, dynamic> toJson() => {
+  //       'sender': sender.toJson(),
+  //       'receiver': receiver.toJson(),
+  //     };
 }
+
+
+//  Conversation(
+//           lastMessage: message.message,
+//           lastMessageTime: message.time,
+//           participants: Participants(
+//             sender: user1,
+//             receiver: user2,
+//           ),
+//           userIds: [user1.id, user2.id],
+//         ).toJson(),
+        
