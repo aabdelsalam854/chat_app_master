@@ -12,7 +12,6 @@ import 'package:go_router/go_router.dart';
 class CameraWidget extends StatefulWidget {
   const CameraWidget({super.key, required this.cameras, required this.email});
   final List<CameraDescription> cameras;
-
   final String email;
   @override
   State<CameraWidget> createState() => _CameraWidgetState();

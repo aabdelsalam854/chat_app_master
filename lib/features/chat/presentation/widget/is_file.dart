@@ -58,13 +58,13 @@ class IsFileState extends State<IsFile> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text('${widget.messageModel.metadata!.fileType ?? ''}.'),
+                    Text('${widget.messageModel.metadata!.fileType}.'),
                     Text(widget.messageModel.metadata!.fileSize.toString()),
                     SizedBox(
                       height: 30,
                       width: 40,
                       child: Image.asset(
-                        'assets/images/${widget.messageModel.metadata!.fileType ?? ''}.png',
+                        'assets/images/${widget.messageModel.metadata!.fileType}.png',
                       ),
                     ),
                   ],
