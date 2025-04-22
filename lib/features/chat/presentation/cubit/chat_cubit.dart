@@ -6,7 +6,6 @@ import 'package:chat_master/features/chat/data/model/messages_model.dart';
 
 import 'package:chat_master/features/chat/domain/usecases/chat_usecase.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_state.dart';
-import 'package:chat_master/features/chat/presentation/widget/send_message.dart';
 
 class ChatCubit extends Cubit<ChatState> {
   ChatCubit(this.usecases) : super(ChatInitial());

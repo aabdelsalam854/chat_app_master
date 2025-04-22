@@ -55,7 +55,7 @@ class FirestoreServices implements DatabaseServices {
     required String docId,
   }) async {
     final doc = await firestore.collection(path).doc(docId).get();
-    return doc.exists ? doc.data() as Map<String, dynamic>? : null;
+    return doc.exists ? doc.data() : null;
   }
 
   @override

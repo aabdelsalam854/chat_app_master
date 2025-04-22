@@ -65,7 +65,7 @@ class _AudioRecorderViewBodyState extends State<_AudioRecorderViewBody> {
                       // Navigator.pop(context,voiceNoteModel);
                     });
                   },
-                  child: Text(
+                  child: const Text(
                     "Save note",
                     // style: AppTextStyles.medium(
                     //   color: AppColors.background,
@@ -107,7 +107,7 @@ class _AudioRecorderViewBodyState extends State<_AudioRecorderViewBody> {
                       }
                     });
                   },
-                  child: Text(
+                  child: const Text(
                     "Dismiss",
                     // style: AppTextStyles.medium(
                     //   color: AppColors.red,
