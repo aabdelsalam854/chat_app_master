@@ -4,6 +4,7 @@ import 'package:chat_master/features/chat/presentation/widget/is_image.dart';
 import 'package:chat_master/features/chat/presentation/widget/is_record.dart';
 import 'package:chat_master/features/chat/presentation/widget/is_video.dart';
 import 'package:flutter/material.dart';
+
 class BuildMessageTypeWidget extends StatelessWidget {
   const BuildMessageTypeWidget(
       {super.key, required this.messageModel, required this.message});

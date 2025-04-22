@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 Future<T?> showAppBottomSheet<T>(BuildContext context,
     {required Widget Function(BuildContext) builder,
-    bool? enableDrag  ,
+    bool? enableDrag,
     bool showCloseButton = false}) async {
   return await showModalBottomSheet<T?>(
     context: context,
     // backgroundColor: AppColors.success,
     isDismissible: false,
-    enableDrag: enableDrag??false,
+    enableDrag: enableDrag ?? false,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(35),

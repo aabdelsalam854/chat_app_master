@@ -1,4 +1,3 @@
-
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';

@@ -13,11 +13,11 @@ final sl = GetIt.instance;
 Future<void> setUpServerLocator() async {
   sl.registerSingleton<FirebaseAuthServices>(FirebaseAuthServices());
   sl.registerSingleton<DatabaseServices>((FirestoreServices()));
- await appInit(sl);
- await homeInjection(sl);
-await  autInjection(sl);
- await profileInjection(sl);
- await chatInjection(sl);
+  await appInit(sl);
+  await homeInjection(sl);
+  await autInjection(sl);
+  await profileInjection(sl);
+  await chatInjection(sl);
   sl.registerSingleton<SharedPreferences>(
       await SharedPreferences.getInstance());
 }

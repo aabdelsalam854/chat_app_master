@@ -30,7 +30,9 @@ class FirestoreServices implements DatabaseServices {
 
   @override
   Future<void> setData(
-      {required String path, required Map<String, dynamic> data, String? docId}) async {
+      {required String path,
+      required Map<String, dynamic> data,
+      String? docId}) async {
     if (docId != null) {
       await firestore.collection(path).doc(docId).set(data);
     } else {
@@ -48,14 +50,13 @@ class FirestoreServices implements DatabaseServices {
   }
 
   @override
-Future<Map<String, dynamic>?> getData({
-  required String path,
-  required String docId,
-}) async {
-  final doc = await firestore.collection(path).doc(docId).get();
-  return doc.exists ? doc.data() as Map<String, dynamic>? : null;
-}
-
+  Future<Map<String, dynamic>?> getData({
+    required String path,
+    required String docId,
+  }) async {
+    final doc = await firestore.collection(path).doc(docId).get();
+    return doc.exists ? doc.data() as Map<String, dynamic>? : null;
+  }
 
   @override
   Future<List<Map<String, dynamic>>> getAllDocuments(

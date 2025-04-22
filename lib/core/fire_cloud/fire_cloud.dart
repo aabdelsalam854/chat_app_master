@@ -45,8 +45,7 @@ class ChatService {
       'lastMessage': message.message,
       'lastMessageTime': FieldValue.serverTimestamp(),
       'lastMessageType': message.type,
-    }
-    );
+    });
   }
 
   // String generateChatId(String userId1, String userId2) {

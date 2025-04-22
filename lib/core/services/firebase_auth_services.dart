@@ -6,7 +6,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FirebaseAuthServices {
   // FirebaseAuthServices._();
 
-
   String _mapFirebaseAuthExceptionToString(FirebaseAuthException e) {
     switch (e.code) {
       case 'user-not-found':

@@ -35,7 +35,7 @@ class ChatRepositoryImpl implements ChatRepository {
 
       await _dataSource.sendMessage(chatId, message, user1, user2);
 
-      return const Right(true);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }

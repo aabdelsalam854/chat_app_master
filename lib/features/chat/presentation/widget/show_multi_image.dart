@@ -129,30 +129,15 @@ class _ShowMultiImageState extends State<ShowMultiImage> {
                         case 'jpg':
                         case 'jpeg':
                         case 'png':
-                          fileType = 'MessageType.image'; // إذا كان الملف صورة
+                          fileType = 'MessageType.image';
                           break;
                         case 'mp4':
-                          fileType = 'MessageType.video'; // إذا كان الملف فيديو
+                          fileType = 'MessageType.video';
                           break;
                         default:
                           fileType = 'MessageType.image';
                           break;
                       }
-                      // await FireCloud.sendMessage(MessageModel(
-                      //   message: imageUrl,
-                      //   id: widget.email,
-                      //   type: fileType,
-                      //   metadata: MetadataModel(
-                      //     fileName: widget.file[index].path.split('/').last,
-                      //     fileSize: null,
-                      //     width: null,
-                      //     height: null,
-                      //     fileType: widget.file[index].path.split('.').last,
-                      //     details: controller.text,
-                      //   ),
-                      //   time: DateTime.now(),
-                      // )
-                      // );
                     }
                   },
                   child: const Text('Send All'),

@@ -12,6 +12,6 @@ abstract class ChatRepository {
       {required String userId1,
       required String userId2,
       required MessageModel message,
-    required  UserModel user1,
-   required   UserModel user2});
+      required UserModel user1,
+      required UserModel user2});
 }
