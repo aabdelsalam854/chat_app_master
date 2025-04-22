@@ -3,7 +3,6 @@ import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// message.orderBy('time', descending: true).snapshots(),
 class ChatService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -47,9 +46,4 @@ class ChatService {
       'lastMessageType': message.type,
     });
   }
-
-  // String generateChatId(String userId1, String userId2) {
-  //   List<String> sortedIds = [userId1, userId2]..sort();
-  //   return sortedIds.join("_");
-  // }
 }

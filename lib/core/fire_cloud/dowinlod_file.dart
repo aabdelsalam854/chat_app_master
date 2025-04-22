@@ -6,7 +6,6 @@ class DownloadFile {
   static Future<String> downloadAndOpenFile(
       {required String fileUrl, required String fileName}) async {
     Dio dio = Dio();
-
     try {
       var dir = await getExternalStorageDirectory();
       String savePath = '${dir!.path}/$fileName';
