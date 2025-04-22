@@ -77,21 +77,17 @@ class FirestoreServices implements DatabaseServices {
   }) {
     CollectionReference collectionRef = firestore.collection(collectionPath);
     Query query;
-
     if (docId != null && subCollectionPath != null) {
       query = collectionRef.doc(docId).collection(subCollectionPath);
     } else {
       query = collectionRef;
     }
-
     if (orderByField != null) {
       query = query.orderBy(orderByField, descending: descending);
     }
-
     if (limit != null) {
       query = query.limit(limit);
     }
-
     return query.snapshots();
   }
 }

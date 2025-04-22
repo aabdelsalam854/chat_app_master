@@ -34,12 +34,12 @@ class ShowImageAndSend extends StatelessWidget {
               onPressed: () async {
                 Navigator.pop(context);
 
-                final upDateurl = await UploadFileInFirebase.uploadFile(
-                    File(imageFromGallery.path));
-                final file = File(imageFromGallery.path);
-                final fileSize = await file.length();
-                final bytes = await file.readAsBytes();
-                final image = img.decodeImage(bytes);
+                // final upDateurl = await UploadFileInFirebase.uploadFile(
+                //     File(imageFromGallery.path));
+                // final file = File(imageFromGallery.path);
+                // final fileSize = await file.length();
+                // final bytes = await file.readAsBytes();
+                // final image = img.decodeImage(bytes);
 
                 // await FireCloud.sendMessage(
                 //   MessageModel(

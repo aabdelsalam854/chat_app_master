@@ -28,8 +28,8 @@ class ShowSend extends StatelessWidget {
               onPressed: () async {
                 Navigator.pop(context);
 
-                final upDateurl =
-                    await UploadFileInFirebase.uploadFile(File(videoUrl.path));
+                // final upDateurl =
+                //     await UploadFileInFirebase.uploadFile(File(videoUrl.path));
                 // await FireCloud.sendMessage(
                 //   MessageModel(
                 //       message: upDateurl,
