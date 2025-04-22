@@ -102,7 +102,9 @@ class _AudioRecorderViewBodyState extends State<_AudioRecorderViewBody> {
                             .read<AudioRecorderController>()
                             .delete(voiceNoteModel.path)
                             .then((value) {
-                          Navigator.pop(context);
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
                         });
                       }
                     });

@@ -1,4 +1,3 @@
-
 import 'package:chat_master/core/constant/endpoint.dart';
 
 import 'package:chat_master/core/model/user_model.dart';
