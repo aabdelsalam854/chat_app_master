@@ -27,7 +27,6 @@ class ChatBody extends StatelessWidget {
       builder: (context, state) {
         if (state is GetMessagesSuccessState) {
           final messagesList = state.messages;
-
           return GetChatItem(
               controller: controller,
               messagesList: messagesList,

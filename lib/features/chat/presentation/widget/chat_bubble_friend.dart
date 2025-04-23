@@ -1,6 +1,7 @@
+import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/model/messages_model.dart';
+
 import 'build_message_type_widget.dart';
 
 class ChatBubbleFriend extends StatelessWidget {

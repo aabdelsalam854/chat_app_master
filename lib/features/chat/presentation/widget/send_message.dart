@@ -1,5 +1,4 @@
 import 'package:chat_master/core/constant/constant.dart';
-
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
@@ -52,8 +51,6 @@ class _SendMessageState extends State<SendMessage> {
   }
 
   Future<void> _sendMessage(String message, BuildContext context) async {
-    if (message.isEmpty) return;
-
     await context.read<ChatCubit>().sendMessage(
           message: MessageModel(
             message: message,
