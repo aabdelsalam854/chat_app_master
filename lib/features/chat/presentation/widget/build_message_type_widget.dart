@@ -9,12 +9,12 @@ class BuildMessageTypeWidget extends StatelessWidget {
   const BuildMessageTypeWidget(
       {super.key, required this.messageModel, required this.message});
   final MessageModel messageModel;
-  final dynamic message;
+  final String message;
   @override
   Widget build(BuildContext context) {
     switch (messageModel.type) {
       case 'MessageType.text':
-        return Text(message);
+        return Text(message, style: const TextStyle(color: Colors.white));
       case 'MessageType.video':
         return IsVideo(
           message: message,

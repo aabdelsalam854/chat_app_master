@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_master/features/call/presentation/pages/call_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -52,6 +53,26 @@ AppBar chatsAppBar(BuildContext context, {String? name, String? image}) {
               name!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const Icon(
+            CupertinoIcons.phone,
+            size: 20,
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>  const NormalCallPage
+                  (),
+                ),
+              );
+            },
+            child: const Icon(
+              CupertinoIcons.video_camera_solid,
+              size: 20,
             ),
           ),
         ],

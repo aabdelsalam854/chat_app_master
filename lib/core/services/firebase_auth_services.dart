@@ -1,6 +1,6 @@
 import 'package:chat_master/core/error/exception.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseAuthServices {
@@ -85,17 +85,17 @@ class FirebaseAuthServices {
     return (await FirebaseAuth.instance.signInWithCredential(credential)).user!;
   }
 
-//*----------- Facebook Login -----------------*/
-  Future<User> loginWithFacebook() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login();
+// //*----------- Facebook Login -----------------*/
+//   Future<User> loginWithFacebook() async {
+//     final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
+//     final OAuthCredential facebookAuthCredential =
+//         FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
 
-    return (await FirebaseAuth.instance
-            .signInWithCredential(facebookAuthCredential))
-        .user!;
-  }
+//     return (await FirebaseAuth.instance
+//             .signInWithCredential(facebookAuthCredential))
+//         .user!;
+//   }
 
 //*------------- Twitter Login -----------------*/
   Future signInWithTwitter() async {
@@ -123,6 +123,6 @@ class FirebaseAuthServices {
 
   Future<void> logout() async {
     await GoogleSignIn().signOut();
-    await FacebookAuth.instance.logOut();
+    // await FacebookAuth.instance.logOut();
   }
 }

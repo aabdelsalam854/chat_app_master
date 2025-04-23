@@ -22,7 +22,6 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
 
   ChatRemoteDataSourceImpl(this._databaseServices);
   @override
-  @override
   Stream<List<MessageModel>> getMessages(String chatId) {
     return _databaseServices
         .getCollectionStream(
@@ -69,7 +68,6 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       data: message.toJson()
         ..addAll({
           'isRead': false,
-          'sentAt': FieldValue.serverTimestamp(),
         }),
     );
 

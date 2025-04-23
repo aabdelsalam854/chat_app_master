@@ -35,7 +35,7 @@ class GetChatItem extends StatelessWidget {
                 reverse: true,
                 controller: controller,
                 itemBuilder: (context, index) {
-                  return messagesList[index].id == kUid
+                  return messagesList[index].id != kUid
                       ? ChatBubble(
                           messageModel: messagesList[index],
                           message: messagesList[index].message,
@@ -55,15 +55,6 @@ class GetChatItem extends StatelessWidget {
                     message: textController.text,
                     controller: textController,
                     email: widget.uid),
-                // isEmpty
-                //     ? recorder(context)
-                //     : SendMessage(
-                //         metadata: null,
-                //         type: 'MessageType.text',
-                //         message: textController.text,
-                //         controller: textController,
-                //         email: widget.email),
-
                 Expanded(
                   child: CustomTextFormField(
                     icon: IconButton(
