@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
+import 'package:chat_master/core/services/firebase_storage.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/record/audio_recorder_view/audio_recorder_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,6 +35,7 @@ class SendMessage extends StatefulWidget {
 
 class _SendMessageState extends State<SendMessage> {
   late final ValueNotifier<String> _messageNotifier = ValueNotifier<String>('');
+  final FirebaseStorageService _storageService = FirebaseStorageServiceImpl();
 
   @override
   void initState() {
@@ -55,7 +60,7 @@ class _SendMessageState extends State<SendMessage> {
           message: MessageModel(
             message: message,
             id: widget.email,
-            type: widget.type,
+            type: "text",
             metadata: widget.metadata,
             time: DateTime.now(),
           ),
@@ -86,14 +91,22 @@ class _SendMessageState extends State<SendMessage> {
       builder: (context, value, child) {
         return IconButton(
           onPressed: () async {
-            if (value.isEmpty) {
-              showAppBottomSheet(context, builder: (context) {
-                return const AudioRecorderView();
-              });
-              return;
-            }
-
-            await _sendMessage(value, context);
+            log(widget.email);
+            // if (value.isEmpty) {
+            //   showAppBottomSheet(context, builder: (context) {
+            //     return const AudioRecorderView();
+            //   });
+            //   return;
+            // }
+            // // ImagePickerHelper.imageSelector(image: ImageSource.gallery)
+            // //     .then((value) async {
+            // //       if (value != null) {
+            // //     await    _storageService.uploadFile(value.path, value.path, type: MediaType.image).then((url) async{
+            // //       await    _sendMessage(url, context);
+            // //         });
+            // //       }
+            // //     });
+            // await _sendMessage(value, context);
           },
           icon: Icon(
             value.isEmpty ? Icons.mic : Icons.send,

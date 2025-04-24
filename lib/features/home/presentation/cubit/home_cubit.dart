@@ -1,12 +1,9 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:chat_master/core/model/user_model.dart';
-
 import 'package:chat_master/features/home/data/models/conversation.dart';
 import 'package:chat_master/features/home/domain/usecases/messages.dart';
 import 'package:equatable/equatable.dart';
-
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {

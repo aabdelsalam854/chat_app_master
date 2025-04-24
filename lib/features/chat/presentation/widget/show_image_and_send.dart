@@ -45,7 +45,7 @@ class ShowImageAndSend extends StatelessWidget {
                 //   MessageModel(
                 //       message: upDateurl,
                 //       id: email,
-                //       type: 'MessageType.image',
+                //       type: 'image',
                 //       time: DateTime.now(),
                 //       metadata: MetadataModel(
                 //         details: null,

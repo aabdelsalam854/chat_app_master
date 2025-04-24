@@ -1,13 +1,9 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:chat_master/core/routes/routes.dart';
-
 import 'package:chat_master/core/utils/cam.dart';
 import 'package:chat_master/features/chat/presentation/widget/cam.dart';
-
 import 'package:chat_master/features/chat/presentation/widget/selcet_file.dart';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,10 +12,7 @@ class MediaSelection extends StatelessWidget {
     super.key,
     required this.email,
   });
-
   final String email;
-
-  @override
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
@@ -49,17 +42,30 @@ class MediaSelection extends StatelessWidget {
             Card(
               child: ListTile(
                 onTap: () {
-                  SelectMediaFromStorage.selectMedia().then((mediaSelect) {
+                  ImagePickerHelper.selectMedia().then((mediaSelect) {
                     if (mediaSelect != null) {
-                      List<File> imageFile = mediaSelect
-                          .map((media) => File(media.path!))
-                          .toList();
+                      List<File> imageFile =
+                          mediaSelect.map((media) => File(media.path)).toList();
+
+
                       if (context.mounted) {
+                        
                         GoRouter.of(context).push(Routes.kMediaSelection,
                             extra: ({'imageFile': imageFile, 'email': email}));
                       }
                     }
                   });
+                  // SelectMediaFromStorage.selectMedia().then((mediaSelect) {
+                  //   if (mediaSelect != null) {
+                  //     List<File> imageFile = mediaSelect
+                  //         .map((media) => File(media.path!))
+                  //         .toList();
+                  //     if (context.mounted) {
+                  //       GoRouter.of(context).push(Routes.kMediaSelection,
+                  //           extra: ({'imageFile': imageFile, 'email': email}));
+                  //     }
+                  //   }
+                  // });
                 },
                 title: const Text('Select Media'),
                 leading: const Icon(Icons.camera),

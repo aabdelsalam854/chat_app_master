@@ -34,7 +34,7 @@ class ShowSend extends StatelessWidget {
                 //   MessageModel(
                 //       message: upDateurl,
                 //       id: email,
-                //       type: 'MessageType.video',
+                //       type: 'video',
                 //       time: DateTime.now(),
                 //       metadata: MetadataModel(
                 //         details: null,

@@ -1,14 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_master/core/constant/validation.dart';
-
 import 'package:chat_master/features/auth/presentation/widget/password.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
-
 import 'package:chat_master/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:chat_master/features/profile/presentation/cubit/profile_state.dart';
 

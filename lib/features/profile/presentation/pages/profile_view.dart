@@ -48,6 +48,14 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
     statusController.text = widget.user.status!;
     super.initState();
   }
+  @override
+  dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    statusController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,15 +148,12 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                     hintText: "Name",
                     keyboardType: TextInputType.name,
                   ),
-
                   const SizedBox(height: 20),
                   CustomTextFormField(
                     controller: statusController,
                     hintText: "Status",
                     keyboardType: TextInputType.text,
                   ),
-
-                  // Text(user.email ?? ""),
                   const SizedBox(height: 20),
                   CustomTextFormField(
                     controller: phoneController,

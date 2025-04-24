@@ -36,7 +36,7 @@ class ShowFileBeforeSend extends StatelessWidget {
                 // FireCloud.sendMessage(MessageModel(
                 //     message: url,
                 //     id: email!,
-                //     type: 'MessageType.File',
+                //     type: 'File',
                 //     time: DateTime.now(),
                 //     metadata: MetadataModel(
                 //       fileName: pickedFile!.name,
@@ -49,7 +49,7 @@ class ShowFileBeforeSend extends StatelessWidget {
                 SendMessage(
                     message: url,
                     email: email!,
-                    type: 'MessageType.File',
+                    type: 'File',
                     metadata: MetadataModel(
                       fileName: pickedFile!.name,
                       details: null,

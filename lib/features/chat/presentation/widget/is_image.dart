@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_master/core/routes/routes.dart';
 
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
@@ -10,7 +11,6 @@ class IsImage extends StatelessWidget {
     required this.message,
     required this.messageModel,
   });
-
   final String message;
   final MessageModel messageModel;
 
@@ -23,7 +23,8 @@ class IsImage extends StatelessWidget {
             onTap: () {
               GoRouter.of(context).push(Routes.kShowImage, extra: message);
             },
-            child: Image.network(message)),
+            child:CachedNetworkImage(imageUrl: message,
+            )),
         const SizedBox(
           height: 2,
         ),

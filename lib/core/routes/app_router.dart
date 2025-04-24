@@ -93,7 +93,7 @@ abstract class AppRouts {
         final data = state.extra as Map<String, dynamic>;
         return ShowMultiImage(
           file: data['imageFile'] as List<File>,
-          email: data['email'] as String,
+        
         );
       },
     ),

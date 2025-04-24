@@ -13,19 +13,19 @@ class BuildMessageTypeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (messageModel.type) {
-      case 'MessageType.text':
+      case 'text':
         return Text(message, style: const TextStyle(color: Colors.white));
-      case 'MessageType.video':
+      case 'video':
         return IsVideo(
           message: message,
         );
-      case 'MessageType.image':
+      case 'image':
         return IsImage(messageModel: messageModel, message: message);
-      case 'MessageType.images':
+      case 'images':
         return IsImage(messageModel: messageModel, message: message);
-      case 'MessageType.record':
+      case 'record':
         return IsRecord(message: message);
-      case 'MessageType.File':
+      case 'File':
         return IsFile(message: message, messageModel: messageModel);
       default:
         return const Text('message');

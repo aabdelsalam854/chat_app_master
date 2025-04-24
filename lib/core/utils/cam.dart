@@ -32,6 +32,35 @@ class ImagePickerHelper {
 
     return null;
   }
+   static Future<List<File>?> selectMedia() async {
+    List<File> selectedImages = [];
+    final picker = ImagePicker();
+    final List<XFile> images = await picker.pickMultipleMedia(
+      imageQuality: 50,
+      maxWidth: 800,
+      maxHeight: 600,
+    );
+
+    for (XFile image in images) {
+      selectedImages.add(File(image.path));
+    }
+    return selectedImages;
+  }
+
+//   static Future<List<File?> imageSelector({ImageSource? image}) async {
+//         final picker = ImagePicker();
+//   List<File> selectedImages = [];
+//     List<File?> images = await picker.pickMultiImage(
+//       imageQuality: 60,
+//       maxWidth: 800,
+//       maxHeight: 600,
+//     );
+
+//     for (XFile image in images) {
+//       selectedImages.add(File(image.path));
+//   }
+
+// }
 }
 
 Future<Uint8List?> testCompressFile(File file) async {

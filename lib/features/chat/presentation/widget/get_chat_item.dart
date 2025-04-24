@@ -51,7 +51,7 @@ class GetChatItem extends StatelessWidget {
               children: [
                 SendMessage(
                     metadata: null,
-                    type: 'MessageType.text',
+                    type: 'text',
                     message: textController.text,
                     controller: textController,
                     email: widget.uid),

@@ -30,7 +30,6 @@ class IsFileState extends State<IsFile> {
             path = await DownloadFile.downloadAndOpenFile(
                 fileUrl: widget.message,
                 fileName: widget.messageModel.metadata!.fileType );
-
             setState(() {
               fileOpened = true;
             });

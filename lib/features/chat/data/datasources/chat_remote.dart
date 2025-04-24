@@ -1,5 +1,4 @@
 import 'package:chat_master/core/constant/endpoint.dart';
-
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/services/database_services.dart';
 

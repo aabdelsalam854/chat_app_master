@@ -29,7 +29,6 @@ class SelectFile extends StatelessWidget {
                 );
               },
             );
-
             if (context.mounted) {
               GoRouter.of(context).push(
                 Routes.kShowFileBeforeSend,

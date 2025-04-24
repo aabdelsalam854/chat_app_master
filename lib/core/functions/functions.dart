@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:chat_master/core/enums/media_type.dart';
 import 'package:chat_master/features/app/presentation/cubits/app/app_cubit.dart';
 
 import 'package:intl/intl.dart';
@@ -37,3 +38,15 @@ String generateChatId(String firstUserId, String secondUserId) {
   final sortedIds = <String>[firstUserId, secondUserId]..sort();
   return sortedIds.join('_');
 }
+  String getFolderName(MediaType type) {
+    switch (type) {
+      case MediaType.image:
+        return 'images';
+      case MediaType.audio:
+        return 'audio';
+      case MediaType.video:
+        return 'videos';
+      case MediaType.document:
+        return 'documents';
+    }
+  }
