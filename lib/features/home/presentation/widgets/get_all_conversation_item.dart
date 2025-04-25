@@ -28,7 +28,9 @@ class GetAllConversationItem extends StatelessWidget {
         return ChatTile(
           imgUrl: otherUser.photoUrl ?? "",
           username: otherUser.name,
-          lastMessage: conversationsData.lastMessage,
+          lastMessage: conversationsData.lastMessageType != "text"
+              ? conversationsData.lastMessageType
+              : conversationsData.lastMessage,
           time: parseTime(
             conversationsData.lastMessageTime.toString(),
           ),

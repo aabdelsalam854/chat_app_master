@@ -17,7 +17,6 @@ class SelectFile extends StatelessWidget {
       child: ListTile(
         onTap: () async {
           final pickedFile = await SelectFileFromStorage.selectFiles();
-
           if (pickedFile != null && context.mounted) {
             await showModalBottomSheet(
               context: context,
@@ -34,7 +33,6 @@ class SelectFile extends StatelessWidget {
                 Routes.kShowFileBeforeSend,
                 extra: {'file': pickedFile, 'email': email},
               );
-
               Navigator.of(context).pop();
             }
           }

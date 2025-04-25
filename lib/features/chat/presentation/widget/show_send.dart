@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/services/server_locator.dart';
-import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/chat/presentation/widget/video_player.dart';
@@ -33,39 +31,22 @@ class ShowSend extends StatelessWidget {
                 Navigator.pop(context);
                 sl<ChatCubit>().sendFiles(
                   files: videoUrl,
-                   description: "",
-                    user1: UserModel(
-                        email: kUid,
-                        name: "kName",
-                        photoUrl: "kPhotoUrl",
-                        id: kUid,
-                      ),
-                      user2: const UserModel(
-                        email: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
-                        name: "kName",
-                        photoUrl: "kPhotoUrl",
-                        id: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
-                      ),
-                      userId1: kUid,
-                      userId2: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
-                    );
-                // final upDateurl =
-                //     await UploadFileInFirebase.uploadFile(File(videoUrl.path));
-                // await FireCloud.sendMessage(
-                //   MessageModel(
-                //       message: upDateurl,
-                //       id: email,
-                //       type: 'video',
-                //       time: DateTime.now(),
-                //       metadata: MetadataModel(
-                //         details: null,
-                //         fileType: null,
-                //         fileName: 'mp4',
-                //         fileSize: null,
-                //         width: 5,
-                //         height: 5,
-                //       )),
-                // );
+                  description: "",
+                  user1: UserModel(
+                    email: kUid,
+                    name: "kName",
+                    photoUrl: "kPhotoUrl",
+                    id: kUid,
+                  ),
+                  user2: const UserModel(
+                    email: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                    name: "kName",
+                    photoUrl: "kPhotoUrl",
+                    id: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                  ),
+                  userId1: kUid,
+                  userId2: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                );
               },
             ),
           )

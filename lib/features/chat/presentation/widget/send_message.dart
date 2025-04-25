@@ -1,14 +1,10 @@
-import 'dart:developer';
-
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
-import 'package:chat_master/core/services/firebase_storage.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
 import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/record/audio_recorder_view/audio_recorder_view.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

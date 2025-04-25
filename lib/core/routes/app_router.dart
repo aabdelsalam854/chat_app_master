@@ -20,6 +20,7 @@ import 'package:chat_master/features/profile/presentation/pages/profile_view.dar
 import 'package:chat_master/features/profile/presentation/pages/settings.dart';
 import 'package:chat_master/home/presentation/views/user_main_screen.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:chat_master/features/chat/presentation/widget/show_image.dart';
@@ -92,7 +93,7 @@ abstract class AppRouts {
       builder: (context, state) {
         final data = state.extra as Map<String, dynamic>;
         return ShowMultiImage(
-          file: data['imageFile'] as List<File>,
+          imageFileNotifier: data['imageFile'] as ValueNotifier<List<File>> ,
         
         );
       },

@@ -22,7 +22,7 @@ class _CameraWidgetState extends State<CameraWidget> {
   bool _isRecording = false;
   void startCam(int camera) {
     camController =
-        CameraController(widget.cameras[camera], ResolutionPreset.high);
+        CameraController(widget.cameras[camera], ResolutionPreset.medium);
     cameraValue = camController.initialize();
   }
 
@@ -168,12 +168,9 @@ class _CameraWidgetState extends State<CameraWidget> {
             padding: const EdgeInsets.all(10),
             color: Colors.transparent,
             child: Row(
-          
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
-                
-                      
                   heroTag: 'btn1',
                   onPressed: () {
                     SelectMediaFromStorage.selectMedia().then((mediaSelect) {
@@ -202,13 +199,13 @@ class _CameraWidgetState extends State<CameraWidget> {
                   heroTag: 'btn2',
                   onPressed: () {
                     camController.takePicture().then((value) {
-                      File file = File(value.path);
                       if (context.mounted) {
-                        GoRouter.of(context).push(Routes.kShowImageAndSend,
+                        GoRouter.of(context).push(Routes.kMediaSelection,
                             extra: ({
-                              'imageFile': file,
-                              'email': widget.email
+                              'imageFile':
+                                  ValueNotifier<List<File>>([File(value.path)]),
                             }));
+                        Navigator.pop(context);
                       }
                     });
                   },

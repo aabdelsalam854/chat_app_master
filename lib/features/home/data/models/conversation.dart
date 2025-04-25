@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Conversation {
   final String lastMessage;
   final DateTime lastMessageTime;
+  final String lastMessageType;
   final Participants participants;
   final List<dynamic> userIds;
 
@@ -11,6 +12,7 @@ class Conversation {
       {required this.lastMessage,
       required this.lastMessageTime,
       required this.participants,
+        required this.lastMessageType,
       required this.userIds});
 
   factory Conversation.fromJson(Map<String, dynamic> json) => Conversation(
@@ -18,7 +20,8 @@ class Conversation {
         lastMessageTime:
             (json['lastMessageTime'] as Timestamp?)?.toDate() ?? DateTime.now(),
         participants: Participants.fromJson(json['participants']),
-        userIds: json['users'],
+        userIds: json['users'], 
+        lastMessageType: json['lastMessageType'] ,
       );
 }
 

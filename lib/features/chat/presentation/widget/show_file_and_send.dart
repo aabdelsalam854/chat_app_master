@@ -33,19 +33,7 @@ class ShowFileBeforeSend extends StatelessWidget {
                 Navigator.pop(context);
                 final url = await UploadFileInFirebase.uploadFile(
                     File(pickedFile!.path!));
-                // FireCloud.sendMessage(MessageModel(
-                //     message: url,
-                //     id: email!,
-                //     type: 'File',
-                //     time: DateTime.now(),
-                //     metadata: MetadataModel(
-                //       fileName: pickedFile!.name,
-                //       details: null,
-                //       fileSize: GetFileSize.getFileSize(pickedFile!.size),
-                //       fileType: pickedFile!.extension,
-                //       height: null,
-                //       width: null,
-                //     )));
+
                 SendMessage(
                     message: url,
                     email: email!,

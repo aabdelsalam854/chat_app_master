@@ -13,6 +13,7 @@ class MediaSelection extends StatelessWidget {
     required this.email,
   });
   final String email;
+
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
@@ -32,7 +33,9 @@ class MediaSelection extends StatelessWidget {
                             builder: (context) =>
                                 CameraWidget(email: email, cameras: value)),
                       );
-                    }
+                     
+                    } 
+                //  Navigator.pop(context);
                   });
                 },
                 title: const Text('camera'),
@@ -42,19 +45,6 @@ class MediaSelection extends StatelessWidget {
             Card(
               child: ListTile(
                 onTap: () {
-                  // ImagePickerHelper.selectMedia().then((mediaSelect) {
-                  //   if (mediaSelect != null) {
-                  //     List<File> imageFile =
-                  //         mediaSelect.map((media) => File(media.path)).toList();
-
-
-                  //     if (context.mounted) {
-
-                  //       GoRouter.of(context).push(Routes.kMediaSelection,
-                  //           extra: ({'imageFile': imageFile, 'email': email}));
-                  //     }
-                  //   }
-                  // });
                   SelectMediaFromStorage.selectMedia().then((mediaSelect) {
                     if (mediaSelect != null) {
                       List<File> imageFile = mediaSelect
@@ -62,7 +52,11 @@ class MediaSelection extends StatelessWidget {
                           .toList();
                       if (context.mounted) {
                         GoRouter.of(context).push(Routes.kMediaSelection,
-                            extra: ({'imageFile': imageFile, 'email': email}));
+                            extra: ({
+                              'imageFile': ValueNotifier<List<File>>(imageFile),
+                              'email': email
+                            }));
+                        Navigator.pop(context);
                       }
                     }
                   });
