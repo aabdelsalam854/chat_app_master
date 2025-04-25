@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:chat_master/core/model/user_model.dart';
@@ -44,6 +45,29 @@ class ChatCubit extends Cubit<ChatState> {
         (send) => emit(const SendMessageSuccessState(true)),
       );
     });
+  }
+
+  Future<void> sendFiles({
+    required List<File> files,
+    required String description,
+    required UserModel user1,
+    required UserModel user2,
+    required String userId1,
+    required String userId2,
+  }) async {
+    emit(SendMessageLoadingState());
+    var result = await usecases.sendFiles(
+      files: files,
+      description: description,
+      user1: user1,
+      user2: user2,
+      userId1: userId1,
+      userId2: userId2,
+    );
+    result.fold(
+      (failure) => emit(SendMessageErrorState(failure.msg)),
+      (send) => emit(const SendMessageSuccessState(true)),
+    );
   }
 
   @override

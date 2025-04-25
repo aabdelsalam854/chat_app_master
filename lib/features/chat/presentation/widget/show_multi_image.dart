@@ -1,18 +1,11 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chat_master/core/constant/constant.dart';
-import 'package:chat_master/core/extensions/media_query.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/services/server_locator.dart';
-import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
-import 'package:chat_master/features/chat/data/model/messages_model.dart';
-import 'package:chat_master/features/chat/data/model/metadata_model.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ShowMultiImage extends StatefulWidget {
   const ShowMultiImage({
@@ -133,47 +126,24 @@ class _ShowMultiImageState extends State<ShowMultiImage> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    for (final file in widget.file) {
-                      final imageUrl =
-                          await UploadFileInFirebase.uploadFile(file);
-
-                      final extension = file.path.split('.').last.toLowerCase();
-                      final isVideo = extension == 'mp4';
-                      final fileType = isVideo ? 'video' : 'image';
-
-                      await sl<ChatCubit>().sendMessage(
-                          user1: UserModel(
-                            email: kUid,
-                            name: "kName",
-                            photoUrl: "kPhotoUrl",
-                            id: kUid,
-                          ),
-                          user2: const UserModel(
-                            email: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
-                            name: "kName",
-                            photoUrl: "kPhotoUrl",
-                            id: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
-                          ),
-                          userId1: kUid,
-                          userId2: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
-                          message: MessageModel(
-                            message: imageUrl,
-                            id: kUid,
-                            type: fileType,
-                            time: DateTime.now(),
-                            metadata: MetadataModel(
-                              width: 0,
-                              height: 0,
-                              details: controller.text,
-                              fileSize: file.lengthSync().toString(),
-                              fileType: fileType,
-                              fileName: file.path.split('/').last,
-                            ),
-                          ));
-                      if (context.mounted) {
-                        context.pop();
-                      }
-                    }
+                    await sl<ChatCubit>().sendFiles(
+                      files: widget.file,
+                      description: controller.text,
+                      user1: UserModel(
+                        email: kUid,
+                        name: "kName",
+                        photoUrl: "kPhotoUrl",
+                        id: kUid,
+                      ),
+                      user2: const UserModel(
+                        email: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                        name: "kName",
+                        photoUrl: "kPhotoUrl",
+                        id: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                      ),
+                      userId1: kUid,
+                      userId2: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                    );
                   },
                   icon: const Icon(
                     Icons.send,

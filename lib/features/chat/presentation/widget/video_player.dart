@@ -14,80 +14,54 @@ class VideoView extends StatefulWidget {
 }
 
 class _VideoViewState extends State<VideoView> {
-  late final VideoPlayerController videoPlayerController;
-  late final ChewieController chewieController;
-  late final Chewie videoPlayer;
-  bool initialized = false;
+  late VideoPlayerController _videoPlayerController;
+  ChewieController? _chewieController;
 
-  void initVideo() {
-    videoPlayerController = widget.local!
-        ? VideoPlayerController.file(widget.videoUrl)
-        : VideoPlayerController.networkUrl(widget.videoUrl);
-
-    videoPlayerController.addListener(() {
-      if (videoPlayerController.value.isInitialized) {
-        setState(() {
-          initialized = true;
-        });
-      }
-    });
-
-    // Initialize the VideoPlayerController
-    videoPlayerController.initialize().then((_) {
-      setState(() {
-        initialized = true;
-      });
-    });
-
-    chewieController = ChewieController(
-      videoPlayerController: videoPlayerController,
-      autoPlay: true,
-      looping: true,
-    );
-    videoPlayer = Chewie(controller: chewieController);
-  }
+  final ValueNotifier<bool> _initialized = ValueNotifier(false);
 
   @override
   void initState() {
     super.initState();
-    initVideo();
+    _initializePlayer();
+  }
+
+  Future<void> _initializePlayer() async {
+    _videoPlayerController = widget.local!
+        ? VideoPlayerController.file(widget.videoUrl)
+        : VideoPlayerController.networkUrl(
+            widget.videoUrl,
+          );
+    await _videoPlayerController.initialize();
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController,
+      autoPlay: false,
+      looping: true,
+    );
+
+    _initialized.value = true;
   }
 
   @override
   void dispose() {
-    videoPlayerController.dispose();
-    chewieController.dispose();
-
+    _videoPlayerController.dispose();
+    _chewieController?.dispose();
+    _initialized.dispose();
     super.dispose();
-  }
-
-  void close() {
-    videoPlayerController.dispose();
-    chewieController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: initialized
-          ? Scaffold(
-              appBar: AppBar(),
-              body: Column(
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: AspectRatio(
-                        aspectRatio: videoPlayerController.value.aspectRatio,
-                        child: SizedBox(
-                            height: 150, width: 150, child: videoPlayer),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : const Center(child: CircularProgressIndicator()),
+    return ValueListenableBuilder<bool>(
+      valueListenable: _initialized,
+      builder: (context, isReady, _) {
+        if (!isReady) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return AspectRatio(
+          aspectRatio: _videoPlayerController.value.aspectRatio,
+          child: Chewie(controller: _chewieController!),
+        );
+      },
     );
   }
 }

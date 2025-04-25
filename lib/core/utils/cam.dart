@@ -97,6 +97,7 @@ class SelectMediaFromStorage {
     final res = await FilePicker.platform.pickFiles(
       allowMultiple: true,
       type: FileType.custom,
+
       allowedExtensions: ['jpg', 'jpeg', 'png', 'mp4'],
     );
     if (res != null) {

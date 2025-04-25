@@ -35,7 +35,6 @@ class SendMessage extends StatefulWidget {
 
 class _SendMessageState extends State<SendMessage> {
   late final ValueNotifier<String> _messageNotifier = ValueNotifier<String>('');
-  final FirebaseStorageService _storageService = FirebaseStorageServiceImpl();
 
   @override
   void initState() {
@@ -91,22 +90,14 @@ class _SendMessageState extends State<SendMessage> {
       builder: (context, value, child) {
         return IconButton(
           onPressed: () async {
-            log(widget.email);
-            // if (value.isEmpty) {
-            //   showAppBottomSheet(context, builder: (context) {
-            //     return const AudioRecorderView();
-            //   });
-            //   return;
-            // }
-            // // ImagePickerHelper.imageSelector(image: ImageSource.gallery)
-            // //     .then((value) async {
-            // //       if (value != null) {
-            // //     await    _storageService.uploadFile(value.path, value.path, type: MediaType.image).then((url) async{
-            // //       await    _sendMessage(url, context);
-            // //         });
-            // //       }
-            // //     });
-            // await _sendMessage(value, context);
+            if (value.isEmpty) {
+              showAppBottomSheet(context, builder: (context) {
+                return const AudioRecorderView();
+              });
+              return;
+            }
+
+            await _sendMessage(value, context);
           },
           icon: Icon(
             value.isEmpty ? Icons.mic : Icons.send,

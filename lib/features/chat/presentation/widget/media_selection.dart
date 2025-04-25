@@ -42,30 +42,30 @@ class MediaSelection extends StatelessWidget {
             Card(
               child: ListTile(
                 onTap: () {
-                  ImagePickerHelper.selectMedia().then((mediaSelect) {
-                    if (mediaSelect != null) {
-                      List<File> imageFile =
-                          mediaSelect.map((media) => File(media.path)).toList();
-
-
-                      if (context.mounted) {
-                        
-                        GoRouter.of(context).push(Routes.kMediaSelection,
-                            extra: ({'imageFile': imageFile, 'email': email}));
-                      }
-                    }
-                  });
-                  // SelectMediaFromStorage.selectMedia().then((mediaSelect) {
+                  // ImagePickerHelper.selectMedia().then((mediaSelect) {
                   //   if (mediaSelect != null) {
-                  //     List<File> imageFile = mediaSelect
-                  //         .map((media) => File(media.path!))
-                  //         .toList();
+                  //     List<File> imageFile =
+                  //         mediaSelect.map((media) => File(media.path)).toList();
+
+
                   //     if (context.mounted) {
+
                   //       GoRouter.of(context).push(Routes.kMediaSelection,
                   //           extra: ({'imageFile': imageFile, 'email': email}));
                   //     }
                   //   }
                   // });
+                  SelectMediaFromStorage.selectMedia().then((mediaSelect) {
+                    if (mediaSelect != null) {
+                      List<File> imageFile = mediaSelect
+                          .map((media) => File(media.path!))
+                          .toList();
+                      if (context.mounted) {
+                        GoRouter.of(context).push(Routes.kMediaSelection,
+                            extra: ({'imageFile': imageFile, 'email': email}));
+                      }
+                    }
+                  });
                 },
                 title: const Text('Select Media'),
                 leading: const Icon(Icons.camera),
