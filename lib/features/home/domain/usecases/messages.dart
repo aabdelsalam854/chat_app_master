@@ -12,4 +12,7 @@ class MessagesUsecases {
       messagesRepo.getUsers();
   Stream<Either<Failure, List<Conversation>>> getAllConversations() =>
       messagesRepo.getAllConversations();
+
+  Stream<Either<Failure, List<Conversation>>> getAllGroupConversations() =>
+      messagesRepo.getAllGroupConversations();
 }

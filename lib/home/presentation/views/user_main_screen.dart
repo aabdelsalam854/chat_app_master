@@ -1,3 +1,4 @@
+import 'package:chat_master/features/home/presentation/pages/groups_page.dart';
 import 'package:chat_master/features/home/presentation/pages/home_page.dart';
 import 'package:chat_master/features/stories/presentation/pages/stories.dart';
 import 'package:chat_master/home/presentation/views/widget/custom_bottom_navigation_bar.dart';
@@ -15,7 +16,7 @@ class MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const HomePage(),
     const StatusScreen(),
-    const HomePage(),
+    const GroupsPage(),
     const HomePage(),
     // Payment(),
   ];

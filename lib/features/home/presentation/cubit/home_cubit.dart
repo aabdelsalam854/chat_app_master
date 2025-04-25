@@ -34,6 +34,17 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
+  getAllGroupConversations() async {
+    emit(GetAllGroupConversationsLoadingState());
+    _subscription = usecases.getAllGroupConversations().listen((either) {
+      either.fold(
+        (failure) => emit(GetAllGroupConversationsErrorState(failure.msg)),
+        (conversations) =>
+            emit(GetAllGroupConversationsSuccessState(conversations)),
+      );
+    });
+  }
+
   @override
   Future<void> close() {
     _subscription?.cancel();

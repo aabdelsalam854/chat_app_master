@@ -7,6 +7,8 @@ abstract class MessagesRemoteDataSource {
   Future<List<UserModel>> getUsers();
 
   Stream<List<Conversation>> getAllConversations();
+
+  Stream<List<Conversation>> getAllGroupConversations();
 }
 
 class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
@@ -24,7 +26,19 @@ class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
   @override
   Stream<List<Conversation>> getAllConversations() {
     return firestore
-        .getCollectionStream(collectionPath: 'chats')
+        .getCollectionStream(collectionPath: EndPoint.kChatCollection)
+        .map((snapshot) {
+      return snapshot.docs
+          .map((doc) =>
+              Conversation.fromJson(doc.data() as Map<String, dynamic>))
+          .toList();
+    });
+  }
+
+  @override
+  Stream<List<Conversation>> getAllGroupConversations() {
+    return firestore
+        .getCollectionStream(collectionPath: EndPoint.kGroupCollection)
         .map((snapshot) {
       return snapshot.docs
           .map((doc) =>

@@ -35,4 +35,20 @@ class MessageRepositoryImpl implements MessageRepository {
       yield Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Stream<Either<Failure, List<Conversation>>>
+      getAllGroupConversations() async* {
+    try {
+      final stream = messagesRemote.getAllConversations();
+      yield* stream.map((event) {
+        final filtered =
+            event.where((element) => element.userIds.contains(kUid)).toList();
+
+        return Right(filtered);
+      });
+    } catch (e) {
+      yield Left(ServerFailure(e.toString()));
+    }
+  }
 }

@@ -40,3 +40,18 @@ class GetAllConversationsErrorState extends HomeState {
   @override
   List<Object> get props => [error];
 }
+
+
+class GetAllGroupConversationsLoadingState extends HomeState {}
+class GetAllGroupConversationsSuccessState extends HomeState {
+  final List<Conversation> allGroupConversations;
+  const GetAllGroupConversationsSuccessState(this.allGroupConversations);
+  @override
+  List<Object> get props => [allGroupConversations];
+}
+class GetAllGroupConversationsErrorState extends HomeState {
+  final String error;
+  const GetAllGroupConversationsErrorState(this.error);
+  @override
+  List<Object> get props => [error];
+}
