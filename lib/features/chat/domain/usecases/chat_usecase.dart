@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chat_master/core/error/failures.dart';
+import 'package:chat_master/core/functions/functions.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
@@ -41,8 +42,8 @@ class ChatUsecases {
   }) async {
     for (var file in files) {
       final url = await UploadFileInFirebase.uploadFile(file);
-      final extension = file.path.split('.').last.toLowerCase();
-      final fileType = extension == 'mp4' ? 'video' : 'image';
+
+      final fileType = getFileType(file.path);
 
       final message = MessageModel(
         message: url,

@@ -45,10 +45,12 @@ class _CameraWidgetState extends State<CameraWidget> {
     super.dispose();
   }
 
-  _recordVideo() async {
+  _recordVideo(BuildContext context) async {
     if (_isRecording) {
       final file = await camController.stopVideoRecording();
-      setState(() => _isRecording = false);
+      setState(() {
+        _isRecording = false;
+      });
 
       File files = File(file.path);
 
@@ -56,13 +58,15 @@ class _CameraWidgetState extends State<CameraWidget> {
         fullscreenDialog: true,
         builder: (_) => ShowSend(videoUrl: files, email: widget.email),
       );
-      if (mounted) {
-        Navigator.push(context, route);
+      if (context.mounted) {
+        Navigator.pushReplacement(context, route);
       }
     } else {
       await camController.prepareForVideoRecording();
       await camController.startVideoRecording();
-      setState(() => _isRecording = true);
+      setState(() {
+        _isRecording = true;
+      });
     }
   }
 
@@ -160,12 +164,16 @@ class _CameraWidgetState extends State<CameraWidget> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+          Container(
+            padding: const EdgeInsets.all(10),
+            color: Colors.transparent,
             child: Row(
+          
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
+                
+                      
                   heroTag: 'btn1',
                   onPressed: () {
                     SelectMediaFromStorage.selectMedia().then((mediaSelect) {
@@ -205,7 +213,7 @@ class _CameraWidgetState extends State<CameraWidget> {
                     });
                   },
                   backgroundColor: const Color.fromRGBO(225, 225, 225, .7),
-                  shape: const CircleBorder(),
+                  // shape: const CircleBorder(),
                   child: const Icon(
                     Icons.camera_alt,
                     size: 40,
@@ -215,7 +223,11 @@ class _CameraWidgetState extends State<CameraWidget> {
                   heroTag: 'btn3',
                   backgroundColor: Colors.red,
                   child: Icon(_isRecording ? Icons.stop : Icons.circle),
-                  onPressed: () => _recordVideo(),
+                  onPressed: () {
+                    _recordVideo(
+                      context,
+                    );
+                  },
                 ),
               ],
             ),

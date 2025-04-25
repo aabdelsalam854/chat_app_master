@@ -50,3 +50,18 @@ String generateChatId(String firstUserId, String secondUserId) {
         return 'documents';
     }
   }
+  String getFileType(String path) {
+  final extension = path.split('.').last.toLowerCase();
+
+  if (['jpg', 'jpeg', 'png', 'gif', 'webp'].contains(extension)) {
+    return 'image';
+  } else if (['mp4', 'mov', 'avi', 'mkv'].contains(extension)) {
+    return 'video';
+  } else if (['mp3', 'wav', 'aac', 'ogg', 'm4a'].contains(extension)) {
+    return 'record';
+  } else if (['pdf', 'doc', 'docx', 'xls', 'xlsx'].contains(extension)) {
+    return 'document';
+  } else {
+    return 'unknown';
+  }
+}

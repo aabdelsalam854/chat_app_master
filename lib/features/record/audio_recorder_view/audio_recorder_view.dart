@@ -1,3 +1,10 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:chat_master/core/constant/constant.dart';
+import 'package:chat_master/core/model/user_model.dart';
+import 'package:chat_master/core/services/server_locator.dart';
+import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/record/audio_recorder_manager/audio_recorder_controller.dart';
 import 'package:chat_master/features/record/audio_recorder_manager/audio_recorder_file_helper.dart';
 import 'package:chat_master/features/record/audio_recorder_view/play_pause_button.dart';
@@ -62,11 +69,31 @@ class _AudioRecorderViewBodyState extends State<_AudioRecorderViewBody> {
                     context
                         .read<AudioRecorderController>()
                         .stop((voiceNoteModel) {
-                      // Navigator.pop(context,voiceNoteModel);
+                      if (voiceNoteModel != null) {
+                        sl<ChatCubit>().sendFiles(
+                          files: [File(voiceNoteModel.path)],
+                          description: "",
+                          user1: UserModel(
+                            email: kUid,
+                            name: "kName",
+                            photoUrl: "kPhotoUrl",
+                            id: kUid,
+                          ),
+                          user2: const UserModel(
+                            email: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                            name: "kName",
+                            photoUrl: "kPhotoUrl",
+                            id: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                          ),
+                          userId1: kUid,
+                          userId2: "ZBsU7iXYmaT46Xz58QXp1D8IDz02",
+                        );
+                      }
                     });
+                    Navigator.pop(context);
                   },
                   child: const Text(
-                    "Save note",
+                    "Send",
                     // style: AppTextStyles.medium(
                     //   color: AppColors.background,
                     //   fontSize: 18

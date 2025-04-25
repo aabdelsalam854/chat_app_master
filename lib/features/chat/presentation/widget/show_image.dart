@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ShowImage extends StatelessWidget {
@@ -14,8 +15,8 @@ class ShowImage extends StatelessWidget {
       body: SizedBox(
         width: screenSize.width,
         height: screenSize.height,
-        child: Image.network(
-          message!,
+        child: CachedNetworkImage(
+          imageUrl: message!,
         ),
       ),
     );
