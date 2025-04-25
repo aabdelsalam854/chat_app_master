@@ -40,7 +40,7 @@ class MessageRepositoryImpl implements MessageRepository {
   Stream<Either<Failure, List<Conversation>>>
       getAllGroupConversations() async* {
     try {
-      final stream = messagesRemote.getAllConversations();
+      final stream = messagesRemote.getAllGroupConversations();
       yield* stream.map((event) {
         final filtered =
             event.where((element) => element.userIds.contains(kUid)).toList();

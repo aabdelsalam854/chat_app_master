@@ -1,6 +1,6 @@
 import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
 import 'package:chat_master/features/home/presentation/widgets/conversation_loading.dart';
-import 'package:chat_master/features/home/presentation/widgets/start_chat_Item.dart';
+import 'package:chat_master/features/home/presentation/widgets/start_groups_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +16,7 @@ class AddGroup extends StatelessWidget {
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is GetUsersSuccessState) {
-              return StartChatItem(
+              return StartGroupsItem(
                 users: state.users,
               );
             } else if (state is GetUsersErrorState) {

@@ -35,9 +35,6 @@ class GetAllConversationItem extends StatelessWidget {
             conversationsData.lastMessageTime.toString(),
           ),
           onTap: () {
-            // log(conversationsData.participants.sender.id);
-            // log(otherUser.id);
-            // log(kUid);
             GoRouter.of(context).push(
               Routes.kChatView,
               extra: {

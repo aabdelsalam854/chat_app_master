@@ -1,6 +1,7 @@
 import 'package:chat_master/core/routes/routes.dart';
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
+import 'package:chat_master/features/home/presentation/widgets/add_group.dart';
 import 'package:chat_master/features/home/presentation/widgets/groups_view_body.dart';
 
 import 'package:flutter/material.dart';
@@ -17,7 +18,14 @@ class GroupsPage extends StatelessWidget {
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              GoRouter.of(context).push(Routes.kStartChat);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BlocProvider(
+                      create: (context) => sl<HomeCubit>()..getUsers(),
+                      child: const AddGroup(),
+                    ),
+                  ));
             },
             child: const Icon(Icons.add),
           ),

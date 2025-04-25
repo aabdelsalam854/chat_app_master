@@ -25,7 +25,7 @@ class ChatTile extends StatelessWidget {
       leading: GestureDetector(
         onTap: () {},
         child: CustomCircleNetworkImage(imageUrl: imgUrl),
-      ), // Placeholder for the image URL
+      ), 
       title: Row(
         children: [
           Expanded(

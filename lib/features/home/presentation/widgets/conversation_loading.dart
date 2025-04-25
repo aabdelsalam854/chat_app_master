@@ -24,7 +24,7 @@ class ConversationLoading extends StatelessWidget {
             lastMessage: 'Last message from user $index',
             time: '${index + 1} min ago',
             onTap: () {
-              // snackBar(context, 'Hello', Colors.red);
+              
             },
           );
         },
