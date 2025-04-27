@@ -15,7 +15,7 @@ class GroupsViewBody extends StatefulWidget {
 class _GroupsViewBodyState extends State<GroupsViewBody> {
   @override
   void dispose() {
-    context.read<HomeCubit>().close();
+    // context.read<HomeCubit>().close();
     super.dispose();
   }
 
@@ -35,7 +35,7 @@ class _GroupsViewBodyState extends State<GroupsViewBody> {
           if (state.allGroupConversations.isEmpty) {
             return const EmptyChatWidget();
           }
-          return GetAllConversationItem(
+          return GetAllGroubConversationItem(
               conversations: state.allGroupConversations);
         }
         return const Center(child: Text('No conversations available.'));

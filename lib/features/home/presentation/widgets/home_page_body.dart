@@ -21,7 +21,7 @@ class _HomePageBodyState extends State<HomePageBody> {
 
   @override
   void dispose() {
-    context.read<HomeCubit>().close();
+    // context.read<HomeCubit>().close();
     super.dispose();
   }
 

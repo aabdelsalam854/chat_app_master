@@ -16,7 +16,7 @@ class AddGroup extends StatelessWidget {
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is GetUsersSuccessState) {
-              return StartGroupsItem(
+              return GroupsItem(
                 users: state.users,
               );
             } else if (state is GetUsersErrorState) {

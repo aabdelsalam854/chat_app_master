@@ -4,13 +4,17 @@ import 'package:chat_master/core/constant/endpoint.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/services/database_services.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
+import 'package:chat_master/features/home/data/models/group_conversation.dart';
 
 abstract class MessagesRemoteDataSource {
   Future<List<UserModel>> getUsers();
 
   Stream<List<Conversation>> getAllConversations();
 
-  Stream<List<Conversation>> getAllGroupConversations();
+  Stream<List<GroupConversation>> getAllGroupConversations();
+  Future<void> createGroup({
+    required GroupConversation groupConversation,
+  });
 }
 
 class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
@@ -38,15 +42,22 @@ class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
   }
 
   @override
-  Stream<List<Conversation>> getAllGroupConversations() {
+  Stream<List<GroupConversation>> getAllGroupConversations() {
     return firestore
         .getCollectionStream(collectionPath: EndPoint.kGroupCollection)
         .map((snapshot) {
-          log(snapshot.docs.toString());
+      log(snapshot.docs.toString());
       return snapshot.docs
           .map((doc) =>
-              Conversation.fromJson(doc.data() as Map<String, dynamic>))
+              GroupConversation.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
     });
+  }
+
+  @override
+  Future<void> createGroup(
+      {required GroupConversation groupConversation}) async {
+    return firestore.addData(
+        path: EndPoint.kGroupCollection, data: groupConversation.toJson());
   }
 }

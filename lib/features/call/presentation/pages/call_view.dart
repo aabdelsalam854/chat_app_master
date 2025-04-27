@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:zego_uikit_prebuilt_call/zego_uikit_prebuilt_call.dart';
 
 class NormalCallPage extends StatelessWidget {
-  const NormalCallPage({Key? key}) : super(key: key);
+  const NormalCallPage({super.key});
   @override
   Widget build(BuildContext context) {
 
