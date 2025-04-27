@@ -59,7 +59,7 @@ defaultConfig {
 
     buildTypes {
    release {
-            minifyEnabled false  // عطله مؤقتًا
+            minifyEnabled false  
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 }

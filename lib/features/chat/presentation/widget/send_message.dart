@@ -77,6 +77,7 @@ class _SendMessageState extends State<SendMessage> {
   ) async {
     await context.read<ChatCubit>().sendMessage(
           message: MessageModel(
+            
             message: message,
             id: widget.email,
             type: "text",

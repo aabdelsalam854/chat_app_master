@@ -5,6 +5,7 @@ class MessagesEntity extends Equatable {
   final String message;
   final String type;
   final String id;
+
   final DateTime time;
   final MetadataModel? metadata;
 

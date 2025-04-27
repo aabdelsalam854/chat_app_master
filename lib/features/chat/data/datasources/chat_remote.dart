@@ -86,6 +86,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       },
     );
   }
+
   @override
   Future<void> sendGroupMessage(String chatId, MessageModel message) async {
     await _databaseServices
@@ -102,12 +103,6 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         data: message.toJson());
   }
 
-
-
-
-
-
-
   @override
   Stream<List<MessageModel>> getGroupMessages(String chatId) {
     return _databaseServices
@@ -117,6 +112,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             subCollectionPath: EndPoint.kMessageCollection,
             orderByField: "time",
             descending: true,
+            
             limit: 20)
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {
@@ -124,6 +120,4 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       }).toList();
     });
   }
-
-
 }

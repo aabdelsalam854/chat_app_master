@@ -30,7 +30,7 @@ class GroupsPage extends StatelessWidget {
             child: const Icon(Icons.add),
           ),
           appBar: AppBar(
-            title: const Text('Chat '),
+            title: const Text('Groups'),
             actions: [
               IconButton(
                 onPressed: () {
