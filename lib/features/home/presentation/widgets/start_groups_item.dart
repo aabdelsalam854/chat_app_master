@@ -2,11 +2,11 @@ import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/core/widget/custom_button.dart';
-import 'package:chat_master/features/home/data/datasources/messages_remote.dart';
 import 'package:chat_master/features/home/data/models/group_conversation.dart';
+import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsItem extends StatelessWidget {
   const GroupsItem({super.key, required this.users});
@@ -134,24 +134,59 @@ void showCreateGroupDialog(BuildContext context,
           onPressed: () => Navigator.pop(context),
           child: const Text('إلغاء'),
         ),
-        ElevatedButton(
-          onPressed: () {
-            final groupName = groupNameController.text.trim();
-            if (groupName.isNotEmpty) {
+        BlocConsumer<HomeCubit, HomeState>(
+          listener: (context, state) {
+            if (state is CreateGroupConversationSuccessState) {
               Navigator.pop(context);
-              onCreate(groupName);
-              sl<MessagesRemoteDataSource>().createGroup(
-                  groupConversation: GroupConversation(
-                groupName: groupName,
-                lastMessage: "",
-                lastMessageTime: DateTime.now(),
-                senderName: "",
-                lastMessageType: "text",
-                userIds: [...userIds, kUid],
-              ));
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  content: const Text("تم إنشاء الجروب بنجاح"),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("حسنا"),
+                    ),
+                  ],
+                ),
+              );
+            } else if (state is CreateGroupConversationErrorState) {
+              Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  content: Text(state.error),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text("حسنا"),
+                    ),
+                  ],
+                ),
+              );
             }
           },
-          child: const Text('إنشاء'),
+          builder: (context, state) {
+            return ElevatedButton(
+              onPressed: () {
+                final groupName = groupNameController.text.trim();
+                if (groupName.isNotEmpty) {
+                  Navigator.pop(context);
+                  onCreate(groupName);
+                  sl<HomeCubit>().createGroup(
+                      groupConversation: GroupConversation(
+                    groupName: groupName,
+                    lastMessage: "",
+                    lastMessageTime: DateTime.now(),
+                    senderName: "",
+                    lastMessageType: "text",
+                    userIds: [...userIds, kUid],
+                  ));
+                }
+              },
+              child: const Text('إنشاء'),
+            );
+          },
         ),
       ],
     ),

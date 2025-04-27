@@ -6,6 +6,7 @@ import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/core/utils/app_constants.dart';
 import 'package:chat_master/core/widget/responsive_widget.dart';
 import 'package:chat_master/features/app/presentation/cubits/app/app_cubit.dart';
+import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
 import 'package:chat_master/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,6 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setUpServerLocator();
 
-  // await sl<AppCubit>().getSavedLang();
-  // await sl<AppCubit>().getSavedTheme();
   runApp(const ChatApp());
 }
 
@@ -28,10 +27,17 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: sl<AppCubit>()
-        ..getSavedLang()
-        ..getSavedTheme(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: sl<AppCubit>()
+            ..getSavedLang()
+            ..getSavedTheme(),
+        ),
+        BlocProvider(
+          create: (context) => sl<HomeCubit>(),
+        ),
+      ],
       child: Responsive(
         child: BlocBuilder<AppCubit, AppState>(
           builder: (context, themeState) {

@@ -52,4 +52,16 @@ class MessageRepositoryImpl implements MessageRepository {
       yield Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> createGroup(
+      {required GroupConversation groupConversation}) async {
+    try {
+      await messagesRemote.createGroup(groupConversation: groupConversation);
+      // ignore: void_checks
+      return const Right(true);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

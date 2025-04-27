@@ -10,4 +10,7 @@ abstract class MessageRepository {
 
   Stream<Either<Failure, List<Conversation>>> getAllConversations();
   Stream<Either<Failure, List<GroupConversation>>> getAllGroupConversations();
+  Future<Either<Failure, void>> createGroup({
+    required GroupConversation groupConversation,
+  });
 }

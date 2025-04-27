@@ -55,3 +55,22 @@ class GetAllGroupConversationsErrorState extends HomeState {
   @override
   List<Object> get props => [error];
 }
+
+
+
+class CreateGroupConversationLoadingState extends HomeState {}
+class CreateGroupConversationSuccessState extends HomeState {
+  final bool isCreated;
+  const CreateGroupConversationSuccessState(this.isCreated);
+  @override
+  List<Object> get props => [isCreated];
+}
+class CreateGroupConversationErrorState extends HomeState {
+  final String error;
+  const CreateGroupConversationErrorState(this.error);
+  @override
+  List<Object> get props => [error];
+}
+
+
+

@@ -16,4 +16,7 @@ class MessagesUsecases {
 
   Stream<Either<Failure, List<GroupConversation>>> getAllGroupConversations() =>
       messagesRepo.getAllGroupConversations();
+  Future<Either<Failure, void>> createGroup(
+          {required GroupConversation groupConversation}) =>
+      messagesRepo.createGroup(groupConversation: groupConversation);
 }

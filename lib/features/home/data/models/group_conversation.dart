@@ -1,13 +1,14 @@
+import 'package:chat_master/features/home/domain/entities/group_conversation_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class GroupConversation {
-  final String groupName;
-  final String lastMessage;
-  final DateTime lastMessageTime;
-  final String lastMessageType;
-  final String senderName;
-
-  final List<dynamic> userIds;
+class GroupConversation extends GroupConversationEntity {
+  const GroupConversation(
+      {required super.groupName,
+      required super.lastMessage,
+      required super.lastMessageTime,
+      required super.lastMessageType,
+      required super.senderName,
+      required super.userIds});
 
   factory GroupConversation.fromJson(Map<String, dynamic> json) =>
       GroupConversation(
@@ -20,13 +21,6 @@ class GroupConversation {
         userIds: json['users'] ?? [].map<String>((e) => e.toString()).toList(),
       );
 
-  GroupConversation(
-      {required this.groupName,
-      required this.lastMessage,
-      required this.lastMessageTime,
-      required this.lastMessageType,
-      required this.senderName,
-      required this.userIds});
   Map<String, dynamic> toJson() => {
         'groupName': groupName,
         'lastMessage': lastMessage,

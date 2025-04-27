@@ -8,9 +8,7 @@ import 'package:chat_master/features/home/data/models/group_conversation.dart';
 
 abstract class MessagesRemoteDataSource {
   Future<List<UserModel>> getUsers();
-
   Stream<List<Conversation>> getAllConversations();
-
   Stream<List<GroupConversation>> getAllGroupConversations();
   Future<void> createGroup({
     required GroupConversation groupConversation,
