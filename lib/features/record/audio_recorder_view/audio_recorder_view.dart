@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/services/server_locator.dart';
@@ -11,7 +9,6 @@ import 'package:chat_master/features/record/audio_recorder_view/play_pause_butto
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:record/record.dart';
-
 import 'audio_waves_view.dart';
 
 class AudioRecorderView extends StatelessWidget {

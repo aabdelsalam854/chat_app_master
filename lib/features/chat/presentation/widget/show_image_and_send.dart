@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:chat_master/core/utils/upload_file_in_firebase.dart';
+
 import 'package:chat_master/core/widget/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:image/image.dart' as img;
+
 
 class ShowImageAndSend extends StatelessWidget {
   const ShowImageAndSend({

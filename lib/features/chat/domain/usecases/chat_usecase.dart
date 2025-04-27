@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:chat_master/core/error/failures.dart';
 import 'package:chat_master/core/functions/functions.dart';
 import 'package:chat_master/core/model/user_model.dart';

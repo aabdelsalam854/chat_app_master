@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:chat_master/core/utils/app_colors.dart';
 import 'package:chat_master/features/record/audio_recorder_manager/audio_recorder_controller.dart';
 import 'package:flutter/material.dart';
