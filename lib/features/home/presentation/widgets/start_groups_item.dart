@@ -117,7 +117,7 @@ void showCreateGroupDialog(BuildContext context,
             radius: 40,
             backgroundImage: const AssetImage('assets/group_default.png'),
             child: Icon(Icons.group,
-                size: 40, color: Colors.white.withOpacity(0.7)),
+                size: 40, color: Colors.white.withValues(alpha: 0.7)),
           ),
           const SizedBox(height: 16),
           TextField(
