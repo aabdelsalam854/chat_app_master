@@ -8,10 +8,23 @@ abstract class ChatRepository {
     required String userId1,
     required String userId2,
   });
+  Stream<Either<Failure, List<MessageModel>>> getGroupMessages({
+    required String groupId,
+  });
   Future<Either<Failure, void>> sendMessage(
       {required String userId1,
       required String userId2,
       required MessageModel message,
       required UserModel user1,
       required UserModel user2});
+
+
+  Future<Either<Failure, void>> sendGroupMessage(
+      {
+      required MessageModel message,
+      required String groupId,
+    
+   });
+
+
 }

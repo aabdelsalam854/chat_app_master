@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/functions/functions.dart';
 import 'package:chat_master/core/routes/routes.dart';
+import 'package:chat_master/features/chat/presentation/pages/groups_chat.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
 import 'package:chat_master/features/home/data/models/group_conversation.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
@@ -80,15 +83,16 @@ class GetAllGroubConversationItem extends StatelessWidget {
           //   conversationsData.lastMessageTime.toString(),
           // ),
           onTap: () {
-            // GoRouter.of(context).push(
-            //   Routes.kChatView,
-            //   extra: {
-            //     'email': otherUser.email,
-            //     'name': otherUser.name,
-            //     'photoUrl': otherUser.photoUrl,
-            //     'id': otherUser.id,
-            //   },
-            // );
+            log(conversationsData.docId!);
+
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return ChatGroupView(
+                photoUrl: conversationsData.groupName,
+                groupId: conversationsData.docId!,
+                groupName: conversationsData.groupName,
+                groupMembersCount: conversations.length,
+              );
+            }));
           },
         );
       },

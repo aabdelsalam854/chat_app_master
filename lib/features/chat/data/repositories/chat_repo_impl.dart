@@ -40,4 +40,25 @@ class ChatRepositoryImpl implements ChatRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Stream<Either<Failure, List<MessageModel>>> getGroupMessages(
+      {required String groupId}) async* {
+    try {
+      final stream = _dataSource.getGroupMessages(groupId);
+      yield* stream.map((messages) => Right(messages));
+    } catch (e) {
+      yield Left(ServerFailure(e.toString()));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, void>> sendGroupMessage({required MessageModel message, required String groupId}) async{
+    try {
+      await _dataSource.sendGroupMessage(groupId, message);
+      return const Right(null);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

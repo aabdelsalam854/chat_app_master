@@ -175,6 +175,7 @@ void showCreateGroupDialog(BuildContext context,
                   onCreate(groupName);
                   sl<HomeCubit>().createGroup(
                       groupConversation: GroupConversation(
+                    null,
                     groupName: groupName,
                     lastMessage: "",
                     lastMessageTime: DateTime.now(),

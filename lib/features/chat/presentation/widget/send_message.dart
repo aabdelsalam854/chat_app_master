@@ -17,6 +17,7 @@ class SendMessage extends StatefulWidget {
     required this.type,
     required this.message,
     required this.metadata,
+    this.isGroup = false,
   });
 
   final TextEditingController? controller;
@@ -24,6 +25,7 @@ class SendMessage extends StatefulWidget {
   final String type;
   final String message;
   final MetadataModel? metadata;
+  final bool? isGroup;
 
   @override
   State<SendMessage> createState() => _SendMessageState();
@@ -50,7 +52,29 @@ class _SendMessageState extends State<SendMessage> {
     super.dispose();
   }
 
-  Future<void> _sendMessage(String message, BuildContext context) async {
+  Future<void> _sendInGroupMessage(
+    String message,
+    BuildContext context,
+  ) async {
+    await context.read<ChatCubit>().sendGroupMessage(
+          groupId: "2yjWS9lmdJ6T6qnULVfJ",
+          message: MessageModel(
+            message: message,
+            id: widget.email,
+            type: "text",
+            metadata: widget.metadata,
+            time: DateTime.now(),
+          ),
+        );
+
+    widget.controller?.clear();
+    _messageNotifier.value = '';
+  }
+
+  Future<void> _sendMessage(
+    String message,
+    BuildContext context,
+  ) async {
     await context.read<ChatCubit>().sendMessage(
           message: MessageModel(
             message: message,
@@ -93,7 +117,11 @@ class _SendMessageState extends State<SendMessage> {
               return;
             }
 
-            await _sendMessage(value, context);
+            if (widget.isGroup ?? false) {
+              await _sendInGroupMessage(value, context);
+            } else {
+              await _sendMessage(value, context);
+            }
           },
           icon: Icon(
             value.isEmpty ? Icons.mic : Icons.send,

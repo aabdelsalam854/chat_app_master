@@ -2,7 +2,7 @@ import 'package:chat_master/features/home/domain/entities/group_conversation_ent
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class GroupConversation extends GroupConversationEntity {
-  const GroupConversation(
+  const GroupConversation(super.docId,
       {required super.groupName,
       required super.lastMessage,
       required super.lastMessageTime,
@@ -10,8 +10,9 @@ class GroupConversation extends GroupConversationEntity {
       required super.senderName,
       required super.userIds});
 
-  factory GroupConversation.fromJson(Map<String, dynamic> json) =>
+  factory GroupConversation.fromJson(Map<String, dynamic> json, String docId) =>
       GroupConversation(
+        docId,
         groupName: json['groupName'] ?? "",
         lastMessage: json['lastMessage'] ?? "لم يتم إرسال أي رسائل بعد",
         lastMessageTime:

@@ -2,7 +2,7 @@ import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
 import 'package:chat_master/core/widget/custom_text_form_field.dart';
 import 'package:chat_master/features/chat/data/model/messages_model.dart';
-import 'package:chat_master/features/chat/presentation/pages/chat_views.dart';
+
 import 'package:chat_master/features/chat/presentation/widget/chat_bubble.dart';
 import 'package:chat_master/features/chat/presentation/widget/chat_bubble_friend.dart';
 import 'package:chat_master/features/chat/presentation/widget/media_selection.dart';
@@ -14,13 +14,17 @@ class GetChatItem extends StatelessWidget {
     super.key,
     required this.controller,
     required this.messagesList,
-    required this.widget,
     required this.textController,
+    required this.email,
+    required this.uid, required this.isGroup,
   });
 
   final ScrollController controller;
   final List<MessageModel> messagesList;
-  final ChatView widget;
+  final String email;
+  final String uid;
+  final bool isGroup;
+
   final TextEditingController textController;
 
   @override
@@ -50,11 +54,12 @@ class GetChatItem extends StatelessWidget {
             Row(
               children: [
                 SendMessage(
+                  isGroup: isGroup,
                     metadata: null,
                     type: 'text',
                     message: textController.text,
                     controller: textController,
-                    email: widget.uid),
+                    email: uid),
                 Expanded(
                   child: CustomTextFormField(
                     icon: IconButton(
@@ -63,7 +68,7 @@ class GetChatItem extends StatelessWidget {
                           enableDrag: true,
                           context,
                           builder: (context) {
-                            return MediaSelection(email: widget.email);
+                            return MediaSelection(email: email);
                           },
                         );
                       },

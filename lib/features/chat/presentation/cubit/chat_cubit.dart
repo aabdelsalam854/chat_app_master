@@ -26,6 +26,16 @@ class ChatCubit extends Cubit<ChatState> {
     });
   }
 
+  getGroupMessages({required String groupId}) {
+    emit(GetMessagesLoadingState());
+
+    _subscription = usecases.getGroupMessages(groupId: groupId).listen((either) {
+      either.fold(
+        (failure) => emit(GetMessagesErrorState(failure.msg)),
+        (messages) => emit(GetMessagesSuccessState(messages)),
+      );
+    });
+  }
   sendMessage(
       {required String userId1,
       required String userId2,
@@ -46,6 +56,23 @@ class ChatCubit extends Cubit<ChatState> {
       );
     });
   }
+
+
+sendGroupMessage(
+      {required MessageModel message, required String groupId}) {
+    emit(SendMessageLoadingState());
+    var result = usecases.sendGroupMessage(message: message, groupId: groupId);
+    result.then((value) {
+      value.fold(
+        (failure) => emit(SendMessageErrorState(failure.msg)),
+        (send) => emit(const SendMessageSuccessState(true)),
+      );
+    });
+  }
+
+
+
+
 
   Future<void> sendFiles({
     required List<File> files,

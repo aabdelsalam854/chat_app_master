@@ -16,6 +16,11 @@ class ChatUsecases {
   Stream<Either<Failure, List<MessageModel>>> getMessages(
           {required String userId1, required String userId2}) =>
       _chatRepository.getMessages(userId1: userId1, userId2: userId2);
+
+
+  Stream<Either<Failure, List<MessageModel>>> getGroupMessages(
+          {required String groupId}) =>
+      _chatRepository.getGroupMessages(groupId: groupId);
   Future<Either<Failure, void>> sendMessage(
       {required String userId1,
       required String userId2,
@@ -28,6 +33,15 @@ class ChatUsecases {
       message: message,
       user1: user1,
       user2: user2,
+    );
+
+  }
+
+  Future<Either<Failure, void>> sendGroupMessage(
+      {required MessageModel message, required String groupId}) async {
+    return await _chatRepository.sendGroupMessage(
+      message: message,
+      groupId: groupId,
     );
   }
 
@@ -68,6 +82,7 @@ class ChatUsecases {
       );
     }
 
+    // ignore: void_checks
     return const Right(true);
   }
 }

@@ -45,9 +45,10 @@ class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
         .getCollectionStream(collectionPath: EndPoint.kGroupCollection)
         .map((snapshot) {
       log(snapshot.docs.toString());
+
       return snapshot.docs
-          .map((doc) =>
-              GroupConversation.fromJson(doc.data() as Map<String, dynamic>))
+          .map((doc) => GroupConversation.fromJson(
+              doc.data() as Map<String, dynamic>, doc.id))
           .toList();
     });
   }

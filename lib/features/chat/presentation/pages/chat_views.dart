@@ -1,4 +1,3 @@
-import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/chat/presentation/widget/chat_app_bar.dart';
@@ -27,8 +26,21 @@ class _ChatViewState extends State<ChatView> {
   final TextEditingController textController = TextEditingController();
 
   final controller = ScrollController();
+  late String kUid;
+  late String kEmail;
+  late String kPhotoUrl;
+  late String kName;
 
   @override
+  void initState() {
+    kUid = widget.email;
+    kEmail = widget.email;
+    kPhotoUrl = widget.photoUrl!;
+    kName = widget.name!;
+
+    super.initState();
+  }
+
   @override
   void dispose() {
     textController.dispose();
@@ -45,10 +57,15 @@ class _ChatViewState extends State<ChatView> {
           name: widget.name,
         ),
         body: BlocProvider(
-          create: (context) =>
-              sl<ChatCubit>()..getMessages(userId1: kUid, userId2: widget.uid),
+          create: (context) => sl<ChatCubit>()
+            ..getMessages(
+              userId1: kUid,
+              userId2: widget.uid,
+            ),
           child: ChatBody(
-              widget: widget,
+              isGroup: false,
+              email: kEmail,
+              uid: kUid,
               controller: controller,
               textController: textController),
         ));

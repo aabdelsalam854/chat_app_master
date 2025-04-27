@@ -1,6 +1,6 @@
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_state.dart';
-import 'package:chat_master/features/chat/presentation/pages/chat_views.dart';
+
 import 'package:chat_master/features/chat/presentation/widget/get_chat_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,14 +8,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ChatBody extends StatelessWidget {
   const ChatBody({
     super.key,
-    required this.widget,
     required this.controller,
     required this.textController,
+    required this.email,
+    required this.uid, required this.isGroup,
   });
 
-  final ChatView widget;
   final ScrollController controller;
   final TextEditingController textController;
+  final String email;
+  final String uid;
+  final bool isGroup;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +31,12 @@ class ChatBody extends StatelessWidget {
         if (state is GetMessagesSuccessState) {
           final messagesList = state.messages;
           return GetChatItem(
+         isGroup: isGroup,
+
               controller: controller,
               messagesList: messagesList,
-              widget: widget,
+              email: email,
+              uid: uid,
               textController: textController);
         } else if (state is GetMessagesLoadingState) {
           return const Center(child: CircularProgressIndicator());

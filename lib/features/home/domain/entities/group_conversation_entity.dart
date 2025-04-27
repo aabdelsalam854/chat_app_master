@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class GroupConversationEntity extends Equatable {
+  final String? docId;
   final String groupName;
   final String lastMessage;
   final DateTime lastMessageTime;
@@ -10,7 +11,10 @@ class GroupConversationEntity extends Equatable {
   final List<dynamic> userIds;
 
   const GroupConversationEntity(
-      {required this.groupName,
+
+this.docId,
+      { 
+        required this.groupName,
       required this.lastMessage,
       required this.lastMessageTime,
       required this.lastMessageType,
@@ -18,7 +22,9 @@ class GroupConversationEntity extends Equatable {
       required this.userIds});
   @override
   List<Object?> get props => [
+        docId,
         groupName,
+
         lastMessage,
         lastMessageTime,
         senderName,

@@ -5,6 +5,7 @@ import 'package:chat_master/features/record/voice_note_model.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:record/record.dart';
 
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
 
 class AudioRecorderController {

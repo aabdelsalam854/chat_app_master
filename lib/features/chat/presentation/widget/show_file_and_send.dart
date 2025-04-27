@@ -35,6 +35,7 @@ class ShowFileBeforeSend extends StatelessWidget {
                     File(pickedFile!.path!));
 
                 SendMessage(
+                  
                     message: url,
                     email: email!,
                     type: 'File',

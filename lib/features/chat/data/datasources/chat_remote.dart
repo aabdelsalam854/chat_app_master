@@ -7,12 +7,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class ChatRemoteDataSource {
   Stream<List<MessageModel>> getMessages(String chatId);
+  Stream<List<MessageModel>> getGroupMessages(String chatId);
 
   Future<void> sendMessage(
     String chatId,
     MessageModel message,
     UserModel user1,
     UserModel user2,
+  );
+
+  Future<void> sendGroupMessage(
+    String chatId,
+    MessageModel message,
   );
 }
 
@@ -80,4 +86,44 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       },
     );
   }
+  @override
+  Future<void> sendGroupMessage(String chatId, MessageModel message) async {
+    await _databaseServices
+        .updateData(path: EndPoint.kGroupCollection, docId: chatId, data: {
+      'lastMessage': message.message,
+      'lastMessageTime': FieldValue.serverTimestamp(),
+      'lastMessageType': message.type,
+    });
+
+    await _databaseServices.addData(
+        path: EndPoint.kGroupCollection,
+        docId: chatId,
+        subCollectionPath: EndPoint.kMessageCollection,
+        data: message.toJson());
+  }
+
+
+
+
+
+
+
+  @override
+  Stream<List<MessageModel>> getGroupMessages(String chatId) {
+    return _databaseServices
+        .getCollectionStream(
+            collectionPath: EndPoint.kGroupCollection,
+            docId: chatId,
+            subCollectionPath: EndPoint.kMessageCollection,
+            orderByField: "time",
+            descending: true,
+            limit: 20)
+        .map((querySnapshot) {
+      return querySnapshot.docs.map((doc) {
+        return MessageModel.fromJson(doc.data() as Map<String, dynamic>);
+      }).toList();
+    });
+  }
+
+
 }
