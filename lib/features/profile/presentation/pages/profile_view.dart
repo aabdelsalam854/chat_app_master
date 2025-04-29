@@ -48,6 +48,7 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
     statusController.text = widget.user.status!;
     super.initState();
   }
+
   @override
   dispose() {
     nameController.dispose();

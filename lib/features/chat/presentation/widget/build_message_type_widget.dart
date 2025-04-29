@@ -14,7 +14,10 @@ class BuildMessageTypeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (messageModel.type) {
       case 'text':
-        return Text(message, style: const TextStyle(color: Colors.white));
+        return Text(message, style: const TextStyle(color: Colors.white),
+        textAlign: TextAlign.start,
+        
+        );
       case 'video':
         return IsVideo(
           message: message,

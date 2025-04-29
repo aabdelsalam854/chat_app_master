@@ -44,7 +44,7 @@ class GetAllConversationsErrorState extends HomeState {
 
 class GetAllGroupConversationsLoadingState extends HomeState {}
 class GetAllGroupConversationsSuccessState extends HomeState {
-  final List<GroupConversation> allGroupConversations;
+  final List<GroupConversationEntity> allGroupConversations;
   const GetAllGroupConversationsSuccessState(this.allGroupConversations);
   @override
   List<Object> get props => [allGroupConversations];

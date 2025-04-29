@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
 import 'package:chat_master/features/home/data/models/group_conversation.dart';
+import 'package:chat_master/features/home/domain/entities/group_conversation_entity.dart';
 import 'package:chat_master/features/home/domain/usecases/messages.dart';
 import 'package:equatable/equatable.dart';
 part 'home_state.dart';
@@ -12,6 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   final MessagesUsecases usecases;
 
   StreamSubscription? _subscription;
+  StreamSubscription? _subscription2;
   Future<void> getUsers() async {
     emit(GetUsersLoadingState());
     var data = await usecases.getUsers();
@@ -37,11 +39,12 @@ class HomeCubit extends Cubit<HomeState> {
 
   getAllGroupConversations() async {
     emit(GetAllGroupConversationsLoadingState());
-    _subscription = usecases.getAllGroupConversations().listen((either) {
+    _subscription2 = usecases.getAllGroupConversations().listen((either) {
       either.fold(
         (failure) => emit(GetAllGroupConversationsErrorState(failure.msg)),
-        (conversations) =>
-            emit(GetAllGroupConversationsSuccessState(conversations)),
+        (conversations) {
+          emit(GetAllGroupConversationsSuccessState(conversations));
+        },
       );
     });
   }

@@ -36,10 +36,7 @@ abstract class AppRouts {
           if (sl<SharedPreferences>().getString(CachedKey.uid) != null) {
             kUid = sl<SharedPreferences>().getString(CachedKey.uid)!.decrypt()!;
 
-            return BlocProvider.value(
-              value: sl<AuthCubit>(),
-              child: const MainScreen(),
-            );
+            return const MainScreen();
           } else {
             return BlocProvider.value(
               value: sl<AuthCubit>(),
@@ -93,8 +90,7 @@ abstract class AppRouts {
       builder: (context, state) {
         final data = state.extra as Map<String, dynamic>;
         return ShowMultiImage(
-          imageFileNotifier: data['imageFile'] as ValueNotifier<List<File>> ,
-        
+          imageFileNotifier: data['imageFile'] as ValueNotifier<List<File>>,
         );
       },
     ),
@@ -127,31 +123,33 @@ abstract class AppRouts {
             child: const ForgetPassword(),
           );
         }),
-    GoRoute(
+   
+    ShellRoute(
+        builder: (context, state, child) => BlocProvider(
+              create: (context) => sl<ProfileCubit>(),
+              child: child,
+            ),
+        routes: [
+           GoRoute(
       path: Routes.kSettings,
       builder: (context, state) {
-        return BlocProvider.value(
-          value: sl<AuthCubit>(),
-          child: const SettingsView(),
-        );
+        return const SettingsView();
       },
     ),
-    GoRoute(
-      path: Routes.kChangePassword,
-      builder: (context, state) {
-        return const ChangePassword();
-      },
-    ),
-    GoRoute(
-        path: Routes.kProfile,
-        builder: (context, state) {
-          return BlocProvider.value(
-            value: sl<ProfileCubit>(),
-            child: ProfileView(
-              user: state.extra as UserModel,
-            ),
-          );
-        }),
+          GoRoute(
+              path: Routes.kProfile,
+              builder: (context, state) {
+                return ProfileView(
+                  user: state.extra as UserModel,
+                );
+              }),
+          GoRoute(
+            path: Routes.kChangePassword,
+            builder: (context, state) {
+              return const ChangePassword();
+            },
+          ),
+        ]),
     GoRoute(
         path: Routes.kStartChat,
         builder: (context, state) {

@@ -51,9 +51,10 @@ class ChatRepositoryImpl implements ChatRepository {
       yield Left(ServerFailure(e.toString()));
     }
   }
-  
+
   @override
-  Future<Either<Failure, void>> sendGroupMessage({required MessageModel message, required String groupId}) async{
+  Future<Either<Failure, void>> sendGroupMessage(
+      {required MessageModel message, required String groupId}) async {
     try {
       await _dataSource.sendGroupMessage(groupId, message);
       return const Right(null);

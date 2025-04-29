@@ -34,6 +34,7 @@ class _ChatGroupViewState extends State<ChatGroupView> {
   void dispose() {
     textController.dispose();
     controller.dispose();
+    
     super.dispose();
   }
 
@@ -49,7 +50,7 @@ class _ChatGroupViewState extends State<ChatGroupView> {
             create: (context) =>
                 sl<ChatCubit>()..getGroupMessages(groupId: widget.groupId),
             child: ChatBody(
-              isGroup: true,
+                isGroup: true,
                 email: kUid,
                 uid: kUid,
                 controller: controller,

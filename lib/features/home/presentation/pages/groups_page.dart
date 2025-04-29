@@ -13,8 +13,8 @@ class GroupsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-        value: sl<HomeCubit>()..getAllGroupConversations(),
+    return BlocProvider(
+        create: (context) => sl<HomeCubit>()..getAllGroupConversations(),
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -32,12 +32,12 @@ class GroupsPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text('Groups'),
             actions: [
-              IconButton(
-                onPressed: () {
-                  GoRouter.of(context).push(Routes.kSettings);
-                },
-                icon: const Icon(Icons.more_vert_sharp),
-              ),
+              // IconButton(
+              //   onPressed: () {
+              //     GoRouter.of(context).push(Routes.kSettings);
+              //   },
+              //   icon: const Icon(Icons.more_vert_sharp),
+              // ),
             ],
           ),
           body: const GroupsViewBody(),

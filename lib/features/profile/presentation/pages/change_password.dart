@@ -17,10 +17,7 @@ class ChangePassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Change Password')),
-      body: BlocProvider.value(
-        value: sl<ProfileCubit>(),
-        child: const ChangePasswordBody(),
-      ),
+      body: const ChangePasswordBody(),
     );
   }
 }

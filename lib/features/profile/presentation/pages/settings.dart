@@ -21,15 +21,12 @@ class SettingsView extends StatelessWidget {
     final uid = sl<SharedPreferences>().getString(CachedKey.uid) ?? '';
     final encryptedUid = uid.decrypt();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Settings'),
+      // ),
       // floatingActionButton: FloatingActionButton(
-      body: BlocProvider.value(
-        value: sl<ProfileCubit>(),
-        child: SettingsViewBody(
-          uid: encryptedUid!,
-        ),
+      body: SettingsViewBody(
+        uid: encryptedUid!,
       ),
     );
   }
@@ -46,7 +43,7 @@ class SettingsViewBody extends StatelessWidget {
           current is GetUserDataSuccessState ||
           current is GetUserDataLoadingState ||
           current is GetUserDataErrorState,
-      bloc: sl<ProfileCubit>()..getUserData(uid),
+      bloc: context.read<ProfileCubit>()..getUserData(uid),
       builder: (context, state) {
         if (state is GetUserDataSuccessState) {
           return Column(

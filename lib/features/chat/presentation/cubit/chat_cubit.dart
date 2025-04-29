@@ -12,6 +12,8 @@ class ChatCubit extends Cubit<ChatState> {
   ChatCubit(this.usecases) : super(ChatInitial());
   final ChatUsecases usecases;
   StreamSubscription? _subscription;
+  // StreamSubscription? _subscription2;
+
 
   getMessages({required String userId1, required String userId2}) {
     emit(GetMessagesLoadingState());

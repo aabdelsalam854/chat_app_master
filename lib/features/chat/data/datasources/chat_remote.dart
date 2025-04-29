@@ -10,16 +10,9 @@ abstract class ChatRemoteDataSource {
   Stream<List<MessageModel>> getGroupMessages(String chatId);
 
   Future<void> sendMessage(
-    String chatId,
-    MessageModel message,
-    UserModel user1,
-    UserModel user2,
-  );
+      String chatId, MessageModel message, UserModel user1, UserModel user2);
 
-  Future<void> sendGroupMessage(
-    String chatId,
-    MessageModel message,
-  );
+  Future<void> sendGroupMessage(String chatId, MessageModel message);
 }
 
 class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
@@ -112,7 +105,6 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
             subCollectionPath: EndPoint.kMessageCollection,
             orderByField: "time",
             descending: true,
-            
             limit: 20)
         .map((querySnapshot) {
       return querySnapshot.docs.map((doc) {

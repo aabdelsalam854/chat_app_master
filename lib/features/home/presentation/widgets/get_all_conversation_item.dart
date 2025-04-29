@@ -1,11 +1,14 @@
-import 'dart:developer';
+
 
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/functions/functions.dart';
 import 'package:chat_master/core/routes/routes.dart';
+import 'package:chat_master/core/services/server_locator.dart';
+import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/chat/presentation/pages/groups_chat.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
 import 'package:chat_master/features/home/data/models/group_conversation.dart';
+import 'package:chat_master/features/home/domain/entities/group_conversation_entity.dart';
 import 'package:chat_master/features/home/presentation/widgets/chat_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -61,7 +64,7 @@ class GetAllGroubConversationItem extends StatelessWidget {
     required this.conversations,
   });
 
-  final List<GroupConversation> conversations;
+  final List<GroupConversationEntity> conversations;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +86,7 @@ class GetAllGroubConversationItem extends StatelessWidget {
           //   conversationsData.lastMessageTime.toString(),
           // ),
           onTap: () {
-            log(conversationsData.docId!);
+         
 
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return ChatGroupView(

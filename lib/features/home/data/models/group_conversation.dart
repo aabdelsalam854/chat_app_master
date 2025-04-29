@@ -19,7 +19,7 @@ class GroupConversation extends GroupConversationEntity {
             (json['lastMessageTime'] as Timestamp?)?.toDate() ?? DateTime.now(),
         senderName: json['senderName'] ?? "",
         lastMessageType: json['lastMessageType'] ?? "",
-        userIds: json['users'] ?? [].map<String>((e) => e.toString()).toList(),
+        userIds: json['users'] ?? [],
       );
 
   Map<String, dynamic> toJson() => {

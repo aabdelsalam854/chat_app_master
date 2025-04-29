@@ -45,17 +45,18 @@ class _ChatViewState extends State<ChatView> {
   void dispose() {
     textController.dispose();
     controller.dispose();
+    
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: chatsAppBar(
-          context,
-          image: widget.photoUrl,
-          name: widget.name,
-        ),
+        // appBar: chatsAppBar(
+        //   context,
+        //   image: widget.photoUrl,
+        //   name: widget.name,
+        // ),
         body: BlocProvider(
           create: (context) => sl<ChatCubit>()
             ..getMessages(

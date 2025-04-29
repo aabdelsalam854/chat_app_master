@@ -5,11 +5,8 @@ class ParticipantsEntity extends Equatable {
   final UserModel sender;
   final UserModel receiver;
 
- const ParticipantsEntity({required this.sender, required this.receiver});
+  const ParticipantsEntity({required this.sender, required this.receiver});
 
-
-      
-        @override
-     
-        List<Object?> get props => [sender, receiver];
+  @override
+  List<Object?> get props => [sender, receiver];
 }

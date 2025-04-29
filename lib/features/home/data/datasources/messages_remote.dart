@@ -44,8 +44,7 @@ class MessageRemoteDataSourceImpl implements MessagesRemoteDataSource {
     return firestore
         .getCollectionStream(collectionPath: EndPoint.kGroupCollection)
         .map((snapshot) {
-      log(snapshot.docs.toString());
-
+      log(111.toString());
       return snapshot.docs
           .map((doc) => GroupConversation.fromJson(
               doc.data() as Map<String, dynamic>, doc.id))
