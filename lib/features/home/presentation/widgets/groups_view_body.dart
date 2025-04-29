@@ -24,7 +24,7 @@ class GroupsViewBody extends StatelessWidget {
           if (state.allGroupConversations.isEmpty) {
             return const EmptyChatWidget();
           }
-          return GetAllGroubConversationItem(
+          return GetAllGroupConversationItem(
               conversations: state.allGroupConversations);
         }
         return const Center(child: Text('No conversations available.'));
