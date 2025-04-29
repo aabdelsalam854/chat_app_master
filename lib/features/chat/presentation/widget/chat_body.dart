@@ -11,7 +11,8 @@ class ChatBody extends StatelessWidget {
     required this.controller,
     required this.textController,
     required this.email,
-    required this.uid, required this.isGroup,
+    required this.uid,
+    required this.isGroup,
   });
 
   final ScrollController controller;
@@ -31,8 +32,7 @@ class ChatBody extends StatelessWidget {
         if (state is GetMessagesSuccessState) {
           final messagesList = state.messages;
           return GetChatItem(
-         isGroup: isGroup,
-
+              isGroup: isGroup,
               controller: controller,
               messagesList: messagesList,
               email: email,

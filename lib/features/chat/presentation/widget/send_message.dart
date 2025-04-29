@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chat_master/core/constant/constant.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/core/widget/app_bottom_sheet.dart';
@@ -56,11 +58,13 @@ class _SendMessageState extends State<SendMessage> {
     String message,
     BuildContext context,
   ) async {
+    log(message);
+    log(widget.email);
     await context.read<ChatCubit>().sendGroupMessage(
-          groupId: "2yjWS9lmdJ6T6qnULVfJ",
+          groupId: widget.email,
           message: MessageModel(
             message: message,
-            id: widget.email,
+            id: kUid,
             type: "text",
             metadata: widget.metadata,
             time: DateTime.now(),
@@ -77,7 +81,6 @@ class _SendMessageState extends State<SendMessage> {
   ) async {
     await context.read<ChatCubit>().sendMessage(
           message: MessageModel(
-            
             message: message,
             id: widget.email,
             type: "text",

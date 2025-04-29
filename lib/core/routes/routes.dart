@@ -3,6 +3,9 @@ class Routes {
 
   static const kRegisterView = '/registerView';
   static const kChatView = '/ChatView';
+
+  static const kChatViewGroup = '/ChatViewGroup';
+
   static const kVideoPlayer = '/VideoPlayer';
 
   static const kLogin = "/";

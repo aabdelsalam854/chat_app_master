@@ -21,9 +21,9 @@ class SettingsView extends StatelessWidget {
     final uid = sl<SharedPreferences>().getString(CachedKey.uid) ?? '';
     final encryptedUid = uid.decrypt();
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Settings'),
-      // ),
+      appBar: AppBar(
+        title: const Text('Settings'),
+      ),
       // floatingActionButton: FloatingActionButton(
       body: SettingsViewBody(
         uid: encryptedUid!,

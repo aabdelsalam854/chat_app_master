@@ -28,7 +28,12 @@ class _HomePageBodyState extends State<HomePageBody> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      buildWhen: (previous, current) => 
+          current is GetAllConversationsLoadingState ||
+          current is GetAllConversationsErrorState ||
+          current is GetAllConversationsSuccessState,
       builder: (context, state) {
+
         if (state is GetAllConversationsLoadingState) {
           return const ConversationLoading();
         } else if (state is GetAllConversationsErrorState) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:chat_master/core/model/user_model.dart';
 import 'package:chat_master/features/home/data/models/conversation.dart';
@@ -13,7 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
   final MessagesUsecases usecases;
 
   StreamSubscription? _subscription;
-  StreamSubscription? _subscription2;
+
   Future<void> getUsers() async {
     emit(GetUsersLoadingState());
     var data = await usecases.getUsers();
@@ -37,9 +38,19 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
+  void pauseStream() {
+    _subscription?.pause();
+    log(_subscription?.isPaused.toString()??"");
+  }
+
+
+  void resumeStream() {
+    _subscription?.resume();
+  }
+
   getAllGroupConversations() async {
     emit(GetAllGroupConversationsLoadingState());
-    _subscription2 = usecases.getAllGroupConversations().listen((either) {
+    _subscription = usecases.getAllGroupConversations().listen((either) {
       either.fold(
         (failure) => emit(GetAllGroupConversationsErrorState(failure.msg)),
         (conversations) {
@@ -61,6 +72,7 @@ class HomeCubit extends Cubit<HomeState> {
   @override
   Future<void> close() {
     _subscription?.cancel();
+    log("HomeCubit closed");
     return super.close();
   }
 }

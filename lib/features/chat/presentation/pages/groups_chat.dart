@@ -3,6 +3,7 @@ import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
 import 'package:chat_master/features/chat/presentation/widget/chat_app_bar.dart';
 import 'package:chat_master/features/chat/presentation/widget/chat_body.dart';
+import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,17 +30,22 @@ class _ChatGroupViewState extends State<ChatGroupView> {
   final TextEditingController textController = TextEditingController();
 
   final controller = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
     textController.dispose();
     controller.dispose();
-    
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    context.read<HomeCubit>().pauseStream();
     return Scaffold(
         appBar: chatsAppBar(
           context,
@@ -51,7 +57,7 @@ class _ChatGroupViewState extends State<ChatGroupView> {
                 sl<ChatCubit>()..getGroupMessages(groupId: widget.groupId),
             child: ChatBody(
                 isGroup: true,
-                email: kUid,
+                email: widget.groupId,
                 uid: kUid,
                 controller: controller,
                 textController: textController)));

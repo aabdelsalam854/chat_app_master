@@ -90,6 +90,6 @@ class FirestoreServices implements DatabaseServices {
     }
 
 
-    return query.snapshots();
+   return query.snapshots().distinct();
   }
 }

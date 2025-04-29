@@ -5,19 +5,8 @@ import 'package:chat_master/features/home/presentation/widgets/get_all_conversat
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GroupsViewBody extends StatefulWidget {
+class GroupsViewBody extends StatelessWidget {
   const GroupsViewBody({super.key});
-
-  @override
-  State<GroupsViewBody> createState() => _GroupsViewBodyState();
-}
-
-class _GroupsViewBodyState extends State<GroupsViewBody> {
-  @override
-  void dispose() {
-    // context.read<HomeCubit>().close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

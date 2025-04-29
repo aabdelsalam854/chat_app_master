@@ -1,7 +1,7 @@
 import 'package:chat_master/core/services/server_locator.dart';
 import 'package:chat_master/features/chat/presentation/cubit/chat_cubit.dart';
-import 'package:chat_master/features/chat/presentation/widget/chat_app_bar.dart';
 import 'package:chat_master/features/chat/presentation/widget/chat_body.dart';
+import 'package:chat_master/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,6 +45,7 @@ class _ChatViewState extends State<ChatView> {
   void dispose() {
     textController.dispose();
     controller.dispose();
+
     
     super.dispose();
   }

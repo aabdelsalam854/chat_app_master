@@ -1,62 +1,33 @@
-import 'package:chat_master/features/home/presentation/pages/groups_page.dart';
-import 'package:chat_master/features/home/presentation/pages/home_page.dart';
-import 'package:chat_master/features/stories/presentation/pages/stories.dart';
 import 'package:chat_master/home/presentation/views/widget/custom_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class CustomBottomNavShell extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
 
-  @override
-  MainScreenState createState() => MainScreenState();
-}
+  const CustomBottomNavShell({super.key, required this.navigationShell});
 
-class MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
-  final List<Widget> _screens = [
-    const HomePage(),
-    const StatusScreen(),
-    const GroupsPage(),
-    const HomePage(),
-    // Payment(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  void _onTap(int index) {
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _screens[_selectedIndex],
-
-        // body: IndexedStack(
-        //   index: _selectedIndex,
-        //   children: _screens,
-        // ),
-        bottomNavigationBar: CustomBottomNavBar(
-          selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped,
-          items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.message_outlined, size: 30),
-              label: "Messages",
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.flip_camera_android_outlined, size: 30),
-              label: "stories",
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.groups_2_outlined, size: 30),
-              label: "groups",
-            ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.call, size: 30),
-              label: "calls",
-            ),
-          ],
-        ));
+      body: navigationShell,
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedIndex: navigationShell.currentIndex,
+        onItemTapped: _onTap,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Messages'),
+          BottomNavigationBarItem(icon: Icon(Icons.flip_camera_android), label: 'Stories'),
+          BottomNavigationBarItem(icon: Icon(Icons.groups), label: 'Groups'),
+          BottomNavigationBarItem(icon: Icon(Icons.call), label: 'Calls'),
+        ],
+      ),
+    );
   }
 }
